@@ -1,0 +1,145 @@
+{
+  "commits": [
+    {
+      "sha": "141d3ea",
+      "tag": "pr",
+      "message": "fix(contentgen): add 200 success path to publish endpoint (PTG-140)",
+      "author": "web3sea",
+      "time": "2026-05-05"
+    },
+    {
+      "sha": "b948c52",
+      "tag": "pr",
+      "message": "fix(review-modal): keyboard-accessible per-language error disclosure (PTG-144)",
+      "author": "web3sea",
+      "time": "2026-05-05"
+    },
+    {
+      "sha": "664529e",
+      "tag": "pr",
+      "message": "perf(contentgen): short-circuit regenerate-on-approved before OpenAI calls (PTG-143)",
+      "author": "web3sea",
+      "time": "2026-05-05"
+    },
+    {
+      "sha": "8fc95ab",
+      "tag": "pr",
+      "message": "test(review-modal): cover tab switch and field-diff rendering (PTG-142)",
+      "author": "web3sea",
+      "time": "2026-05-05"
+    },
+    {
+      "sha": "4d7b82e",
+      "tag": "pr",
+      "message": "fix(review-modal): exact plaintext char-count delta (PTG-141)",
+      "author": "web3sea",
+      "time": "2026-05-05"
+    },
+    {
+      "sha": "ab73e0f",
+      "tag": "pr",
+      "message": "fix(translation): poll in_progress batch status (PTG-137)",
+      "author": "web3sea",
+      "time": "2026-05-05"
+    },
+    {
+      "sha": "08a6ff1",
+      "tag": "pr",
+      "message": "fix(pdps): replace stale ScrapingDefinitionResponse type reference (PTG-138)",
+      "author": "web3sea",
+      "time": "2026-05-05"
+    },
+    {
+      "sha": "647aa78",
+      "tag": "pr",
+      "message": "fix(review-modal): rejected snapshot collapsed by default (PTG-139)",
+      "author": "web3sea",
+      "time": "2026-05-05"
+    },
+    {
+      "sha": "b5423df",
+      "tag": "pr",
+      "message": "fix(contentgen): use content-specific DLQ failure policy (PTG-136)",
+      "author": "web3sea",
+      "time": "2026-05-05"
+    },
+    {
+      "sha": "7a8907e",
+      "tag": "pr",
+      "message": "docs(translation): QA pass synthesis + tech doc + autoresearch viability",
+      "author": "web3sea",
+      "time": "2026-05-05"
+    },
+    {
+      "sha": "f67d933",
+      "tag": "pr",
+      "message": "fix(translation): surface per-language error_message in review modal (PTG-131)",
+      "author": "web3sea",
+      "time": "2026-05-05"
+    },
+    {
+      "sha": "3a3a48d",
+      "tag": "pr",
+      "message": "fix(translation): apply Badge variants to review modal sync counts (PTG-134)",
+      "author": "web3sea",
+      "time": "2026-05-05"
+    },
+    {
+      "sha": "c66dfb3",
+      "tag": "pr",
+      "message": "fix(translation): use language_name end-to-end \u2014 prompt + UI breakdown (PTG-123)",
+      "author": "web3sea",
+      "time": "2026-05-05"
+    },
+    {
+      "sha": "98a3119",
+      "tag": "pr",
+      "message": "fix(translation): use formatted status badge for bulk batch panel (PTG-133)",
+      "author": "web3sea",
+      "time": "2026-05-05"
+    },
+    {
+      "sha": "283dedc",
+      "tag": "pr",
+      "message": "chore(translation): remove dead ExtractionTemplates import from pdps.tsx (PTG-135)",
+      "author": "web3sea",
+      "time": "2026-05-05"
+    },
+    {
+      "sha": "3365098",
+      "tag": "merged",
+      "message": "fix(translation): disable Translate All when zero languages configured (PTG-130) (#136)",
+      "author": "Brad Wilcox",
+      "time": "2026-05-05"
+    },
+    {
+      "sha": "17c9f4e",
+      "tag": "merged",
+      "message": "fix(translation): toast on failed bulk translation batch state (PTG-129) (#133)",
+      "author": "Brad Wilcox",
+      "time": "2026-05-05"
+    },
+    {
+      "sha": "2e1efa5",
+      "tag": "merged",
+      "message": "fix(translation): aria-live on bulk translation progress panel (PTG-132) (#135)",
+      "author": "Brad Wilcox",
+      "time": "2026-05-05"
+    },
+    {
+      "sha": "01cd42d",
+      "tag": "merged",
+      "message": "fix(translation): atomicize batch row + outbox events to prevent orphans (PTG-124) (#137)",
+      "author": "Brad Wilcox",
+      "time": "2026-05-05"
+    },
+    {
+      "sha": "729f855",
+      "tag": "merged",
+      "message": "test(translation): Playwright E2E for bulk translate \u2192 poll \u2192 complete (PTG-128) (#127)",
+      "author": "Brad Wilcox",
+      "time": "2026-05-05"
+    }
+  ],
+  "summary": "5 commits and 15 PRs merged."
+}

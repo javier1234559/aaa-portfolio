@@ -1,0 +1,47 @@
+{
+  "started": "2026-02-01",
+  "targetLaunch": "2026-06-16",
+  "sprints": [
+    {
+      "name": "Sprint 1 — Foundation",
+      "start": "2026-02-01T00:00:00.000Z",
+      "end": "2026-02-28T00:00:00.000Z",
+      "dates": "2026-02-01 – 2026-02-28",
+      "cards": [
+        { "id": "PTG-1", "title": "CSV hotel import pipeline", "status": "done" },
+        { "id": "PTG-2", "title": "URL verification and health-check", "status": "done" },
+        { "id": "PTG-3", "title": "AI scraping pipeline with Firecrawl", "status": "done" },
+        { "id": "PTG-4", "title": "Supabase schema and migrations", "status": "done" },
+        { "id": "PTG-5", "title": "BullMQ queue infrastructure", "status": "done" }
+      ]
+    },
+    {
+      "name": "Sprint 2 — PDP and Content",
+      "start": "2026-03-01T00:00:00.000Z",
+      "end": "2026-03-31T00:00:00.000Z",
+      "dates": "2026-03-01 – 2026-03-31",
+      "cards": [
+        { "id": "PTG-10", "title": "PDP management (create, edit, archive)", "status": "done" },
+        { "id": "PTG-11", "title": "Brand voice configuration", "status": "done" },
+        { "id": "PTG-12", "title": "AI content generation with OpenAI", "status": "done" },
+        { "id": "PTG-13", "title": "Approval workflows (review, approve, reject)", "status": "done" },
+        { "id": "PTG-14", "title": "Batch operations for multi-hotel processing", "status": "done" }
+      ]
+    },
+    {
+      "name": "Sprint 3 — Translation and CMS",
+      "start": "2026-04-01T00:00:00.000Z",
+      "end": "2026-06-16T00:00:00.000Z",
+      "dates": "2026-04-01 – 2026-06-16",
+      "cards": [
+        { "id": "PTG-73", "title": "AI content generation QA pass and hardening", "status": "done" },
+        { "id": "PTG-74", "title": "Translation pipeline QA pass and hardening", "status": "done" },
+        { "id": "PTG-75", "title": "Bulk translation workflow", "status": "done" },
+        { "id": "PTG-76", "title": "Translation quality validation", "status": "done" },
+        { "id": "PTG-77", "title": "Translation auto-propagation on approval", "status": "done" },
+        { "id": "PTG-81", "title": "CMS integration with Hygraph", "status": "upcoming" }
+      ]
+    }
+  ],
+  "blockedItems": []
+}

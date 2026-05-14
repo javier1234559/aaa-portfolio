@@ -1,0 +1,197 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* Class-based dark mode for next-themes */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  AAA Portfolio — teal / lime / off-white (see docs/BRAND.md).
+  Light: canvas + white cards. Dark: #0D0D0D base, #1A1A1A surfaces; lime + teal accents.
+*/
+
+:root {
+  --brand-teal: #004d43;
+  --brand-lime: #e6ff2b;
+  --brand-canvas: #f9f7f2;
+  --brand-panel: color-mix(in srgb, var(--brand-neutral) 10%, var(--brand-canvas));
+  --brand-neutral: #898a8d;
+  --brand-dark: #0d0d0d;
+  --brand-surface: #ffffff;
+
+  --radius: 0.625rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+
+  --background: var(--brand-canvas);
+  --foreground: var(--brand-dark);
+  --card: #ffffff;
+  --card-foreground: var(--brand-dark);
+  --popover: #ffffff;
+  --popover-foreground: var(--brand-dark);
+  --primary: var(--brand-teal);
+  --primary-foreground: var(--brand-lime);
+  --secondary: color-mix(in srgb, var(--brand-neutral) 12%, var(--brand-canvas));
+  --secondary-foreground: var(--brand-dark);
+  --muted: color-mix(in srgb, var(--brand-neutral) 8%, var(--brand-canvas));
+  --muted-foreground: var(--brand-neutral);
+  --accent: color-mix(in srgb, var(--brand-lime) 28%, var(--brand-canvas));
+  --accent-foreground: var(--brand-teal);
+  --destructive: oklch(0.55 0.2 25);
+  --border: color-mix(in srgb, var(--brand-neutral) 22%, var(--brand-canvas));
+  --input: color-mix(in srgb, var(--brand-neutral) 26%, var(--brand-canvas));
+  --ring: var(--brand-teal);
+  --shadow-card: 0 1px 2px rgb(13 13 13 / 0.05), 0 2px 8px rgb(13 13 13 / 0.06);
+
+  --chart-1: #004d43;
+  --chart-2: #2d6a62;
+  --chart-3: #898a8d;
+  --chart-4: #c4c5c7;
+  --chart-5: #e6ff2b;
+
+  --sidebar: #ffffff;
+  --sidebar-foreground: var(--brand-dark);
+  --sidebar-primary: var(--brand-teal);
+  --sidebar-primary-foreground: var(--brand-lime);
+  --sidebar-accent: color-mix(in srgb, var(--brand-teal) 10%, var(--brand-canvas));
+  --sidebar-accent-foreground: var(--brand-teal);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--brand-teal);
+}
+
+.dark {
+  --brand-teal: #004d43;
+  --brand-lime: #e6ff2b;
+  --brand-canvas: #0d0d0d;
+  --brand-panel: #1a1a1a;
+  --brand-neutral: #a1a2a6;
+  --brand-dark: #f9f7f2;
+  --brand-surface: #1a1a1a;
+
+  --background: var(--brand-canvas);
+  --foreground: var(--brand-dark);
+  --card: var(--brand-surface);
+  --card-foreground: var(--brand-dark);
+  --popover: var(--brand-surface);
+  --popover-foreground: var(--brand-dark);
+  --primary: var(--brand-teal);
+  --primary-foreground: var(--brand-lime);
+  --secondary: color-mix(in srgb, #ffffff 8%, var(--brand-surface));
+  --secondary-foreground: var(--brand-dark);
+  --muted: color-mix(in srgb, #ffffff 8%, var(--brand-surface));
+  --muted-foreground: var(--brand-neutral);
+  --accent: color-mix(in srgb, var(--brand-lime) 14%, var(--brand-surface));
+  --accent-foreground: var(--brand-lime);
+  --destructive: oklch(0.62 0.2 25);
+  --border: color-mix(in srgb, #ffffff 12%, transparent);
+  --input: color-mix(in srgb, #ffffff 14%, transparent);
+  --ring: var(--brand-lime);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4);
+
+  --chart-1: #e6ff2b;
+  --chart-2: #5eead4;
+  --chart-3: #898a8d;
+  --chart-4: #4a4a4a;
+  --chart-5: #004d43;
+
+  --sidebar: var(--brand-surface);
+  --sidebar-foreground: var(--brand-dark);
+  --sidebar-primary: var(--brand-teal);
+  --sidebar-primary-foreground: var(--brand-lime);
+  --sidebar-accent: color-mix(in srgb, var(--brand-lime) 10%, var(--brand-surface));
+  --sidebar-accent-foreground: var(--brand-lime);
+  --sidebar-border: color-mix(in srgb, #ffffff 10%, transparent);
+  --sidebar-ring: var(--brand-lime);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-brand-teal: var(--brand-teal);
+  --color-brand-lime: var(--brand-lime);
+  --color-brand-canvas: var(--brand-canvas);
+  --color-brand-neutral: var(--brand-neutral);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-surface: var(--brand-surface);
+  --color-brand-green: var(--brand-teal);
+  --color-brand-offwhite: var(--brand-panel);
+  --color-brand-gray: var(--brand-neutral);
+  --font-display: var(--font-jura), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.5rem;
+  --shadow-sm: var(--shadow-card);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-semibold tracking-tight text-foreground;
+    font-family: var(--font-jura), ui-sans-serif, system-ui, sans-serif;
+    line-height: 1.15;
+  }
+
+  h1 {
+    @apply text-3xl sm:text-4xl;
+  }
+
+  h2 {
+    @apply text-2xl sm:text-3xl;
+  }
+
+  h3 {
+    @apply text-xl sm:text-2xl;
+  }
+
+  h4 {
+    @apply text-lg sm:text-xl;
+  }
+}

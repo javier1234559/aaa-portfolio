@@ -1,0 +1,19 @@
+{
+  "commits": [
+    {
+      "sha": "491ce55",
+      "tag": "merged",
+      "message": "Add project.config.yaml and gitignore Dashboard/",
+      "author": "Brad Wilcox",
+      "time": "2026-05-03"
+    },
+    {
+      "sha": "f5da786",
+      "tag": "merged",
+      "message": "Initial project setup: PROJECT_BRIEF, PRD, CLAUDE.md",
+      "author": "Brad Wilcox",
+      "time": "2026-05-03"
+    }
+  ],
+  "summary": "2 commits and 0 PRs merged."
+}

@@ -1,0 +1,145 @@
+{
+  "commits": [
+    {
+      "sha": "2543e95",
+      "tag": "merged",
+      "message": "chore: sync sprint-progress.json from Jira",
+      "author": "Claude",
+      "time": "2026-05-04"
+    },
+    {
+      "sha": "2f754db",
+      "tag": "pr",
+      "message": "feat: add Post-Sprint 5 Hardening section to sprint-progress.json",
+      "author": "web3sea",
+      "time": "2026-05-02"
+    },
+    {
+      "sha": "bf25efa",
+      "tag": "pr",
+      "message": "docs(LKID-88): record Done + note remaining items blocked on Lee",
+      "author": "web3sea",
+      "time": "2026-05-02"
+    },
+    {
+      "sha": "8c93094",
+      "tag": "pr",
+      "message": "chore: refresh stale READMEs + add 5 missing ones",
+      "author": "web3sea",
+      "time": "2026-05-02"
+    },
+    {
+      "sha": "295fa90",
+      "tag": "pr",
+      "message": "docs: update CLAUDE.md for PR #92 final state + PR #94",
+      "author": "web3sea",
+      "time": "2026-05-02"
+    },
+    {
+      "sha": "b02d424",
+      "tag": "pr",
+      "message": "fix: responsive overlay inset + cosmetic blank line cleanup",
+      "author": "web3sea",
+      "time": "2026-05-02"
+    },
+    {
+      "sha": "ce974c7",
+      "tag": "pr",
+      "message": "docs: update CLAUDE.md for PR #91 nav strip + PR #92 header/PDF polish",
+      "author": "web3sea",
+      "time": "2026-05-02"
+    },
+    {
+      "sha": "154ae2f",
+      "tag": "pr",
+      "message": "chore: solid blue header bar + PDF single-page fit",
+      "author": "web3sea",
+      "time": "2026-05-02"
+    },
+    {
+      "sha": "5e9627c",
+      "tag": "merged",
+      "message": "chore: sync sprint-progress.json from Jira",
+      "author": "Claude",
+      "time": "2026-05-02"
+    },
+    {
+      "sha": "4590b65",
+      "tag": "pr",
+      "message": "chore: strip nav links from landing page \u2014 solid blue bar only",
+      "author": "web3sea",
+      "time": "2026-05-01"
+    },
+    {
+      "sha": "3e752ef",
+      "tag": "pr",
+      "message": "docs(LKID-83): record LKID-83 as Done \u2014 PostHog analytics live",
+      "author": "web3sea",
+      "time": "2026-05-01"
+    },
+    {
+      "sha": "e4a768d",
+      "tag": "pr",
+      "message": "docs(LKID-84): record LKID-84 as Done \u2014 Sentry source maps live",
+      "author": "web3sea",
+      "time": "2026-05-01"
+    },
+    {
+      "sha": "258512c",
+      "tag": "pr",
+      "message": "docs(LKID-77): record LKID-77 as Done + Yuri QA verdict (PR #87)",
+      "author": "web3sea",
+      "time": "2026-05-01"
+    },
+    {
+      "sha": "5c44e61",
+      "tag": "pr",
+      "message": "fix(LKID-77): compute_dial_age returns current_age when baseline already below threshold",
+      "author": "web3sea",
+      "time": "2026-05-01"
+    },
+    {
+      "sha": "b021a89",
+      "tag": "pr",
+      "message": "docs(LKID-96): record LKID-96 as Done + Yuri QA verdict (PR #85)",
+      "author": "web3sea",
+      "time": "2026-04-30"
+    },
+    {
+      "sha": "9c0268c",
+      "tag": "pr",
+      "message": "fix(LKID-96): darken --kh-muted + --s-gray-text for WCAG AA; restore full-page axe scope",
+      "author": "web3sea",
+      "time": "2026-04-30"
+    },
+    {
+      "sha": "c7d826d",
+      "tag": "pr",
+      "message": "docs: update CLAUDE.md for LKID-93/94 + LKID-84 partial + LKID-96 backlog",
+      "author": "web3sea",
+      "time": "2026-04-30"
+    },
+    {
+      "sha": "03c2416",
+      "tag": "merged",
+      "message": "feat(LKID-94): wire axe-core accessibility suite into GitHub Actions CI (#83)",
+      "author": "Brad Wilcox",
+      "time": "2026-04-30"
+    },
+    {
+      "sha": "e70ba5d",
+      "tag": "merged",
+      "message": "docs: fix three Copilot findings from PR #77 review (#80)",
+      "author": "Brad Wilcox",
+      "time": "2026-04-30"
+    },
+    {
+      "sha": "73fdf31",
+      "tag": "merged",
+      "message": "feat(LKID-94): replace dialysis-crossing dot with circled D badge (#82)",
+      "author": "Brad Wilcox",
+      "time": "2026-04-30"
+    }
+  ],
+  "summary": "5 commits and 15 PRs merged."
+}

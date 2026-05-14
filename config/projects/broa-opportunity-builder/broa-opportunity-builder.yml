@@ -1,0 +1,31 @@
+slug: broa-opportunity-builder
+projectName: BROA Opportunity Builder
+clientName: Chad
+engagementType: "Project · Web Application"
+currentPhase: build
+slackContactChannel: "#client-comms"
+apiBaseUrl: "https://broa-opportunity-builder-production.up.railway.app"
+jiraProjectKey: BROAOB
+githubRepo: Automation-Architecture/opportunity-builder
+clientDashboardPath: "https://dashboard.automationarchitecture.ai/client/broa-opportunity-builder"
+description: >-
+  AI-powered Outlook add-in that converts inbound sales emails into Salesforce opportunities
+
+sales:
+  meetings: []
+discovery:
+  docs: []
+build:
+  githubActivity: []
+qa:
+  notes: >-
+    Live sprint and stage tracker live on the client dashboard (Jira + GitHub
+    sync from aaa-client-dashboard). Build tab here uses data_sprint_progress.json
+    and data_github_activity.json copied from that app.
+uat:
+  handoffSummary: ""
+  credentialHints: []
+maintenance:
+  owner: AAA Engineering
+  channel: "#client-comms"
+  notes: ""

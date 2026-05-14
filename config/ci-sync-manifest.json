@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "description": "Drives monorepo GitHub Actions under .github/workflows/portfolio-sync-*.yml. Omit jira_project_key or github_repo when that sync does not apply.",
+  "projects": [
+    {
+      "slug": "kidneyhood",
+      "jira_project_key": "LKID",
+      "github_repo": "Automation-Architecture/LKID"
+    },
+    {
+      "slug": "amanah-legacy",
+      "jira_project_key": "QAL",
+      "github_repo": "Automation-Architecture/amanah-legacy"
+    },
+    {
+      "slug": "broa-freight-auditor",
+      "jira_project_key": "BROAFA",
+      "github_repo": "Automation-Architecture/freight-auditor"
+    },
+    {
+      "slug": "broa-opportunity-builder",
+      "jira_project_key": "BROAOB",
+      "github_repo": "Automation-Architecture/opportunity-builder"
+    },
+    {
+      "slug": "collab-world",
+      "jira_project_key": "CW",
+      "github_repo": "Automation-Architecture/collab-world-outreach"
+    },
+    {
+      "slug": "ptg-content-engine",
+      "jira_project_key": "PTG",
+      "github_repo": "Automation-Architecture/ptg-content-generator"
+    },
+    {
+      "slug": "kidneyhood-zendesk-agent",
+      "jira_project_key": "KHZ",
+      "github_repo": null
+    },
+    {
+      "slug": "funston-advisory-services",
+      "jira_project_key": "FAS",
+      "github_repo": "Automation-Architecture/funston-advisory-services"
+    },
+    {
+      "slug": "nzs-assessment-automation",
+      "jira_project_key": null,
+      "github_repo": "Automation-Architecture/new-zealand-shores"
+    }
+  ]
+}

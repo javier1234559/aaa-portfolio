@@ -1,0 +1,516 @@
+{
+  "started": "2026-03-20",
+  "targetLaunch": "2026-05-08",
+  "sprints": [
+    {
+      "name": "Sprint 1 \u2014 Design Sprint",
+      "start": "2026-03-20T00:00:00.000Z",
+      "end": "2026-03-26T00:00:00.000Z",
+      "dates": "2026-03-20 \u2013 2026-03-26",
+      "cards": [
+        {
+          "id": "LKID-30",
+          "title": "Design Sprint",
+          "status": "done"
+        },
+        {
+          "id": "LKID-39",
+          "title": "Client dashboard mockup and prototype design",
+          "status": "done"
+        },
+        {
+          "id": "LKID-40",
+          "title": "Dashboard page scaffolding, isolated layout, and URL routing",
+          "status": "done"
+        },
+        {
+          "id": "LKID-41",
+          "title": "Core dashboard components \u2014 HeroBanner, SprintTracker, SpecTracker, DocumentLibrary, Horizon",
+          "status": "done"
+        },
+        {
+          "id": "LKID-42",
+          "title": "WeeklyUpdate component with markdown rendering pipeline",
+          "status": "done"
+        },
+        {
+          "id": "LKID-43",
+          "title": "Week 1 product update \u2014 authored content",
+          "status": "done"
+        },
+        {
+          "id": "LKID-44",
+          "title": "Week 1 technical update \u2014 authored content",
+          "status": "done"
+        },
+        {
+          "id": "LKID-45",
+          "title": "Sprint progress JSON and spec tracker JSON population",
+          "status": "done"
+        },
+        {
+          "id": "LKID-46",
+          "title": "Visual design review and brand consistency check",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "name": "Sprint 2 \u2014 Core Flow",
+      "start": "2026-03-26T00:00:00.000Z",
+      "end": "2026-04-02T00:00:00.000Z",
+      "dates": "2026-03-26 \u2013 2026-04-02",
+      "cards": [
+        {
+          "id": "LKID-1",
+          "title": "Auth & Lead Capture",
+          "status": "done"
+        },
+        {
+          "id": "LKID-2",
+          "title": "Prediction Engine & API",
+          "status": "done"
+        },
+        {
+          "id": "LKID-3",
+          "title": "Interactive Chart & Form",
+          "status": "done"
+        },
+        {
+          "id": "LKID-6",
+          "title": "Configure Clerk for magic-link-only authentication",
+          "status": "done"
+        },
+        {
+          "id": "LKID-7",
+          "title": "Build magic link email entry form",
+          "status": "done"
+        },
+        {
+          "id": "LKID-8",
+          "title": "Handle magic link click and auto-redirect to prediction form",
+          "status": "done"
+        },
+        {
+          "id": "LKID-9",
+          "title": "Pipe Clerk user.created webhook to leads table",
+          "status": "done"
+        },
+        {
+          "id": "LKID-10",
+          "title": "Create leads table on Railway managed Postgres",
+          "status": "done"
+        },
+        {
+          "id": "LKID-11",
+          "title": "Write name and lab values to leads table when prediction is submitted",
+          "status": "done"
+        },
+        {
+          "id": "LKID-12",
+          "title": "Bootstrap FastAPI project with Railway deployment",
+          "status": "done"
+        },
+        {
+          "id": "LKID-13",
+          "title": "Implement GET /health endpoint",
+          "status": "done"
+        },
+        {
+          "id": "LKID-14",
+          "title": "Integrate Lee's proprietary rules engine into FastAPI",
+          "status": "done"
+        },
+        {
+          "id": "LKID-15",
+          "title": "Implement POST /predict endpoint",
+          "status": "done"
+        },
+        {
+          "id": "LKID-16",
+          "title": "Build the prediction form with 4 required lab value inputs",
+          "status": "done"
+        },
+        {
+          "id": "LKID-17",
+          "title": "Add name field and pre-fill email from Clerk session",
+          "status": "done"
+        },
+        {
+          "id": "LKID-18",
+          "title": "Connect prediction form to POST /predict",
+          "status": "done"
+        },
+        {
+          "id": "LKID-19",
+          "title": "Build the Visx chart displaying 4 trajectory lines",
+          "status": "done"
+        },
+        {
+          "id": "LKID-48",
+          "title": "Spike: set up Playwright visual regression for Visx eGFR chart component",
+          "status": "done"
+        },
+        {
+          "id": "LKID-49",
+          "title": "Pair with Harshit on Visx rendering lifecycle and screenshot timing",
+          "status": "done"
+        },
+        {
+          "id": "LKID-50",
+          "title": "Write k6 load test scripts targeting /predict and /lab-entries endpoints",
+          "status": "done"
+        },
+        {
+          "id": "LKID-51",
+          "title": "Document Railway concurrency limits and connection pooling for load test planning",
+          "status": "done"
+        },
+        {
+          "id": "LKID-52",
+          "title": "Grant Yuri read access to Railway staging environment for load testing",
+          "status": "done"
+        },
+        {
+          "id": "LKID-53",
+          "title": "Conduct Railway infrastructure walkthrough covering security controls for HIPAA verification",
+          "status": "done"
+        },
+        {
+          "id": "LKID-54",
+          "title": "Grant Yuri Railway CLI access for HIPAA infrastructure verification",
+          "status": "done"
+        },
+        {
+          "id": "LKID-55",
+          "title": "Pair with Gay Mark on pgaudit configuration and audit log verification",
+          "status": "done"
+        },
+        {
+          "id": "LKID-56",
+          "title": "Create shared test fixture library with factory functions for backend and frontend",
+          "status": "done"
+        },
+        {
+          "id": "LKID-57",
+          "title": "Add CI step to validate test fixtures against latest Alembic schema",
+          "status": "done"
+        },
+        {
+          "id": "LKID-58",
+          "title": "Create parameterized data generator script for k6 load test payloads",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "name": "LKID Sprint 1 (deprecated)",
+      "start": "2026-03-26T00:00:00.093Z",
+      "end": "2026-04-02T00:00:00.000Z",
+      "dates": "2026-03-26 \u2013 2026-04-02",
+      "cards": [
+        {
+          "id": "LKID-31",
+          "title": "Update user-flows.md to reflect lean launch decisions",
+          "status": "done"
+        },
+        {
+          "id": "LKID-32",
+          "title": "Update wireframes.md with hi-fi screen specs for the lean launch",
+          "status": "done"
+        },
+        {
+          "id": "LKID-33",
+          "title": "Update component-specs.md to match the lean launch component inventory",
+          "status": "done"
+        },
+        {
+          "id": "LKID-34",
+          "title": "Set up Next.js 15 + shadcn/ui prototype project with design tokens applied",
+          "status": "done"
+        },
+        {
+          "id": "LKID-35",
+          "title": "Implement all 7 screens as prototype pages with working route navigation",
+          "status": "done"
+        },
+        {
+          "id": "LKID-37",
+          "title": "Apply accessibility standards to all prototype screens",
+          "status": "done"
+        },
+        {
+          "id": "LKID-38",
+          "title": "Inga reviews the prototype against specs and provides formal sign-off",
+          "status": "done"
+        },
+        {
+          "id": "LKID-36",
+          "title": "Add working form inputs with client-side validation and MSW mock responses",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "name": "Sprint 3 \u2014 PDF, Polish & QA",
+      "start": "2026-04-20T00:00:26.578Z",
+      "end": "2026-04-21T00:00:00.000Z",
+      "dates": "2026-04-20 \u2013 2026-04-21",
+      "cards": [
+        {
+          "id": "LKID-4",
+          "title": "PDF Export",
+          "status": "done"
+        },
+        {
+          "id": "LKID-5",
+          "title": "Polish & QA",
+          "status": "done"
+        },
+        {
+          "id": "LKID-14",
+          "title": "Integrate Lee's proprietary rules engine into FastAPI",
+          "status": "done"
+        },
+        {
+          "id": "LKID-19",
+          "title": "Build the Visx chart displaying 4 trajectory lines",
+          "status": "done"
+        },
+        {
+          "id": "LKID-20",
+          "title": "Add interactive features to the eGFR chart (Variant A)",
+          "status": "done"
+        },
+        {
+          "id": "LKID-21",
+          "title": "Build the results page with chart, disclaimer, and PDF button",
+          "status": "done"
+        },
+        {
+          "id": "LKID-22",
+          "title": "Implement POST /predict/pdf with Playwright server-side rendering",
+          "status": "done"
+        },
+        {
+          "id": "LKID-23",
+          "title": "Add PDF download button to results page",
+          "status": "done"
+        },
+        {
+          "id": "LKID-24",
+          "title": "Add medical and legal disclaimers to the prediction results",
+          "status": "done"
+        },
+        {
+          "id": "LKID-25",
+          "title": "Add rate limiting to auth and predict endpoints",
+          "status": "done"
+        },
+        {
+          "id": "LKID-26",
+          "title": "Achieve zero critical/serious axe-core violations on all pages",
+          "status": "done"
+        },
+        {
+          "id": "LKID-27",
+          "title": "Write exhaustive prediction engine boundary tests with golden-file pairs",
+          "status": "done"
+        },
+        {
+          "id": "LKID-28",
+          "title": "Write two E2E tests covering the full user journey",
+          "status": "done"
+        },
+        {
+          "id": "LKID-29",
+          "title": "Execute the single pre-release QA gate with 5 checkpoints",
+          "status": "done"
+        },
+        {
+          "id": "LKID-61",
+          "title": "DB: add predictions table + report_token column",
+          "status": "done"
+        },
+        {
+          "id": "LKID-62",
+          "title": "Backend: rewire POST /predict + new tokenized endpoints (/results, /leads, /reports PDF)",
+          "status": "done"
+        },
+        {
+          "id": "LKID-63",
+          "title": "Frontend: new patient funnel pages (/labs, /gate/[token], /results/[token], /internal/chart) + Clerk layout migration",
+          "status": "done"
+        },
+        {
+          "id": "LKID-64",
+          "title": "Backend: Resend transactional email template (PDF attached)",
+          "status": "done"
+        },
+        {
+          "id": "LKID-65",
+          "title": "QA: update E2E + a11y tests for new tokenized flow",
+          "status": "done"
+        },
+        {
+          "id": "LKID-66",
+          "title": "Frontend cleanup: delete legacy /predict and /results pages after prod smoke test",
+          "status": "done"
+        },
+        {
+          "id": "LKID-49",
+          "title": "Pair with Harshit on Visx rendering lifecycle and screenshot timing",
+          "status": "done"
+        },
+        {
+          "id": "LKID-47",
+          "title": "Lead capture webhook + Klaviyo integration",
+          "status": "blocked"
+        }
+      ]
+    },
+    {
+      "name": "Sprint 5 \u2014 Readiness",
+      "start": "2026-04-20T09:37:30.772Z",
+      "end": "2026-04-22T04:00:00.000Z",
+      "dates": "2026-04-20 \u2013 2026-04-22",
+      "cards": [
+        {
+          "id": "LKID-68",
+          "title": "Postmortem: Sprint 4 deploy found prod DB empty (migrations 001\u2013004 had never run)",
+          "status": "done"
+        },
+        {
+          "id": "LKID-69",
+          "title": "Infra: clean up duplicate Postgres service on Railway",
+          "status": "done"
+        },
+        {
+          "id": "LKID-71",
+          "title": "Analytics: PostHog conversion funnel (landing \u2192 labs \u2192 gate \u2192 results \u2192 PDF)",
+          "status": "done"
+        },
+        {
+          "id": "LKID-72",
+          "title": "Error monitoring: Sentry (frontend + backend)",
+          "status": "done"
+        },
+        {
+          "id": "LKID-73",
+          "title": "SEO: Open Graph + meta + sitemap + robots.txt",
+          "status": "done"
+        },
+        {
+          "id": "LKID-74",
+          "title": "Security headers: CSP, HSTS, X-Frame-Options, Permissions-Policy",
+          "status": "done"
+        },
+        {
+          "id": "LKID-75",
+          "title": "Dashboard v2 for Lee \u2014 funnel view, recent leads, send counts",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "name": "Sprint 5 \u2014 Readiness 2",
+      "start": "2026-05-03T13:44:03.311Z",
+      "end": "2026-05-08T04:00:00.000Z",
+      "dates": "2026-05-03 \u2013 2026-05-08",
+      "cards": [
+        {
+          "id": "LKID-47",
+          "title": "Lead capture webhook + Klaviyo integration",
+          "status": "blocked"
+        },
+        {
+          "id": "LKID-85",
+          "title": "brad-hands: Resend DNS verification + flip FROM email to reports@kidneyhood.org",
+          "status": "blocked"
+        },
+        {
+          "id": "LKID-86",
+          "title": "brad-hands: DNS flip to kidneyhood.org + set NEXT_PUBLIC_APP_URL",
+          "status": "blocked"
+        },
+        {
+          "id": "LKID-77",
+          "title": "Engine edge case: compute_dial_age returns None when trajectory[0] &lt; 12",
+          "status": "done"
+        },
+        {
+          "id": "LKID-96",
+          "title": "Fix color-contrast AA violations on results page \u2014 .sc-pill.gray, .lbl, .foot, footer links",
+          "status": "done"
+        },
+        {
+          "id": "LKID-97",
+          "title": "Document Library v2 \u2014 clickable documents with rich markdown preview",
+          "status": "done"
+        },
+        {
+          "id": "LKID-99",
+          "title": "DB migration \u2014 create project_client_comments table",
+          "status": "done"
+        },
+        {
+          "id": "LKID-100",
+          "title": "Backend \u2014 client comments CRUD endpoints",
+          "status": "done"
+        },
+        {
+          "id": "LKID-101",
+          "title": "Frontend \u2014 client comments UI in StageTracker",
+          "status": "done"
+        },
+        {
+          "id": "LKID-102",
+          "title": "Frontend \u2014 admin route for team note authoring",
+          "status": "done"
+        },
+        {
+          "id": "LKID-103",
+          "title": "Backend \u2014 add edit/delete endpoints for team notes",
+          "status": "done"
+        },
+        {
+          "id": "LKID-104",
+          "title": "Wizard: collect client email + draft onboarding email in Gmail",
+          "status": "upcoming"
+        },
+        {
+          "id": "LKID-106",
+          "title": "GitHub activity auto-sync via GitHub Action",
+          "status": "done"
+        },
+        {
+          "id": "LKID-107",
+          "title": "Wizard: auto-populate documents.json from product-mgmt/ folder",
+          "status": "done"
+        }
+      ]
+    }
+  ],
+  "blockedItems": [
+    {
+      "id": "LKID-47",
+      "title": "Lead capture webhook + Klaviyo integration",
+      "sprint": "Sprint 3 \u2014 PDF, Polish & QA"
+    },
+    {
+      "id": "LKID-47",
+      "title": "Lead capture webhook + Klaviyo integration",
+      "sprint": "Sprint 5 \u2014 Readiness 2"
+    },
+    {
+      "id": "LKID-85",
+      "title": "brad-hands: Resend DNS verification + flip FROM email to reports@kidneyhood.org",
+      "sprint": "Sprint 5 \u2014 Readiness 2"
+    },
+    {
+      "id": "LKID-86",
+      "title": "brad-hands: DNS flip to kidneyhood.org + set NEXT_PUBLIC_APP_URL",
+      "sprint": "Sprint 5 \u2014 Readiness 2"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+---
+description: AAA Portfolio static config, dashboard sync mirrors, and server loaders
+globs: config/**/*,src/server/portfolio/**/*,src/feature/portfolio/**/*
+alwaysApply: false
+---
+
+# Portfolio config and data
+
+- **Manifest:** `idea/config/projects.manifest.yaml` lists slugs; each slug has a folder `idea/config/projects/<slug>/`.
+- **YAML:** `<slug>.yml` holds identity, URLs, `currentPhase`, `jiraProjectKey`, `githubRepo`, and tab copy. Prefer editing YAML over hardcoding in TS.
+- **JSON mirrors:** `data_sprint_progress.json` / `data_github_activity.json` — same shapes as the dashboard files. Refresh via **monorepo root** `.github/workflows/portfolio-sync-*.yml` and `idea/config/ci-sync-manifest.json`, or copy from `aaa-client-dashboard` after its Actions run.
+- **Loader:** `src/server/portfolio/load-config.ts` and `sprint-github.ts` — keep types aligned with `src/feature/portfolio/types.ts`.
+- **Comments:** `data_comments.json` is read-only in MVP; writes go through a planned Next.js Route Handler (see `docs/PLANS.md` §7.6). Do not call Slack webhooks from the browser.
+
+When adding a client, mirror the steps in `.cursor/skills/aaa-portfolio-config/SKILL.md` (and the Claude copy under `.claude/skills/`).

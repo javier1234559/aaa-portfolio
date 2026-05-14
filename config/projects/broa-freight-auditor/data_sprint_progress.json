@@ -1,0 +1,234 @@
+{
+  "started": "2026-05-03",
+  "targetLaunch": "2026-05-08",
+  "sprints": [
+    {
+      "name": "BROAFA Sprint 1",
+      "start": "2026-05-03T11:21:03.214Z",
+      "end": "2026-05-08T04:00:00.000Z",
+      "dates": "2026-05-03 \u2013 2026-05-08",
+      "cards": [
+        {
+          "id": "BROAFA-4",
+          "title": "PDF extraction with Claude Haiku \u2014 parse 88+ carrier formats",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-5",
+          "title": "CSV loader for Salesforce freight cost data",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-6",
+          "title": "Confidence-ranked matching engine (4 strategies)",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-7",
+          "title": "Variance calculation and flagging (>5% threshold)",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-8",
+          "title": "Web dashboard with auth (FastAPI + Jinja2 + htmx + Pico CSS)",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-9",
+          "title": "CSV export for XL Connector upload to Salesforce",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-10",
+          "title": "Email notification drafts grouped by Shipping Owner",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-11",
+          "title": "Dark mode + BROA branding (colors, logo, favicon)",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-12",
+          "title": "Railway deployment with persistent SQLite volume",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-13",
+          "title": "Dropbox local folder scanning (Option 1)",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-14",
+          "title": "Dropbox API integration for cloud hosting (Option 3)",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-15",
+          "title": "Dropbox webhook endpoint for auto-triggered scans",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-16",
+          "title": "File routing \u2014 move PDFs between Dropbox folders via API",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-17",
+          "title": "SMTP email auto-send after every scan",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-18",
+          "title": "Slack webhook notifications (scan summaries)",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-19",
+          "title": "SSE real-time dashboard updates",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-20",
+          "title": "Background scheduler (configurable interval, webhook fallback)",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-21",
+          "title": "Bill.com AP client implementation",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-22",
+          "title": "Product documentation suite (brief, roadmap, delivery docs, integration guides)",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-23",
+          "title": "Client credentials request consolidated and sent to Chad",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-24",
+          "title": "Exchange Dropbox OAuth authorization code for access + refresh tokens",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-25",
+          "title": "Configure Dropbox env vars on Railway",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-26",
+          "title": "Register webhook URL in Dropbox App Console",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-27",
+          "title": "End-to-end Dropbox webhook test",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-28",
+          "title": "Configure SMTP credentials on Railway",
+          "status": "blocked"
+        },
+        {
+          "id": "BROAFA-29",
+          "title": "Configure Slack webhook on Railway",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-30",
+          "title": "Configure owner email mapping (OWNER_EMAILS)",
+          "status": "blocked"
+        },
+        {
+          "id": "BROAFA-31",
+          "title": "Bill.com sandbox testing",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-32",
+          "title": "Bill.com production cutover",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAFA-33",
+          "title": "Salesforce API integration \u2014 replace CSV with live queries",
+          "status": "blocked"
+        },
+        {
+          "id": "BROAFA-34",
+          "title": "Carrier scorecards \u2014 per-carrier variance analytics",
+          "status": "done"
+        },
+        {
+          "id": "BROAFA-36",
+          "title": "Multi-user access \u2014 individual logins, roles, audit logging",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAFA-40",
+          "title": "Reconfigure Dropbox app to \"Full Dropbox\" scope (BLOCKER)",
+          "status": "blocked"
+        }
+      ]
+    },
+    {
+      "name": "Backlog",
+      "start": "",
+      "end": "",
+      "dates": "",
+      "cards": [
+        {
+          "id": "BROAFA-35",
+          "title": "Carrier scorecards \u2014 per-carrier variance analytics",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAFA-41",
+          "title": "Run PDF extraction concurrently to speed up large-batch scans",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAFA-42",
+          "title": "Make scan pipeline crash-safe with per-phase commits",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAFA-43",
+          "title": "Skip re-download of already-cached PDFs in scan_dropbox_api",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAFA-44",
+          "title": "Make move_file's source==dest check case-insensitive to silence routing log noise",
+          "status": "upcoming"
+        }
+      ]
+    }
+  ],
+  "blockedItems": [
+    {
+      "id": "BROAFA-28",
+      "title": "Configure SMTP credentials on Railway",
+      "sprint": "BROAFA Sprint 1"
+    },
+    {
+      "id": "BROAFA-30",
+      "title": "Configure owner email mapping (OWNER_EMAILS)",
+      "sprint": "BROAFA Sprint 1"
+    },
+    {
+      "id": "BROAFA-33",
+      "title": "Salesforce API integration \u2014 replace CSV with live queries",
+      "sprint": "BROAFA Sprint 1"
+    },
+    {
+      "id": "BROAFA-40",
+      "title": "Reconfigure Dropbox app to \"Full Dropbox\" scope (BLOCKER)",
+      "sprint": "BROAFA Sprint 1"
+    }
+  ]
+}

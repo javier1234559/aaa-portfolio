@@ -1,0 +1,647 @@
+{
+  "started": "2026-04-29",
+  "targetLaunch": "2026-06-23",
+  "sprints": [
+    {
+      "name": "FAS Sprint 1",
+      "start": "2026-04-29T07:10:00.000Z",
+      "end": "2026-05-13T07:10:00.000Z",
+      "dates": "2026-04-29 \u2013 2026-05-13",
+      "cards": [
+        {
+          "id": "FAS-9",
+          "title": "E1.1: Initialize monorepo scaffold and CI pipeline",
+          "status": "done"
+        },
+        {
+          "id": "FAS-10",
+          "title": "E1.2: Author Supabase schema migrations for all Phase 1 tables",
+          "status": "done"
+        },
+        {
+          "id": "FAS-11",
+          "title": "E1.3: Implement RLS helper functions and policies for all RLS-enabled tables",
+          "status": "done"
+        },
+        {
+          "id": "FAS-12",
+          "title": "E1.4: Author pgTAP test suite proving cross-tenant isolation across all RLS-enabled tables",
+          "status": "done"
+        },
+        {
+          "id": "FAS-13",
+          "title": "E1.6: Wire Clerk auth and Supabase JWT bridge",
+          "status": "done"
+        },
+        {
+          "id": "FAS-14",
+          "title": "E1.5: Implement Edge Middleware for subdomain to client_id resolution",
+          "status": "done"
+        },
+        {
+          "id": "FAS-15",
+          "title": "E1.7: Implement Clerk webhook handler on Railway Express for member sync",
+          "status": "done"
+        },
+        {
+          "id": "FAS-16",
+          "title": "E1.8: Provision Supabase Storage content bucket with RLS-inheriting policies and pg_cron jobs",
+          "status": "done"
+        },
+        {
+          "id": "FAS-17",
+          "title": "E1.9: Author seed data script for two test clients (NDSIB + SWIB)",
+          "status": "done"
+        },
+        {
+          "id": "FAS-18",
+          "title": "E1.10: Register apex + wildcard domains on Vercel and configure Cloudflare wildcard CNAME",
+          "status": "done"
+        },
+        {
+          "id": "FAS-19",
+          "title": "E1.11: Update CLAUDE.md and superseded source docs to match Round 2 architecture decisions",
+          "status": "done"
+        },
+        {
+          "id": "FAS-20",
+          "title": "E2.1: Implement portal shell layout, header, and per-tenant brand injection",
+          "status": "done"
+        },
+        {
+          "id": "FAS-21",
+          "title": "E2.2: Implement Hero card and What's New section on dashboard",
+          "status": "done"
+        },
+        {
+          "id": "FAS-22",
+          "title": "E2.3: Implement Pillar Profile Snapshot section on dashboard",
+          "status": "done"
+        },
+        {
+          "id": "FAS-23",
+          "title": "E2.4: Implement Upcoming Decisions section on dashboard",
+          "status": "done"
+        },
+        {
+          "id": "FAS-24",
+          "title": "E2.5: Implement My Insights Queue section on dashboard with CompletionCheckbox",
+          "status": "done"
+        },
+        {
+          "id": "FAS-25",
+          "title": "E2.6: Implement skeleton loaders and designed empty states for dashboard sections",
+          "status": "done"
+        },
+        {
+          "id": "FAS-26",
+          "title": "E2.7: Dashboard cross-section integration: layout, breakpoints, FCP gate, axe-core full pass",
+          "status": "done"
+        },
+        {
+          "id": "FAS-27",
+          "title": "E3.1: Implement Intelligence sub-nav layout",
+          "status": "done"
+        },
+        {
+          "id": "FAS-28",
+          "title": "E3.2: Implement ScorecardView native renderer for current-quarter scorecard",
+          "status": "done"
+        },
+        {
+          "id": "FAS-29",
+          "title": "E3.3: Implement historical scorecard navigation and route",
+          "status": "done"
+        },
+        {
+          "id": "FAS-30",
+          "title": "E3.4: Implement scorecard PDF API route with @react-pdf/renderer",
+          "status": "done"
+        },
+        {
+          "id": "FAS-31",
+          "title": "E3.5: Implement Outcomes Snapshot view",
+          "status": "done"
+        },
+        {
+          "id": "FAS-32",
+          "title": "E3.6: Implement KPR Register and Peer Benchmarking light views",
+          "status": "done"
+        },
+        {
+          "id": "FAS-33",
+          "title": "E3.7: Implement report PDF API route and Intelligence cross-view QA pass",
+          "status": "done"
+        },
+        {
+          "id": "FAS-34",
+          "title": "E3.8: Confirm and document OD-02 PDF fallback criterion in tech-spec section 15",
+          "status": "done"
+        },
+        {
+          "id": "FAS-35",
+          "title": "E4.1: Implement Decisions register table with filters",
+          "status": "done"
+        },
+        {
+          "id": "FAS-36",
+          "title": "E4.2: Implement Decision drill panel (desktop side panel + mobile full-page)",
+          "status": "done"
+        },
+        {
+          "id": "FAS-37",
+          "title": "E4.3: Implement Library content grid with filter chips (no search input)",
+          "status": "done"
+        },
+        {
+          "id": "FAS-38",
+          "title": "E4.4: Implement Library native viewer for video and report content",
+          "status": "done"
+        },
+        {
+          "id": "FAS-39",
+          "title": "E4.5: Implement completion status badge persistence on Library cards and Library filter PostHog event",
+          "status": "done"
+        },
+        {
+          "id": "FAS-40",
+          "title": "E4.6: Implement My Activity view with Completed and Pending sections",
+          "status": "done"
+        },
+        {
+          "id": "FAS-41",
+          "title": "E4.7: Wire decision_drilled PostHog event from Decisions page",
+          "status": "done"
+        },
+        {
+          "id": "FAS-42",
+          "title": "E4.8: Decisions / Library / My Activity cross-view QA pass",
+          "status": "done"
+        }
+      ]
+    },
+    {
+      "name": "FAS Sprint 2",
+      "start": "2026-05-13T04:00:00.000Z",
+      "end": "2026-05-20T04:00:00.000Z",
+      "dates": "2026-05-13 \u2013 2026-05-20",
+      "cards": [
+        {
+          "id": "FAS-43",
+          "title": "E5.1: Implement HMAC token library with two-key rotation",
+          "status": "done"
+        },
+        {
+          "id": "FAS-44",
+          "title": "E5.2: Implement /api/completion/[token] endpoint and branded landing pages",
+          "status": "done"
+        },
+        {
+          "id": "FAS-45",
+          "title": "E5.3: Configure SendGrid Dynamic Templates and commit variable contract",
+          "status": "done"
+        },
+        {
+          "id": "FAS-46",
+          "title": "E5.4: Implement n8n primary + secondary nudge workflows and commit JSON to repo",
+          "status": "done"
+        },
+        {
+          "id": "FAS-47",
+          "title": "E5.4a: Build n8n campaign-driven nudge workflow and export JSON",
+          "status": "done"
+        },
+        {
+          "id": "FAS-48",
+          "title": "E5.4b: Build n8n secondary nudge workflow and export JSON",
+          "status": "done"
+        },
+        {
+          "id": "FAS-49",
+          "title": "E5.4c: GH Actions n8n workflow import job",
+          "status": "done"
+        },
+        {
+          "id": "FAS-50",
+          "title": "E5.5: Configure SendGrid sending domain (SPF / DKIM / DMARC) and execute domain warming",
+          "status": "done"
+        },
+        {
+          "id": "FAS-51",
+          "title": "E5.6: Implement SendGrid event webhook handler on Railway Express",
+          "status": "done"
+        },
+        {
+          "id": "FAS-52",
+          "title": "E5.7: End-to-end section 13.2 verification: nudge to done to portal status flip to My Activity",
+          "status": "done"
+        },
+        {
+          "id": "FAS-53",
+          "title": "E5.8: Cross-device email QA on three nudge templates",
+          "status": "done"
+        },
+        {
+          "id": "FAS-54",
+          "title": "E5.9: Verify HMAC two-key rotation runbook",
+          "status": "done"
+        },
+        {
+          "id": "FAS-55",
+          "title": "E6.1: Implement admin route group, layout, and admin auth gate",
+          "status": "done"
+        },
+        {
+          "id": "FAS-56",
+          "title": "E6.2: Implement admin Member management (list, add, edit, deactivate)",
+          "status": "done"
+        },
+        {
+          "id": "FAS-57",
+          "title": "E6.3: Implement admin Module Composer (create/edit modules per fund, draft/published)",
+          "status": "done"
+        },
+        {
+          "id": "FAS-58",
+          "title": "E6.4: Implement admin Decision Calendar CRUD with constraint validation surfaced inline",
+          "status": "done"
+        },
+        {
+          "id": "FAS-59",
+          "title": "E6.5: Implement client selector sidebar and active-client switching",
+          "status": "done"
+        },
+        {
+          "id": "FAS-60",
+          "title": "E6.6: Implement dispatch queue view, nudge pipeline monitor, and manual dispatch action",
+          "status": "done"
+        },
+        {
+          "id": "FAS-61",
+          "title": "E6.7: Implement programmatic Cloudflare DNS provisioning and end-to-end client onboarding flow",
+          "status": "done"
+        },
+        {
+          "id": "FAS-62",
+          "title": "E6.7a: Cloudflare DNS provisioning helper in lib/cloudflare.ts",
+          "status": "done"
+        },
+        {
+          "id": "FAS-63",
+          "title": "E6.7b: Document client onboarding runbook at spec/runbooks/client-onboarding.md",
+          "status": "done"
+        },
+        {
+          "id": "FAS-64",
+          "title": "E6.8: Resolve OD-04 multi-fund first-login behaviour with FAS and update onboarding flow",
+          "status": "done"
+        },
+        {
+          "id": "FAS-65",
+          "title": "E6.9: Implement Server Action auth + is_admin enforcement helper and audit all admin Server Actions",
+          "status": "done"
+        },
+        {
+          "id": "FAS-89",
+          "title": "T1-1 \u2014 Supabase schema migrations + indexes + constraints",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-92",
+          "title": "T1-2 \u2014 RLS policies + helper functions + pgTAP cross-tenant isolation tests",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-93",
+          "title": "T1-3 \u2014 Supabase Storage `content` bucket + policies + `pg_cron` jobs",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-96",
+          "title": "T1-4 \u2014 Clerk apps (prod + dev) + Supabase JWT integration + `createServerSupabaseClient()`",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-100",
+          "title": "T1-5 \u2014 Clerk webhook handler on Railway (user.created, organizationMembership) + admin_users seed",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-105",
+          "title": "T1-7 \u2014 Cloudflare DNS automation + Client Onboarding Server Action + runbook + seed data",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-112",
+          "title": "T1-6 \u2014 Edge middleware.ts: subdomain \u2192 client_id resolution + caching + 404",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-140",
+          "title": "T1-3a \u2014 Custom Clerk Sign-in UI + magic link + forgot-password",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-141",
+          "title": "T1-1a \u2014 Extract InGov design tokens into globals.css",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-91",
+          "title": "T5-1 \u2014 Admin route group, shared-login gate, and app-boundary enforcement",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-95",
+          "title": "T5-2 \u2014 Server Actions for module + campaign + member + scorecard CRUD",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-98",
+          "title": "T5-3 \u2014 Module Composer surface",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-102",
+          "title": "T5-4 \u2014 Campaign Composer surface",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-104",
+          "title": "T5-5 \u2014 Campaign Calendar surface with gap detection",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-109",
+          "title": "T5-6 \u2014 Member Management surface (per-fund roster, Clerk Org sync)",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-110",
+          "title": "T5-7 \u2014 Completion Dashboard surface",
+          "status": "upcoming"
+        }
+      ]
+    },
+    {
+      "name": "FAS Sprint 3",
+      "start": "2026-05-20T04:00:00.000Z",
+      "end": "2026-05-27T04:00:00.000Z",
+      "dates": "2026-05-20 \u2013 2026-05-27",
+      "cards": [
+        {
+          "id": "FAS-66",
+          "title": "E7.1: Scaffold separate Next.js app at scorecard-gen/ with shared-password auth",
+          "status": "done"
+        },
+        {
+          "id": "FAS-67",
+          "title": "E7.2: Audit and standardize FAS HTML scorecard templates with named variables",
+          "status": "done"
+        },
+        {
+          "id": "FAS-68",
+          "title": "E7.3: Implement Excel/CSV upload, parse, and preview screen",
+          "status": "done"
+        },
+        {
+          "id": "FAS-69",
+          "title": "E7.3a: Implement parser library mapping uploaded columns to the variable contract",
+          "status": "done"
+        },
+        {
+          "id": "FAS-70",
+          "title": "E7.4: Implement save to scorecards table and deterministic HTML scorecard generation",
+          "status": "done"
+        },
+        {
+          "id": "FAS-71",
+          "title": "E7.5: Verify Scorecard Generator integration with trustee portal Scorecard view",
+          "status": "done"
+        },
+        {
+          "id": "FAS-72",
+          "title": "E8.1: Wire and verify all PostHog events from tech-spec section 10.3.1 + build engagement dashboards",
+          "status": "done"
+        },
+        {
+          "id": "FAS-73",
+          "title": "E8.2: Configure Sentry for portal + Railway with PII-free context and alert rules",
+          "status": "done"
+        },
+        {
+          "id": "FAS-74",
+          "title": "E8.3: Implement and pass full Playwright E2E suite (all 10 section 12.4 scenarios) against funston-prod",
+          "status": "done"
+        },
+        {
+          "id": "FAS-75",
+          "title": "E8.4: Run final cross-tenant manual QA, mobile golden flow, and brand-swap demo",
+          "status": "done"
+        },
+        {
+          "id": "FAS-76",
+          "title": "E8.5: Launch readiness sign-off, performance gate, and final readiness report",
+          "status": "done"
+        },
+        {
+          "id": "FAS-107",
+          "title": "T2-1 \u2014 `(portal)/layout.tsx` shell: Header + nav tabs + profile menu + Footer",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-113",
+          "title": "T2-2 \u2014 Per-tenant brand injection + mobile hamburger nav (bottom sheet at 375)",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-116",
+          "title": "T2-3 \u2014 `<CompletionCheckbox />` Client Component + Server Action + rollback toast",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-119",
+          "title": "T2-4 \u2014 Dashboard (Home) page: HeroCard + What's New + Pillar Profile + Upcoming Decisions + Insights Queue preview",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-123",
+          "title": "T2-5 \u2014 Decisions Register: filterable table + side panel (desktop) / full-page (mobile) drill",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-125",
+          "title": "T2-6 \u2014 Library (Content Archive) grid: LibCard + ImCard + filter chips + native viewers",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-128",
+          "title": "T2-7 \u2014 My Activity view: Completed + Pending sections + native viewer tap-through",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-131",
+          "title": "T2-8 \u2014 Insights Queue full-page view (`/insights`)",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-134",
+          "title": "\u26a0\ufe0f PLACEHOLDER: T2-9 \u2014 Multi-fund trustee fund-switcher UI (OD-04)",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-90",
+          "title": "T3-1 \u2014 ScorecardView native renderer (header + pillar blocks + dimension table)",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-94",
+          "title": "T3-2 \u2014 Historical quarter selector on Scorecard view",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-97",
+          "title": "T3-3 \u2014 Outcomes Snapshot view (MetricCard x 9 across three banded sections)",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-99",
+          "title": "T3-4 \u2014 KPR Register view + Peer Benchmarking (light)",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-101",
+          "title": "T3-5 \u2014 Async scorecard PDF: component + Railway worker + Vercel dispatch",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-103",
+          "title": "T3-6 \u2014 Async report PDF: component + Railway worker ext + Vercel dispatch",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-106",
+          "title": "T3-7 \u2014 Export PDF buttons on Scorecard + Report views; cross-quarter PDF QA",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-108",
+          "title": "PLACEHOLDER: T3-8 \u2014 Puppeteer-on-Railway PDF fallback (OD-02)",
+          "status": "upcoming"
+        }
+      ]
+    },
+    {
+      "name": "FAS Sprint 4",
+      "start": "2026-05-27T04:00:00.000Z",
+      "end": "2026-06-03T04:00:00.000Z",
+      "dates": "2026-05-27 \u2013 2026-06-03",
+      "cards": [
+        {
+          "id": "FAS-111",
+          "title": "T4-1 \u2014 lib/tokens.ts HMAC sign + verify with two-key rotation + Vitest coverage",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-114",
+          "title": "T6-1 \u2014 Standalone scorecard-gen Next.js app + shared-password auth + Vercel project setup",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-115",
+          "title": "T4-2 \u2014 /api/completion/[token]/route.ts + completion-success + completion-error landing pages",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-117",
+          "title": "T6-2 \u2014 Audit existing FAS HTML scorecard templates and define the canonical variable contract",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-118",
+          "title": "T4-3 \u2014 CompletionCheckbox portal-side acknowledgment (single completion path with email)",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-120",
+          "title": "T6-3 \u2014 Excel + CSV upload, parsing, and Zod validation",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-121",
+          "title": "T4-4 \u2014 n8n Cloud primary nudge workflow (campaign \u2192 modules \u2192 tokens \u2192 Resend \u2192 mark sent)",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-122",
+          "title": "T6-4 \u2014 Preview screen + save to scorecards with fund-scoped writes",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-124",
+          "title": "T4-5 \u2014 React Email templates (3) + SPF/DKIM/DMARC + domain warming",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-126",
+          "title": "T6-5 \u2014 End-to-end validation: round-trip an existing FAS scorecard through the tool",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-127",
+          "title": "T4-6 \u2014 n8n secondary nudge workflow (non-openers) + per-trustee rate limit + GitHub Actions auto-import",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-130",
+          "title": "T4-7 \u2014 Resend event webhook \u2192 Railway Express nudge_log.status updater (sent/opened/clicked) + Sentry alert + cross-client email QA",
+          "status": "upcoming"
+        }
+      ]
+    },
+    {
+      "name": "FAS Sprint 5",
+      "start": "2026-06-03T04:00:00.000Z",
+      "end": "2026-06-10T04:00:00.000Z",
+      "dates": "2026-06-03 \u2013 2026-06-10",
+      "cards": [
+        {
+          "id": "FAS-129",
+          "title": "T7-1 \u2014 PostHog event instrumentation across portal + n8n",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-132",
+          "title": "T7-2 \u2014 Sentry instrumentation for portal + Railway API with no-PII guarantee",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-133",
+          "title": "T7-3 \u2014 Sentry alerts on the three critical failure modes",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-135",
+          "title": "T7-4 \u2014 PostHog engagement dashboards including email-vs-portal completion split",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-136",
+          "title": "T7-5 \u2014 Playwright E2E suite: all 10 scenarios green against funston-prod",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-137",
+          "title": "T7-6 \u2014 Cross-device email QA + cross-tenant isolation manual verification + scorecard PDF print check",
+          "status": "upcoming"
+        },
+        {
+          "id": "FAS-138",
+          "title": "T7-7 \u2014 Dashboard FCP \u2264 1.5s at 4G throttle",
+          "status": "upcoming"
+        }
+      ]
+    }
+  ],
+  "blockedItems": []
+}

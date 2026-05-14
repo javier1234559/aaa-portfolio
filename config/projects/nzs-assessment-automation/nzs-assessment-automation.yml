@@ -1,0 +1,30 @@
+slug: nzs-assessment-automation
+projectName: NZ Shores Assessment Automation
+clientName: New Zealand Shores
+engagementType: "Project · Web Application"
+currentPhase: discovery
+slackContactChannel: "#nzs-assessment-sprint"
+apiBaseUrl: "https://api.automationarchitecture.ai/clients/nzs-assessment-automation"
+githubRepo: Automation-Architecture/new-zealand-shores
+clientDashboardPath: "https://dashboard.automationarchitecture.ai/client/nzs-assessment-automation"
+description: >-
+  Stage 1 Eligibility Assessment report automation — supervised-then-autonomous pipeline with C1/C2 checkpoints, standalone Next.js EA web app on client AWS, Brevo email delivery, Talent Seeker CV ingest, two-step NZ Job Portal opt-in. Foundation for Stage 2+ CRM migration to a Google-Workspace-integrated system.
+
+sales:
+  meetings: []
+discovery:
+  docs: []
+build:
+  githubActivity: []
+qa:
+  notes: >-
+    Live sprint and stage tracker live on the client dashboard (Jira + GitHub
+    sync from aaa-client-dashboard). Build tab here uses data_sprint_progress.json
+    and data_github_activity.json copied from that app.
+uat:
+  handoffSummary: ""
+  credentialHints: []
+maintenance:
+  owner: AAA Engineering
+  channel: "#nzs-assessment-sprint"
+  notes: ""

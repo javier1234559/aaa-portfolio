@@ -1,0 +1,145 @@
+{
+  "commits": [
+    {
+      "author": "Brad Wilcox",
+      "message": "fix: Add scroll-to-top on navigation and remove dead LandingFooter component",
+      "sha": "0957f74",
+      "tag": "merged",
+      "time": "2026-05-03"
+    },
+    {
+      "author": "Brad Wilcox",
+      "message": "feat: Remove \"Speak to a Lawyer\" CTAs from navbar and hero section",
+      "sha": "1e04940",
+      "tag": "merged",
+      "time": "2026-04-24"
+    },
+    {
+      "author": "yanjigb",
+      "message": "fix(bug): :bug: add .dockerignore file to exclude build artifacts",
+      "sha": "1f56111",
+      "tag": "pr",
+      "time": "2026-04-23"
+    },
+    {
+      "author": "yanjigb",
+      "message": "fix(bug): :bug: fix loop error unauthorized",
+      "sha": "1fef421",
+      "tag": "pr",
+      "time": "2026-04-22"
+    },
+    {
+      "author": "amrahani",
+      "message": "Published your App",
+      "sha": "20ce856",
+      "tag": "merged",
+      "time": "2026-04-11"
+    },
+    {
+      "author": "Brad Wilcox",
+      "message": "docs: Update CLAUDE.md with monitoring, custom domain, GCP project, and Resend config",
+      "sha": "2d17ef3",
+      "tag": "merged",
+      "time": "2026-05-02"
+    },
+    {
+      "author": "web3sea",
+      "message": "Atomically transition orders to ready state to prevent duplicate notifications",
+      "sha": "2d4cd9c",
+      "tag": "pr",
+      "time": "2026-05-01"
+    },
+    {
+      "author": "yanjigb",
+      "message": "feat(ui): ✨ implement send email after document generated + after purhchase",
+      "sha": "305d77f",
+      "tag": "pr",
+      "time": "2026-04-21"
+    },
+    {
+      "author": "Brad Wilcox",
+      "message": "fix: Referral code generation broken — raw fetch missing auth token",
+      "sha": "3ff8713",
+      "tag": "merged",
+      "time": "2026-05-03"
+    },
+    {
+      "author": "Brad Wilcox",
+      "message": "fix: Remove unused footer links (How It Works, Features, Compliance, Get Started, Schedule Consultation)",
+      "sha": "4857794",
+      "tag": "merged",
+      "time": "2026-05-03"
+    },
+    {
+      "author": "Brad Wilcox",
+      "message": "fix: Allow Select dropdown viewport to scroll for long option lists",
+      "sha": "67d85fc",
+      "tag": "merged",
+      "time": "2026-05-02"
+    },
+    {
+      "author": "Brad Wilcox",
+      "message": "docs: Resolve CLAUDE.md merge conflict — keep detailed Clerk v6 auth notes",
+      "sha": "90c392e",
+      "tag": "merged",
+      "time": "2026-04-24"
+    },
+    {
+      "author": "Brad Wilcox",
+      "message": "docs: Update CLAUDE.md with GCP project separation, GAS integration, and N8N status",
+      "sha": "9187ada",
+      "tag": "merged",
+      "time": "2026-05-03"
+    },
+    {
+      "author": "Brad Wilcox",
+      "message": "feat: Add welcome and document-ready transactional emails via Resend",
+      "sha": "921cba7",
+      "tag": "merged",
+      "time": "2026-04-26"
+    },
+    {
+      "author": "yanjigb",
+      "message": "fix(ci): remove CONCURRENTLY from index migration to fix drizzle-kit in CI transactions",
+      "sha": "ac6069e",
+      "tag": "pr",
+      "time": "2026-04-23"
+    },
+    {
+      "author": "yanjigb",
+      "message": "feat(ui): :sparkles: add compression skill + hide Amanah branding",
+      "sha": "ae380e4",
+      "tag": "pr",
+      "time": "2026-04-20"
+    },
+    {
+      "author": "Brad Wilcox",
+      "message": "chore: Pre-handoff codebase cleanup — remove 300+ dead files and fix structure",
+      "sha": "b2987fb",
+      "tag": "merged",
+      "time": "2026-05-03"
+    },
+    {
+      "author": "Brad Wilcox",
+      "message": "chore: Final cleanup — remove dead Affiliate page, unused UI components, GitNexus section",
+      "sha": "c2b3398",
+      "tag": "merged",
+      "time": "2026-05-03"
+    },
+    {
+      "author": "yanjigb",
+      "message": "feat(config): :sparkles: Config Stripe Live Mode",
+      "sha": "c4c69df",
+      "tag": "pr",
+      "time": "2026-04-10"
+    },
+    {
+      "author": "yanjigb",
+      "message": "feat(ui): :sparkles: display estimated time for document generation",
+      "sha": "c993dad",
+      "tag": "pr",
+      "time": "2026-04-21"
+    }
+  ],
+  "summary": "15 commits and 10 PRs merged."
+}

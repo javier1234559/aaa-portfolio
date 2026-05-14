@@ -1,0 +1,32 @@
+slug: kidneyhood
+projectName: KidneyHood
+clientName: Lee
+engagementType: "Project · Web Application"
+currentPhase: build
+slackContactChannel: "#client-comms"
+apiBaseUrl: "https://lkid-backend.railway.app"
+prototypeUrl: "https://kidneyhood.vercel.app"
+jiraProjectKey: LKID
+githubRepo: Automation-Architecture/LKID
+clientDashboardPath: "https://dashboard.automationarchitecture.ai/client/kidneyhood"
+description: >-
+  A patient-facing eGFR projection tool with predictive modelling, reportable PDFs, and a tokenized clinician share-flow. Built by AAA over 6 sprints. This page updates each Monday with the week's ship list, tickets, deploys, and the live prototype.
+
+sales:
+  meetings: []
+discovery:
+  docs: []
+build:
+  githubActivity: []
+qa:
+  notes: >-
+    Live sprint and stage tracker live on the client dashboard (Jira + GitHub
+    sync from aaa-client-dashboard). Build tab here uses data_sprint_progress.json
+    and data_github_activity.json copied from that app.
+uat:
+  handoffSummary: ""
+  credentialHints: []
+maintenance:
+  owner: AAA Engineering
+  channel: "#client-comms"
+  notes: ""

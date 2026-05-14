@@ -1,0 +1,145 @@
+{
+  "commits": [
+    {
+      "sha": "38a7763",
+      "tag": "pr",
+      "message": "chore(admin-prototype): add index.html entry point + Vercel deploy config",
+      "author": "web3sea",
+      "time": "2026-05-13"
+    },
+    {
+      "sha": "f6410b3",
+      "tag": "pr",
+      "message": "chore(repo): move portal/ and admin_portal/ under design/",
+      "author": "web3sea",
+      "time": "2026-05-13"
+    },
+    {
+      "sha": "c602712",
+      "tag": "pr",
+      "message": "docs(claude-md): fix SendGrid\u2192Resend in root CLAUDE.md + drop pre-scaffold header",
+      "author": "web3sea",
+      "time": "2026-05-13"
+    },
+    {
+      "sha": "82ebadf",
+      "tag": "pr",
+      "message": "docs(claude-md): add nudge_log + template_name to Key Schema Tables",
+      "author": "web3sea",
+      "time": "2026-05-13"
+    },
+    {
+      "sha": "b4bc5bc",
+      "tag": "pr",
+      "message": "docs(claude-md): reflect Resend templates, Railway PDF worker, pdf_exports schema",
+      "author": "web3sea",
+      "time": "2026-05-13"
+    },
+    {
+      "sha": "5917caa",
+      "tag": "pr",
+      "message": "docs(spec): async PDF architecture \u2014 close OD-02, update T3-5/T3-6/T3-7",
+      "author": "web3sea",
+      "time": "2026-05-13"
+    },
+    {
+      "sha": "a577c31",
+      "tag": "pr",
+      "message": "chore(config): :wrench: setup base source",
+      "author": "mac-baontg",
+      "time": "2026-05-13"
+    },
+    {
+      "sha": "ca7d42b",
+      "tag": "pr",
+      "message": "chore: replace SendGrid with Resend throughout specs, tickets, and docs",
+      "author": "web3sea",
+      "time": "2026-05-13"
+    },
+    {
+      "sha": "33e786e",
+      "tag": "pr",
+      "message": "chore: update CLAUDE.md to reflect current build phase and artifacts",
+      "author": "web3sea",
+      "time": "2026-05-13"
+    },
+    {
+      "sha": "4abe200",
+      "tag": "pr",
+      "message": "chore(tickets): record FAS-140 and FAS-141 in epic key mapping",
+      "author": "web3sea",
+      "time": "2026-05-13"
+    },
+    {
+      "sha": "a646211",
+      "tag": "pr",
+      "message": "chore(spec): add prototype page reference, gap analysis, and fix Dashboard What's New",
+      "author": "web3sea",
+      "time": "2026-05-13"
+    },
+    {
+      "sha": "f81d565",
+      "tag": "pr",
+      "message": "chore: close OD-04 multi-fund fund-switcher as permanent architectural decision",
+      "author": "web3sea",
+      "time": "2026-05-13"
+    },
+    {
+      "sha": "91dd345",
+      "tag": "pr",
+      "message": "chore(tickets): commit board-nanny Epic + Task drafts and Jira key mapping",
+      "author": "web3sea",
+      "time": "2026-05-13"
+    },
+    {
+      "sha": "b000b71",
+      "tag": "merged",
+      "message": "fix: improve semantic HTML in admin and sign-in pages",
+      "author": "web3sea",
+      "time": "2026-05-13"
+    },
+    {
+      "sha": "fbc8abb",
+      "tag": "merged",
+      "message": "fix: address Copilot AI code review feedback",
+      "author": "web3sea",
+      "time": "2026-05-13"
+    },
+    {
+      "sha": "2ab88e6",
+      "tag": "merged",
+      "message": "chore(config): :wrench: update CLAUDE.md to reflect workflow stages and remove conflicts",
+      "author": "web3sea",
+      "time": "2026-05-13"
+    },
+    {
+      "sha": "7a6fb4b",
+      "tag": "merged",
+      "message": "Merge: resolve portal/CLAUDE.md workflow stages conflict",
+      "author": "web3sea",
+      "time": "2026-05-13"
+    },
+    {
+      "sha": "14e486a",
+      "tag": "merged",
+      "message": "chore(config): :wrench: setup base source",
+      "author": "web3sea",
+      "time": "2026-05-13"
+    },
+    {
+      "sha": "dba6e48",
+      "tag": "pr",
+      "message": "chore: mark stage 3 complete, unblock stage 4",
+      "author": "web3sea",
+      "time": "2026-05-12"
+    },
+    {
+      "sha": "0d9346f",
+      "tag": "pr",
+      "message": "feat(design): InGov Design System + scaffold handoff",
+      "author": "web3sea",
+      "time": "2026-05-12"
+    }
+  ],
+  "summary": "5 commits and 15 PRs merged."
+}

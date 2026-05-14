@@ -1,0 +1,145 @@
+{
+  "commits": [
+    {
+      "sha": "53b084b",
+      "tag": "pr",
+      "message": "Spec cleanup: address Copilot review feedback on dashboard PR #80",
+      "author": "web3sea",
+      "time": "2026-05-12"
+    },
+    {
+      "sha": "32272ea",
+      "tag": "pr",
+      "message": "Step 15: client email markdown \u2014 Discovery handoff to Allan",
+      "author": "web3sea",
+      "time": "2026-05-12"
+    },
+    {
+      "sha": "4a80a98",
+      "tag": "pr",
+      "message": "Add project.config.yaml at repo root",
+      "author": "web3sea",
+      "time": "2026-05-12"
+    },
+    {
+      "sha": "a546948",
+      "tag": "pr",
+      "message": "Step 14: regen spec DOCX + move proposal out of repo",
+      "author": "web3sea",
+      "time": "2026-05-12"
+    },
+    {
+      "sha": "8be8934",
+      "tag": "pr",
+      "message": "Lock R1-Q15: single-adviser Stage 1 (Allan)",
+      "author": "web3sea",
+      "time": "2026-05-12"
+    },
+    {
+      "sha": "b0f3823",
+      "tag": "pr",
+      "message": "Phase 2 Jira Task draft (board-nanny \u2014 89 Tasks, no Jira writes)",
+      "author": "web3sea",
+      "time": "2026-05-12"
+    },
+    {
+      "sha": "15dd370",
+      "tag": "pr",
+      "message": "Lock R2-Q1a auth substrate to Clerk",
+      "author": "web3sea",
+      "time": "2026-05-12"
+    },
+    {
+      "sha": "5451c14",
+      "tag": "pr",
+      "message": "Revise Phase 1 jira-board-draft: Epic 8 pivot + Epic 7 unconditional",
+      "author": "web3sea",
+      "time": "2026-05-12"
+    },
+    {
+      "sha": "9743b37",
+      "tag": "pr",
+      "message": "Bump tech-spec to v1.1: standalone app + Brevo locked",
+      "author": "web3sea",
+      "time": "2026-05-12"
+    },
+    {
+      "sha": "7f59f09",
+      "tag": "pr",
+      "message": "Bump PRD to v1.3: standalone app substrate + Brevo locked",
+      "author": "web3sea",
+      "time": "2026-05-12"
+    },
+    {
+      "sha": "d7abf17",
+      "tag": "pr",
+      "message": "Bump brief to v1.3: standalone app + Brevo locked",
+      "author": "web3sea",
+      "time": "2026-05-12"
+    },
+    {
+      "sha": "4ec8a32",
+      "tag": "pr",
+      "message": "Pivot: standalone app (R2-Q1-revisited) + D1 locked Brevo (R2-Q6)",
+      "author": "web3sea",
+      "time": "2026-05-12"
+    },
+    {
+      "sha": "67668d6",
+      "tag": "pr",
+      "message": "Phase 1 Jira board draft (board-nanny \u2014 11 Epics, no Jira writes)",
+      "author": "web3sea",
+      "time": "2026-05-12"
+    },
+    {
+      "sha": "55f5c17",
+      "tag": "pr",
+      "message": "Add tech-spec.md v1.0 (cto-technical-architect output)",
+      "author": "web3sea",
+      "time": "2026-05-12"
+    },
+    {
+      "sha": "fd3527c",
+      "tag": "pr",
+      "message": "Round 2 architecture decisions",
+      "author": "bkim4472",
+      "time": "2026-05-09"
+    },
+    {
+      "sha": "d993e28",
+      "tag": "merged",
+      "message": "Stage Round 2 architecture grill (15 questions for Brandon) (#7)",
+      "author": "Brad Wilcox",
+      "time": "2026-05-08"
+    },
+    {
+      "sha": "2323200",
+      "tag": "merged",
+      "message": "Mark step 7 done (GitHub repo + README verified) (#6)",
+      "author": "Brad Wilcox",
+      "time": "2026-05-08"
+    },
+    {
+      "sha": "b177b8f",
+      "tag": "merged",
+      "message": "Mark step 5 done + step 6 done (NZAAA / board 450) (#5)",
+      "author": "Brad Wilcox",
+      "time": "2026-05-08"
+    },
+    {
+      "sha": "da74da5",
+      "tag": "merged",
+      "message": "Add PRD v1.2 to spec/prd.md (#4)",
+      "author": "Brad Wilcox",
+      "time": "2026-05-08"
+    },
+    {
+      "sha": "aa92213",
+      "tag": "merged",
+      "message": "Restructure: archive pre-grill docs, point CLAUDE.md + docs/README at spec/ (#3)",
+      "author": "Brad Wilcox",
+      "time": "2026-05-08"
+    }
+  ],
+  "summary": "5 commits and 15 PRs merged."
+}

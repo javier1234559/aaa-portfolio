@@ -1,0 +1,272 @@
+{
+  "started": "2026-05-03",
+  "targetLaunch": "2026-06-03",
+  "sprints": [
+    {
+      "name": "CW Sprint 1",
+      "start": "2026-05-03T15:33:20.967Z",
+      "end": "2026-05-06T04:00:00.000Z",
+      "dates": "2026-05-03 \u2013 2026-05-06",
+      "cards": [
+        {
+          "id": "CW-8",
+          "title": "Register 2-3 sending domains adjacent to collabworld.net",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-9",
+          "title": "Provision 6-9 Zapmail mailboxes across domains",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-10",
+          "title": "Configure SPF/DKIM/DMARC for all sending domains",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-11",
+          "title": "Set up Instantly.ai workspace and connect mailboxes",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-12",
+          "title": "Begin domain warming process",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-13",
+          "title": "Design and deploy Supabase schema",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-14",
+          "title": "Import 714 leads from CSV into Supabase",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-15",
+          "title": "Run AnyMailFinder email verification on all 714 leads",
+          "status": "upcoming"
+        }
+      ]
+    },
+    {
+      "name": "CW Sprint 2",
+      "start": "2026-05-06T15:33:00.000Z",
+      "end": "2026-05-13T15:33:00.000Z",
+      "dates": "2026-05-06 \u2013 2026-05-13",
+      "cards": [
+        {
+          "id": "CW-16",
+          "title": "Implement deduplication logic",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-17",
+          "title": "Set up row-level security policies",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-18",
+          "title": "Build Python autoresearch service (FastAPI async)",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-19",
+          "title": "Implement Claude tool-use orchestration for enrichment",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-20",
+          "title": "Design and version prompt templates for personalization",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-21",
+          "title": "Generate per-lead personalization assets",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-22",
+          "title": "Run autoresearch on all 714 Phase 1 leads",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-23",
+          "title": "Validate enrichment cost per lead (< $0.05 target)",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-24",
+          "title": "Implement caching layer (never re-enrich)",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-25",
+          "title": "Build Python reply handler service",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-26",
+          "title": "Configure n8n webhook: Instantly inbound to Python handler",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-27",
+          "title": "Implement Claude intent classifier (6 intents)",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-28",
+          "title": "Build per-intent response generator using reply_context",
+          "status": "upcoming"
+        }
+      ]
+    },
+    {
+      "name": "CW Sprint 3",
+      "start": "2026-05-13T04:00:00.000Z",
+      "end": "2026-05-20T04:00:00.000Z",
+      "dates": "2026-05-13 \u2013 2026-05-20",
+      "cards": [
+        {
+          "id": "CW-29",
+          "title": "Implement escalation rules for AI responder",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-30",
+          "title": "Implement CAN-SPAM auto-unsubscribe handling",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-31",
+          "title": "End-to-end dry run with test replies",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-32",
+          "title": "Build Next.js (or Streamlit) dashboard on Vercel",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-33",
+          "title": "Connect dashboard to Supabase with 60s auto-refresh",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-34",
+          "title": "Implement funnel view (sent to re-signup)",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-35",
+          "title": "Implement reply intelligence view",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-36",
+          "title": "Implement personalization quality view",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-37",
+          "title": "Implement sender health view",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-38",
+          "title": "Configure automated threshold alerts",
+          "status": "upcoming"
+        }
+      ]
+    },
+    {
+      "name": "CW Sprint 4",
+      "start": "2026-05-20T04:00:00.000Z",
+      "end": "2026-05-27T04:00:00.000Z",
+      "dates": "2026-05-20 \u2013 2026-05-27",
+      "cards": [
+        {
+          "id": "CW-39",
+          "title": "Lock email variant selection (A/B test or Ryan's pick)",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-40",
+          "title": "Verify collabworld.net/signup flow is live and instrumented",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-41",
+          "title": "Build contest knowledge base for AI responder",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-42",
+          "title": "Launch reactivation email send to 714 leads",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-43",
+          "title": "Monitor Day 1 metrics and AI responder performance",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-44",
+          "title": "Daily review cadence through Phase 1",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-45",
+          "title": "Configure Apify Instagram scraping actors",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-46",
+          "title": "Define targeting criteria (hashtags, competitor followers, categories)",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-47",
+          "title": "Scale Supabase schema for 50K+ leads",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-48",
+          "title": "Provision additional domains and mailboxes for 1,000+/day volume",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-49",
+          "title": "Build cold outreach sequences (3-5 steps)",
+          "status": "upcoming"
+        }
+      ]
+    },
+    {
+      "name": "CW Sprint 5",
+      "start": "2026-05-27T04:00:00.000Z",
+      "end": "2026-06-03T04:00:00.000Z",
+      "dates": "2026-05-27 \u2013 2026-06-03",
+      "cards": [
+        {
+          "id": "CW-50",
+          "title": "Expand AI responder knowledge base for cold leads",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-51",
+          "title": "Ramp daily sends: 100 to 500 to 1,000+/day",
+          "status": "upcoming"
+        },
+        {
+          "id": "CW-52",
+          "title": "System documentation and handoff",
+          "status": "upcoming"
+        }
+      ]
+    }
+  ],
+  "blockedItems": []
+}

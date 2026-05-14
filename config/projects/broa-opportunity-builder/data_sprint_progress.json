@@ -1,0 +1,307 @@
+{
+  "started": "2026-05-03",
+  "targetLaunch": "2026-06-14",
+  "sprints": [
+    {
+      "name": "Sprint 1",
+      "start": "2026-05-03T14:13:22.000Z",
+      "end": "2026-05-10T04:00:00.000Z",
+      "dates": "2026-05-03 \u2013 2026-05-10",
+      "cards": [
+        {
+          "id": "BROAOB-9",
+          "title": "Audit BROA Salesforce org \u2014 Opportunity/LineItem/ContactRole fields, Products catalog, record types",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-10",
+          "title": "Introduce M365/Entra admin \u2014 begin add-in approval process",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-11",
+          "title": "Select 2-3 pilot reps with diverse email patterns",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-12",
+          "title": "Collect sample email corpus (20-30 emails with attachments)",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-13",
+          "title": "Provision Connected App in BROA Salesforce org",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-14",
+          "title": "Set up Railway project and GitHub repo",
+          "status": "upcoming"
+        }
+      ]
+    },
+    {
+      "name": "Sprint 2",
+      "start": "2026-05-10T14:13:22.000Z",
+      "end": "2026-05-17T14:13:00.000Z",
+      "dates": "2026-05-10 \u2013 2026-05-17",
+      "cards": [
+        {
+          "id": "BROAOB-15",
+          "title": "Email body parser (plain text + HTML extraction)",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-16",
+          "title": "Excel attachment parser (.xlsx/.xls \u2192 product types, weights, pallet counts)",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-17",
+          "title": "PDF attachment parser (text-based via pdfplumber)",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-18",
+          "title": "Attachment pipeline \u2014 capture, parse, pass to extraction engine",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-19",
+          "title": "Claude extraction prompt \u2014 email body \u2192 structured fields (account, contact, city, stage, description, pallet count)",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-20",
+          "title": "Claude extraction prompt \u2014 spreadsheet data \u2192 product line items (product type, weight, quantity)",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-21",
+          "title": "Account/Contact matching \u2014 sender email \u2192 SF Contact \u2192 Account lookup",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-22",
+          "title": "Opportunity name formatter (YYYY-MM-DD-AccountName-PickupCity)",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-23",
+          "title": "Pickup address extraction (street, city, state, zip from email body)",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-24",
+          "title": "Stage classification (Inquiry vs. Bid Won) with confidence scoring",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-25",
+          "title": "Field-level confidence scoring for review UI",
+          "status": "upcoming"
+        }
+      ]
+    },
+    {
+      "name": "Sprint 3",
+      "start": "2026-05-17T14:13:22.000Z",
+      "end": "2026-05-24T14:13:00.000Z",
+      "dates": "2026-05-17 \u2013 2026-05-24",
+      "cards": [
+        {
+          "id": "BROAOB-26",
+          "title": "OAuth 2.0 Web Server flow \u2014 rep-level authentication",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-27",
+          "title": "Create Opportunity record via REST API",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-28",
+          "title": "Create OpportunityLineItems for each product",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-29",
+          "title": "Create OpportunityContactRoles",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-30",
+          "title": "Upload attachments to Opportunity (Files/ContentDocument)",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-31",
+          "title": "Error handling \u2014 SF validation rules, required fields, duplicate detection",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-32",
+          "title": "Office.js scaffold \u2014 manifest.xml, task pane HTML",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-33",
+          "title": "Ribbon button \"Build Opportunity\" on mail items",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-34",
+          "title": "Email capture \u2014 body, headers, attachments via Office.js APIs",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-35",
+          "title": "Microsoft Entra (Azure AD) app registration and auth flow",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-36",
+          "title": "M365 admin central deployment manifest and documentation",
+          "status": "upcoming"
+        }
+      ]
+    },
+    {
+      "name": "Sprint 4",
+      "start": "2026-05-24T14:13:22.000Z",
+      "end": "2026-05-31T14:13:00.000Z",
+      "dates": "2026-05-24 \u2013 2026-05-31",
+      "cards": [
+        {
+          "id": "BROAOB-37",
+          "title": "Review screen layout \u2014 sections for Opportunity, Products, Contacts, Address",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-38",
+          "title": "Field editing \u2014 inline edit for all extracted fields",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-39",
+          "title": "Product line items \u2014 add/remove/edit rows",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-40",
+          "title": "Contact role selection \u2014 dropdown per identified contact",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-41",
+          "title": "Stage selector with AI suggestion highlighted",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-42",
+          "title": "Submit flow \u2014 validation, loading state, success confirmation",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-43",
+          "title": "Cancel flow \u2014 discard extraction, no SF write",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-44",
+          "title": "Audit log schema and persistence (every extraction/submit/cancel)",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-45",
+          "title": "Observability dashboard \u2014 extraction accuracy per field, edit rates, usage volume",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-46",
+          "title": "Ensure no email/attachment content persisted beyond extraction cycle",
+          "status": "upcoming"
+        }
+      ]
+    },
+    {
+      "name": "Sprint 5: Pilot",
+      "start": "2026-05-31T14:13:22.000Z",
+      "end": "2026-06-07T14:13:00.000Z",
+      "dates": "2026-05-31 \u2013 2026-06-07",
+      "cards": [
+        {
+          "id": "BROAOB-48",
+          "title": "Daily monitoring during pilot week \u2014 accuracy metrics, error rates",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-49",
+          "title": "Prompt tuning based on pilot feedback",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-50",
+          "title": "Full team rollout deployment",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-51",
+          "title": "Training session and documentation for BROA team",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-47",
+          "title": "Deploy to pilot reps (2-3) via M365 central deployment",
+          "status": "upcoming"
+        }
+      ]
+    },
+    {
+      "name": "Launch",
+      "start": "2026-06-07T14:13:22.000Z",
+      "end": "2026-06-14T14:13:00.000Z",
+      "dates": "2026-06-07 \u2013 2026-06-14",
+      "cards": []
+    },
+    {
+      "name": "Backlog",
+      "start": "",
+      "end": "",
+      "dates": "",
+      "cards": [
+        {
+          "id": "BROAOB-52",
+          "title": "Populate BROA 1Password vault with project secrets",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-53",
+          "title": "Produce 2\u20133 UI concept variants for client review &amp; approval",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-54",
+          "title": "Decide &amp; document \u2014 default Opportunity stage when ambiguous",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-55",
+          "title": "Decide &amp; document \u2014 post-creation notification channel",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-56",
+          "title": "Scaffold FastAPI app skeleton with `op run` launch wrapper",
+          "status": "upcoming"
+        },
+        {
+          "id": "BROAOB-57",
+          "title": "Author technical specification for engineering handoff",
+          "status": "upcoming"
+        }
+      ]
+    }
+  ],
+  "blockedItems": []
+}

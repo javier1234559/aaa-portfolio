@@ -1,0 +1,65 @@
+{
+  "started": "2026-05-19",
+  "targetLaunch": "2026-08-31",
+  "sprints": [
+    {
+      "name": "Week 1 — Infrastructure + App Shell + Rules Skeleton",
+      "start": "2026-05-19",
+      "end": "2026-05-23",
+      "dates": "May 19 – May 23",
+      "cards": [
+        { "id": "WP-01", "title": "AWS infra provisioning — EC2 (n8n), ECS Fargate, S3, Secrets Manager, CloudWatch, ALB, ECR", "status": "todo" },
+        { "id": "WP-01b", "title": "Standalone EA app shell — Next.js 14 scaffold, Dockerfile, ALB target group, Clerk auth, /pipeline/* route protection", "status": "todo" },
+        { "id": "WP-02", "title": "Supabase schema + RLS — 6 tables: pipeline_runs, rules_evaluations, engagement_events, partner_pushes, human_review_queue, pdf_hand_edit_audit", "status": "todo" },
+        { "id": "WP-03", "title": "rules.json skeleton + CI validation — schema check, canned-applicant test set, cohort_a_fallback presence", "status": "todo" },
+        { "id": "WP-04", "title": "SmartMove adapter (Module 7) + flag-transition trigger — conditional on D2 + D4a", "status": "todo" }
+      ]
+    },
+    {
+      "name": "Week 2 — Core Engine + CV Ingestion + n8n Orchestration",
+      "start": "2026-05-26",
+      "end": "2026-05-30",
+      "dates": "May 26 – May 30",
+      "cards": [
+        { "id": "WP-05", "title": "5 deep pure-function modules — cohort classifier, rules engine, Zoom-CTA resolver, for-human-review router, cohort transition de-dupe", "status": "todo" },
+        { "id": "WP-06", "title": "Talent Seeker CV ingestion adapter (Module 6) — async callback, correlation_id matching, retry-exhaustion handling", "status": "todo" },
+        { "id": "WP-07", "title": "n8n pipeline orchestration — flag-change trigger → cohort classify → de-dupe → ingest → C1 queue → rules → router → render → C2 queue → dispatch", "status": "todo" },
+        { "id": "M2", "title": "Milestone M2: cohort classifier + rules engine unit tests green; pipeline trigger fires on test record #14458", "status": "todo" }
+      ]
+    },
+    {
+      "name": "Week 3 — Report Renderer + C2 Hand-Edit + Email Dispatcher",
+      "start": "2026-06-02",
+      "end": "2026-06-06",
+      "dates": "Jun 2 – Jun 6",
+      "cards": [
+        { "id": "WP-08", "title": "Report renderer (Module 10) — Jinja/docxtpl master template → Puppeteer PDF, conditional sections, yellow-section Claude API, golden-file regression suite, S3 storage", "status": "todo" },
+        { "id": "WP-09", "title": "C2 workflow in standalone app (View A2) — approve / reject+hand-edit / escalate / route-not-eligible, pdftotext diff, audit writes", "status": "todo" },
+        { "id": "WP-10", "title": "Email dispatcher (Module 8) — Brevo Transactional v3, EA + auto-ack + CV-prompt templates, idempotency on pipeline_run_id", "status": "todo" },
+        { "id": "M3", "title": "Milestone M3: EA PDF rendered from canned inputs; C2 approve sends EA email through Brevo", "status": "todo" }
+      ]
+    },
+    {
+      "name": "Week 4 — C1 + Failure Surface + NZ Job Portal + Burn-in Dashboard + E2E",
+      "start": "2026-06-09",
+      "end": "2026-06-13",
+      "dates": "Jun 9 – Jun 13",
+      "cards": [
+        { "id": "WP-11", "title": "C1 workflow in standalone app (View A1) — pre-filled record, two-step CV-sharing consent (IPP 11), slow-path Cohort A→B banner, c1_cleared_at writes", "status": "todo" },
+        { "id": "WP-12", "title": "Failure surface (View A3) — filtered failed_at_* queue + composed deep-link context view /pipeline/failures/[run_id]/context", "status": "todo" },
+        { "id": "WP-13", "title": "NZ Job Portal two-step opt-in side-channel (Module 15) — fires on lead checkbox AND adviser C1 toggle, non-blocking, bounded retries", "status": "todo" },
+        { "id": "WP-14", "title": "Engagement-event reader + Slack nudge worker — 4-hour cron, 14-day booking-join window, rate-limited per queue_type per hour (Allan only)", "status": "todo" },
+        { "id": "WP-15", "title": "Burn-in dashboard (View A4) — wall-clock median, hand-edit rate, cannibalisation watch, C2 auto-flip eligible indicator, CloudWatch Alarms → SNS", "status": "todo" },
+        { "id": "WP-16", "title": "10 Playwright E2E scenarios + nightly smoke + 6-layer CI gate — unit / integration / renderer regression / E2E / rules JSON / nightly", "status": "todo" },
+        { "id": "M4", "title": "Milestone M4: full pipeline running on staging; adviser-training session with Allan; burn-in begins", "status": "todo" }
+      ]
+    }
+  ],
+  "blockedItems": [
+    { "id": "D2", "title": "Push mechanism — does SmartMove support outbound webhooks? (Fabien)", "sprint": "Week 1" },
+    { "id": "D4a", "title": "SmartMove Laravel HTTP API contract — existing vs. Fabien builds vs. form-POST shim (Fabien)", "sprint": "Week 1" },
+    { "id": "D1-key", "title": "Brevo account API key handover (Allan / Fabien)", "sprint": "Week 3" },
+    { "id": "EA-tmpl", "title": "EA template Word source file from Allan", "sprint": "Week 3" },
+    { "id": "SLA", "title": "Wall-clock SLA target value from Allan", "sprint": "Week 3" }
+  ]
+}

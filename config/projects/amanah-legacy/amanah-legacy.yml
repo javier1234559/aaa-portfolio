@@ -1,0 +1,32 @@
+slug: amanah-legacy
+projectName: Amanah Legacy
+clientName: Hani
+engagementType: "Project · Web Application"
+currentPhase: maintenance
+slackContactChannel: "#client-comms"
+apiBaseUrl: "https://www.amanahlegacy.com"
+prototypeUrl: "https://www.amanahlegacy.com"
+jiraProjectKey: QAL
+githubRepo: Automation-Architecture/amanah-legacy
+clientDashboardPath: "https://dashboard.automationarchitecture.ai/client/amanah-legacy"
+description: >-
+  AI-powered Islamic estate planning platform with automated will generation
+
+sales:
+  meetings: []
+discovery:
+  docs: []
+build:
+  githubActivity: []
+qa:
+  notes: >-
+    Live sprint and stage tracker live on the client dashboard (Jira + GitHub
+    sync from aaa-client-dashboard). Build tab here uses data_sprint_progress.json
+    and data_github_activity.json copied from that app.
+uat:
+  handoffSummary: ""
+  credentialHints: []
+maintenance:
+  owner: AAA Engineering
+  channel: "#client-comms"
+  notes: ""

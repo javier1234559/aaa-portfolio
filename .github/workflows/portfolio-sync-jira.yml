@@ -1,0 +1,49 @@
+# Sync Jira → `config/projects/<slug>/data_sprint_progress.json`
+# Repo root = AAA Portfolio (standalone `idea/` repository).
+# Secrets: JIRA_BASE_URL, JIRA_USER_EMAIL, JIRA_API_TOKEN
+
+name: Portfolio — Sync Jira
+
+on:
+  schedule:
+    - cron: "5 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sync Jira for each project (ci-sync-manifest.json)
+        env:
+          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+          JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+        run: |
+          set -uo pipefail
+          while IFS=$'\t' read -r slug key; do
+            echo "=== Jira sync: $slug ($key) ==="
+            python scripts/sync_jira_portfolio.py --slug "$slug" --project-key "$key" || echo "WARN: sync failed for $slug"
+          done < <(jq -r '.projects[] | select(.jira_project_key != null) | [.slug, .jira_project_key] | @tsv' config/ci-sync-manifest.json)
+
+      - name: Detect changes
+        id: changes
+        run: |
+          git add config/projects/
+          git diff --cached --quiet && echo "changed=false" >> "$GITHUB_OUTPUT" || echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(portfolio): sync Jira sprint data [automated]"
+          git push

@@ -1,0 +1,12 @@
+# Portfolio registry — each slug matches folder idea/config/projects/<slug>/
+version: 1
+projects:
+  - slug: kidneyhood
+  - slug: amanah-legacy
+  - slug: broa-freight-auditor
+  - slug: broa-opportunity-builder
+  - slug: collab-world
+  - slug: ptg-content-engine
+  - slug: kidneyhood-zendesk-agent
+  - slug: funston-advisory-services
+  - slug: nzs-assessment-automation

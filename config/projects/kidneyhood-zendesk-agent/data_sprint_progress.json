@@ -1,0 +1,323 @@
+{
+  "started": "2026-05-06",
+  "targetLaunch": "2026-05-27",
+  "sprints": [
+    {
+      "name": "KHZ Sprint 1",
+      "start": "",
+      "end": "",
+      "dates": " \u2013 ",
+      "cards": [
+        {
+          "id": "KHZ-10",
+          "title": "T1.1 Scaffold Python service repo (uv, FastAPI skeleton, ruff, pyright, pytest)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-11",
+          "title": "T1.2 Author Alembic baseline migration with full Data Model DDL + seed configs",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-12",
+          "title": "T1.3 Implement /healthz and /readyz endpoints (stub /readyz; full checks in E8)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-13",
+          "title": "T1.4 Provision Cloudflare R2 bucket and Pinecone Serverless indexes (khz-dev, khz-prod)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-14",
+          "title": "T1.5 Provision Clerk app and add JWKS-cached JWT verification middleware",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-15",
+          "title": "T1.6 Confirm Pinecone Serverless tier on both indexes (billing-model gotcha)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-16",
+          "title": "T1.7 Wire env loading, .env.example, and per-surface secrets (Railway, Vercel, GitHub Secrets)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-17",
+          "title": "T1.8 Scaffold Next.js 14 admin dashboard at dashboard/ with Clerk SignIn",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-18",
+          "title": "T1.9 Set up GitHub Actions CI (unit, integration, eval) and branch protection on main",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-19",
+          "title": "T1.10 Verify Anthropic ZDR / no-training and write scripts/bootstrap_eval_dataset.py",
+          "status": "upcoming"
+        }
+      ]
+    },
+    {
+      "name": "Backlog",
+      "start": "",
+      "end": "",
+      "dates": "",
+      "cards": [
+        {
+          "id": "KHZ-20",
+          "title": "T2.1 Implement R2 download + EPUB / PDF parsers with chapter detection",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-21",
+          "title": "T2.2 Implement token-aware chunker (tiktoken cl100k_base, \u2264500 tokens, sentence-boundary)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-22",
+          "title": "T2.3 Implement OpenAI batch embedder + Pinecone upsert (100/call)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-23",
+          "title": "T2.4 Implement ingest_source() orchestrator + knowledge_sources status updates + delete flow",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-24",
+          "title": "T2.5 Wire enabled toggle to be a Postgres-only update (no Pinecone changes)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-25",
+          "title": "T2.6 Initial ingestion of 6 Kidneyhood books + curated FAQ corpus (FLAGGED: Lee handover required)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-26",
+          "title": "T3.1 Implement HMAC + IP allowlist + replay-window verification",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-27",
+          "title": "T3.2 Implement POST /webhook/zendesk/ticket-created with dedup + pending_tickets insert + NOTIFY",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-28",
+          "title": "T3.3 Implement worker LISTEN loop + restart resilience + picked_up_at / completed_at tracking",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-29",
+          "title": "T3.4 Add daily prune job for webhook_deliveries rows > 30 days old",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-30",
+          "title": "T3.5 Integration test \u2014 sandbox-signed ticket-created payload reaches worker",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-31",
+          "title": "T4.1 Implement validity-classifier with prompt caching + fail-open",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-32",
+          "title": "T4.2 Implement retriever (embed + Pinecone query + similarity gate + enabled filter)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-33",
+          "title": "T4.3 Implement responder with three-block prompt caching + structured output + 50k truncation",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-34",
+          "title": "T4.4 Implement judge (independent groundedness scoring + threshold-driven decision)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-35",
+          "title": "T4.5 Wire worker pipeline (validity \u2192 retrieve \u2192 respond \u2192 judge) + write agent_runs",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-36",
+          "title": "T4.6 Author initial prompt templates (system, validity rubric, judge rubric, few-shot)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-37",
+          "title": "T4.7 Add Anthropic SDK setup (max_retries=3, prompt caching helpers, FakeAnthropicClient)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-38",
+          "title": "T4.8 Emit $ai_generation, retrieval_result, decision PostHog events at every call site",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-39",
+          "title": "T5.1 Implement zendesk_replier (post_reply / post_clarification / post_escalation_note / tag_ticket)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-40",
+          "title": "T5.2 Implement clarification_tracker.create_clarification + scheduled job insert + second-round prevention",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-41",
+          "title": "T5.3 Implement clarification_tracker.record_reply (cancel scheduled job)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-42",
+          "title": "T5.4 Implement process_timeout + 60-second cron worker tick on scheduled_jobs",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-43",
+          "title": "T5.5 Implement POST /webhook/zendesk/ticket-updated handler",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-44",
+          "title": "T5.6 Wire worker AUTONOMOUS / CLARIFY / ESCALATE / INVALID routing to replier",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-45",
+          "title": "T5.7 Integration test \u2014 supervised + autonomous round-trips + clarification timeout",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-46",
+          "title": "T6.1 Implement burn_in_controller (get_mode, get_chat_enabled, stats rollup)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-47",
+          "title": "T6.2 Implement POST /webhook/zendesk/macro-fired handler (operator-confirmed tag map)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-48",
+          "title": "T6.3 Wire replier post_reply to read agent_mode from burn_in_controller.get_mode()",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-49",
+          "title": "T6.4 Document Zendesk macro + trigger setup for Lee (docs/zendesk-macros.md)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-50",
+          "title": "T6.5 Integration test \u2014 full supervised approval flow",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-51",
+          "title": "T7.1 Implement admin tickets + agent-runs endpoints",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-52",
+          "title": "T7.2 Implement admin configs endpoints with per-key validation + invariant check",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-53",
+          "title": "T7.3 Implement admin sources endpoints (GET, POST upload-url, POST register, PATCH, DELETE)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-54",
+          "title": "T7.4 Implement GET /admin/burn-in-stats endpoint",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-55",
+          "title": "T7.5 Build dashboard overview page (burn-in stats, mode/chat-enabled badges, daily chart auto-refresh)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-56",
+          "title": "T7.6 Build dashboard mode/threshold control page + Graduate macro",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-57",
+          "title": "T7.7 Build dashboard sources page (list, upload via direct R2 PUT, enabled toggle, delete)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-58",
+          "title": "T7.8 Build dashboard audit-log page (paginated agent-runs table + run detail)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-59",
+          "title": "T7.9 Build dashboard sign-in / unauthorized redirect plumbing + nav shell",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-60",
+          "title": "T7.10 Smoke-test admin dashboard end-to-end + sign-off checklist",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-61",
+          "title": "T8.1 Configure structlog JSON output + ticket-context binding at webhook entry",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-62",
+          "title": "T8.2 Audit and harden PostHog event emission across all modules (no PII)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-63",
+          "title": "T8.3 Implement active dependency checks in /readyz (Postgres / Pinecone / Anthropic)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-64",
+          "title": "T8.4 Configure PostHog alerts (error rate, pipeline latency, escalation rate, judge degradation)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-65",
+          "title": "T8.5 Build scripts/run_evals.py --fail-on-regression against kidneyhood-historical-qa",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-66",
+          "title": "T8.6 Wire eval job into GitHub Actions with dorny/paths-filter + initial baseline merge",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-67",
+          "title": "T9.1 Implement chat channel routing + chat_enabled gate + thinking message",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-68",
+          "title": "T9.2 Execute Phase 2 cutover (mode flip + chat_enabled flip via Graduate button)",
+          "status": "upcoming"
+        },
+        {
+          "id": "KHZ-69",
+          "title": "T9.3 Post-flip smoke test (chat + email + web_form autonomous round-trips) + baseline re-snapshot",
+          "status": "upcoming"
+        }
+      ]
+    }
+  ],
+  "blockedItems": []
+}

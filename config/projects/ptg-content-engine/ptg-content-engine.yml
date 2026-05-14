@@ -1,0 +1,32 @@
+slug: ptg-content-engine
+projectName: PTG Content Engine
+clientName: Preferred Travel Group
+engagementType: "Project · Web Application"
+currentPhase: uat
+slackContactChannel: "#client-comms"
+apiBaseUrl: "https://hotel-scraper-api-production.up.railway.app"
+prototypeUrl: "https://ptgcontentgenerator.com"
+jiraProjectKey: PTG
+githubRepo: Automation-Architecture/ptg-content-generator
+clientDashboardPath: "https://dashboard.automationarchitecture.ai/client/ptg-content-engine"
+description: >-
+  Hotel content automation platform — CSV import, URL verification, AI scraping pipeline, AI content generation, multi-language translation, and Hygraph CMS integration
+
+sales:
+  meetings: []
+discovery:
+  docs: []
+build:
+  githubActivity: []
+qa:
+  notes: >-
+    Live sprint and stage tracker live on the client dashboard (Jira + GitHub
+    sync from aaa-client-dashboard). Build tab here uses data_sprint_progress.json
+    and data_github_activity.json copied from that app.
+uat:
+  handoffSummary: ""
+  credentialHints: []
+maintenance:
+  owner: AAA Engineering
+  channel: "#client-comms"
+  notes: ""

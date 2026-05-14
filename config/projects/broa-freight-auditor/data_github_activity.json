@@ -1,0 +1,145 @@
+{
+  "commits": [
+    {
+      "sha": "797b32f",
+      "tag": "merged",
+      "message": "Wire AA admin Slack webhook to receive scan summaries",
+      "author": "Brad Wilcox",
+      "time": "2026-05-04"
+    },
+    {
+      "sha": "238b7d5",
+      "tag": "merged",
+      "message": "Update CLAUDE.md to reflect current state (May 4, 2026)",
+      "author": "Brad Wilcox",
+      "time": "2026-05-04"
+    },
+    {
+      "sha": "b617779",
+      "tag": "merged",
+      "message": "Update delivery documentation to reflect current state (May 4, 2026)",
+      "author": "Brad Wilcox",
+      "time": "2026-05-04"
+    },
+    {
+      "sha": "2ef6e25",
+      "tag": "merged",
+      "message": "Add how-it-works doc for Chad / accounting team",
+      "author": "Brad Wilcox",
+      "time": "2026-05-04"
+    },
+    {
+      "sha": "3acb100",
+      "tag": "merged",
+      "message": "Fix carrier name matching for d/b/a vendors (BROAFA-32)",
+      "author": "Brad Wilcox",
+      "time": "2026-05-04"
+    },
+    {
+      "sha": "59a7f9d",
+      "tag": "merged",
+      "message": "Add Open Freight Auditor button to Slack notification",
+      "author": "Brad Wilcox",
+      "time": "2026-05-04"
+    },
+    {
+      "sha": "882e91f",
+      "tag": "merged",
+      "message": "Show scan timestamp in Central Time (CT)",
+      "author": "Brad Wilcox",
+      "time": "2026-05-04"
+    },
+    {
+      "sha": "85e82fc",
+      "tag": "merged",
+      "message": "Improve Slack notification formatting with Block Kit layout",
+      "author": "Brad Wilcox",
+      "time": "2026-05-04"
+    },
+    {
+      "sha": "1e1333f",
+      "tag": "merged",
+      "message": "Rewrite Slack scan summary with workflow status labels",
+      "author": "Brad Wilcox",
+      "time": "2026-05-04"
+    },
+    {
+      "sha": "f217f00",
+      "tag": "merged",
+      "message": "Add carrier scorecards page (BROAFA-34)",
+      "author": "Brad Wilcox",
+      "time": "2026-05-04"
+    },
+    {
+      "sha": "14effbe",
+      "tag": "merged",
+      "message": "Add admin Slack error alerts for pipeline failures",
+      "author": "Brad Wilcox",
+      "time": "2026-05-04"
+    },
+    {
+      "sha": "e0efb2b",
+      "tag": "merged",
+      "message": "Pre-handoff hardening: concurrency, async, security, Bill.com fixes",
+      "author": "Brad Wilcox",
+      "time": "2026-05-04"
+    },
+    {
+      "sha": "93cc368",
+      "tag": "merged",
+      "message": "Configure basicConfig so freight_auditor logs appear in Railway",
+      "author": "Brad Wilcox",
+      "time": "2026-05-04"
+    },
+    {
+      "sha": "179a5de",
+      "tag": "merged",
+      "message": "Add Dropbox pipeline activation handoff doc for Chad",
+      "author": "Brad Wilcox",
+      "time": "2026-05-04"
+    },
+    {
+      "sha": "9334c0b",
+      "tag": "merged",
+      "message": "Fix auth middleware swallowing route handler exceptions as 401s",
+      "author": "Brad Wilcox",
+      "time": "2026-05-04"
+    },
+    {
+      "sha": "df32ed6",
+      "tag": "merged",
+      "message": "Update project docs: add vendor mapping, credentials request, onboarding doc, dashboard config; remove generated DOCX files",
+      "author": "Brad Wilcox",
+      "time": "2026-05-03"
+    },
+    {
+      "sha": "76eaf6a",
+      "tag": "merged",
+      "message": "Add next steps to CLAUDE.md for future session context",
+      "author": "Brad Wilcox",
+      "time": "2026-04-15"
+    },
+    {
+      "sha": "4a31e7f",
+      "tag": "merged",
+      "message": "Add roadmap, update all product docs with Bill.com go-live, generate client DOCX files",
+      "author": "Brad Wilcox",
+      "time": "2026-04-15"
+    },
+    {
+      "sha": "e50972a",
+      "tag": "merged",
+      "message": "Update CLAUDE.md: Railway now auto-deploys from GitHub",
+      "author": "Brad Wilcox",
+      "time": "2026-04-14"
+    },
+    {
+      "sha": "a4f7685",
+      "tag": "merged",
+      "message": "Add Dropbox API integration for fully automated webhook pipeline",
+      "author": "Brad Wilcox",
+      "time": "2026-04-14"
+    }
+  ],
+  "summary": "20 commits and 0 PRs merged."
+}

@@ -1,0 +1,32 @@
+slug: broa-freight-auditor
+projectName: BROA Freight Auditor
+clientName: Chad
+engagementType: "Project · Automation"
+currentPhase: build
+slackContactChannel: "#client-comms"
+apiBaseUrl: "https://broa-freight-auditor-production.up.railway.app"
+prototypeUrl: "https://broa-freight-auditor-production.up.railway.app"
+jiraProjectKey: BROAFA
+githubRepo: Automation-Architecture/freight-auditor
+clientDashboardPath: "https://dashboard.automationarchitecture.ai/client/broa-freight-auditor"
+description: >-
+  Freight invoice auditor — compares carrier invoices against Salesforce estimates, flags variances >5%
+
+sales:
+  meetings: []
+discovery:
+  docs: []
+build:
+  githubActivity: []
+qa:
+  notes: >-
+    Live sprint and stage tracker live on the client dashboard (Jira + GitHub
+    sync from aaa-client-dashboard). Build tab here uses data_sprint_progress.json
+    and data_github_activity.json copied from that app.
+uat:
+  handoffSummary: ""
+  credentialHints: []
+maintenance:
+  owner: AAA Engineering
+  channel: "#client-comms"
+  notes: ""

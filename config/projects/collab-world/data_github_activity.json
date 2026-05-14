@@ -1,0 +1,19 @@
+{
+  "commits": [
+    {
+      "sha": "fd56437",
+      "tag": "merged",
+      "message": "Add discovery doc, PRD, and dashboard config",
+      "author": "Brad Wilcox",
+      "time": "2026-05-03"
+    },
+    {
+      "sha": "30c6cb0",
+      "tag": "merged",
+      "message": "Initial project docs: brief, email variations, handoff, architecture diagram",
+      "author": "Brad Wilcox",
+      "time": "2026-05-03"
+    }
+  ],
+  "summary": "2 commits and 0 PRs merged."
+}

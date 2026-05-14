@@ -1,0 +1,48 @@
+# Sync GitHub commits/PRs → `config/projects/<slug>/data_github_activity.json`
+# Repo root = AAA Portfolio (standalone `idea/` repository).
+# Secrets: GH_PAT_REPO_READ (preferred) or GITHUB_TOKEN
+
+name: Portfolio — Sync GitHub activity
+
+on:
+  schedule:
+    - cron: "35 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GH_PAT_REPO_READ || secrets.GITHUB_TOKEN }}
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sync GitHub activity for each project (ci-sync-manifest.json)
+        run: |
+          set -uo pipefail
+          while IFS=$'\t' read -r slug repo; do
+            echo "=== GitHub sync: $slug ($repo) ==="
+            python scripts/sync_github_portfolio.py --slug "$slug" --repo "$repo" || echo "WARN: sync failed for $slug"
+          done < <(jq -r '.projects[] | select(.github_repo != null) | [.slug, .github_repo] | @tsv' config/ci-sync-manifest.json)
+
+      - name: Detect changes
+        id: changes
+        run: |
+          git add config/projects/
+          git diff --cached --quiet && echo "changed=false" >> "$GITHUB_OUTPUT" || echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(portfolio): sync GitHub activity [automated]"
+          git push
