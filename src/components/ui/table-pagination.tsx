@@ -3,7 +3,6 @@
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export type TablePaginationProps = {
@@ -14,7 +13,10 @@ export type TablePaginationProps = {
   className?: string;
 };
 
-/** Footer bar for data tables: range label + prev/next. */
+const chevronBtn =
+  "inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-foreground transition-colors duration-150 hover:bg-muted/80 disabled:pointer-events-none disabled:text-muted-foreground/35";
+
+/** Minimal range + chevrons (flat, no outline buttons). */
 export function TablePaginationBar({
   page,
   pageSize,
@@ -27,44 +29,36 @@ export function TablePaginationBar({
   const start = total === 0 ? 0 : (safePage - 1) * pageSize + 1;
   const end = Math.min(safePage * pageSize, total);
 
+  const rangeLabel =
+    total === 0 ? "No results" : `${start} - ${end} of ${total} results`;
+
   return (
     <div
       className={cn(
-        "flex flex-col gap-3 border-t border-border px-4 py-3 sm:flex-row sm:items-center sm:justify-between md:px-6",
+        "flex flex-wrap items-center justify-end gap-6 border-t border-border/80 px-3 py-2.5 sm:gap-10 sm:px-4",
         className,
       )}
     >
-      <p className="text-xs tabular-nums text-muted-foreground">
-        {total === 0 ? "No results" : `${start}–${end} of ${total}`}
-      </p>
-      <div className="flex items-center gap-2">
-        <Button
+      <p className="mr-auto min-w-0 text-sm tabular-nums text-foreground/80">{rangeLabel}</p>
+      <div className="flex items-center gap-0.5">
+        <button
           type="button"
-          variant="outline"
-          size="sm"
-          className="h-8 gap-1 px-2"
-          disabled={safePage <= 1}
+          className={chevronBtn}
+          disabled={safePage <= 1 || total === 0}
           onClick={() => onPageChange(safePage - 1)}
           aria-label="Previous page"
         >
-          <ChevronLeft className="h-4 w-4" />
-          Prev
-        </Button>
-        <span className="min-w-[4.5rem] text-center text-xs tabular-nums text-muted-foreground">
-          {safePage} / {totalPages}
-        </span>
-        <Button
+          <ChevronLeft className="h-4 w-4" strokeWidth={2} />
+        </button>
+        <button
           type="button"
-          variant="outline"
-          size="sm"
-          className="h-8 gap-1 px-2"
+          className={chevronBtn}
           disabled={safePage >= totalPages || total === 0}
           onClick={() => onPageChange(safePage + 1)}
           aria-label="Next page"
         >
-          Next
-          <ChevronRight className="h-4 w-4" />
-        </Button>
+          <ChevronRight className="h-4 w-4" strokeWidth={2} />
+        </button>
       </div>
     </div>
   );
@@ -82,13 +76,15 @@ export function usePagedItems<T>(
   const [page, setPage] = React.useState(1);
 
   React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- reset page when source list/project identity changes
     setPage(1);
-  }, resetDeps);
+  }, resetDeps); // eslint-disable-line react-hooks/exhaustive-deps -- opaque dependency bundle from callers
 
   const total = items.length;
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
 
   React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- keep page valid when total shrinks
     setPage((p) => Math.min(Math.max(1, p), totalPages));
   }, [totalPages]);
 

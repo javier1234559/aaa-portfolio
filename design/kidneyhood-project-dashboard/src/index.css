@@ -1,0 +1,23 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Jura:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Jura", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-primary-dark: #004D43;
+  --color-accent: #E6FF2B;
+  --color-paper: #F9F7F2;
+  --color-neutral: #898A8D;
+  --color-surface: #0D0D0D;
+  --color-surface-lighter: #1A1A1A;
+  --color-line: rgba(0, 77, 67, 0.1);
+  --color-ink: #004D43;
+}
+
+@layer base {
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+  }
+}

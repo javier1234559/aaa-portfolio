@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Bell, ChevronUp, Globe, LayoutDashboard, LogOut, Settings } from "lucide-react";
 
+import { BrandWordmark } from "@/components/layout/brand-wordmark";
 import { ThemeToggleButton } from "@/components/layout/theme-toggle-button";
 import { brandConfig } from "@/config";
 import { RouteNames } from "@/constants";
@@ -34,11 +35,12 @@ export function PortfolioSidebar() {
 
   return (
     <aside className="fixed left-0 top-0 z-40 flex h-screen w-64 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground shadow-sm">
-      <div className="flex items-center gap-3 border-b border-sidebar-border/80 p-6">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground shadow-sm">
-          A
-        </div>
-        <span className="font-display text-base font-semibold tracking-tight">AAA PORTFOLIO</span>
+      <div className="flex items-center border-b border-sidebar-border/80 p-6">
+        <BrandWordmark
+          className="gap-3"
+          logoClassName="size-9"
+          textClassName="text-base font-semibold tracking-tight"
+        />
       </div>
 
       <nav className="flex-1 space-y-1 px-3 py-4">

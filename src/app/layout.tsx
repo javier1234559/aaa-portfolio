@@ -28,6 +28,16 @@ export const metadata: Metadata = {
   title: "AAA Portfolio",
   description:
     "Internal portfolio MVP — project overview, phases, and client dashboard links.",
+  appleWebApp: {
+    title: "AAA",
+  },
+  icons: {
+    icon: [
+      { url: "/icon0.svg", type: "image/svg+xml" },
+      { url: "/icon1.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/apple-icon.png",
+  },
 };
 
 export default function RootLayout({

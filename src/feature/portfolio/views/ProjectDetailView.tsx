@@ -2,66 +2,439 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import {
   Activity,
-  AlertCircle,
   ArrowUpRight,
   Box,
-  CheckSquare,
+  Calendar,
+  CheckCircle2,
   ChevronRight,
-  Code,
-  Edit3,
   ExternalLink,
-  Eye,
-  FileText,
   Github,
+  Layout,
   Layers,
   MessageSquare,
   Plus,
-  Search,
-  Settings2,
-  ShieldCheck,
   Target,
-  Trash2,
+  Users,
 } from "lucide-react";
 
-import { Input } from "@/components/ui/input";
 import { TablePaginationBar, usePagedItems } from "@/components/ui/table-pagination";
+import {
+  PhaseDotStrip,
+  phaseDatesFromMilestones,
+  PortfolioDeliveryProgressFallback,
+} from "@/feature/portfolio/components/project-milestone-rail";
 import { RouteNames } from "@/constants";
 import { cn } from "@/lib/utils";
 import type { PortfolioProject } from "@/feature/portfolio/types";
-import type { UiPhase } from "@/feature/portfolio/types-display";
+import type { UiHealth, UiPhase } from "@/feature/portfolio/types-display";
 import { UI_PHASES } from "@/feature/portfolio/types-display";
-import {
-  artifactsForPhase,
-  firstOpenJiraTicket,
-  githubWebUrl,
-  type DetailArtifact,
-} from "@/feature/portfolio/lib/project-detail-artifacts";
+import { firstOpenJiraTicket, githubWebUrl } from "@/feature/portfolio/lib/project-detail-artifacts";
 import { mapPortfolioToUiProject, portfolioProgress } from "@/feature/portfolio/lib/map-portfolio-display";
 
-const phaseIcons: Record<
-  UiPhase,
-  React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>
-> = {
-  Sales: MessageSquare,
-  Discovery: Target,
-  Build: Code,
-  QA: ShieldCheck,
-  UAT: CheckSquare,
-  Maintenance: Settings2,
-};
+const LIST_PAGE = 8;
+const BUILD_COMMIT_PAGE = 6;
+const BUILD_JIRA_PAGE = 8;
 
-const ARTIFACT_PAGE_SIZE = 8;
+function flattenJiraRows(project: PortfolioProject) {
+  const rows: { key: string; title: string; stream: string; done: boolean }[] = [];
+  for (const g of project.build.jiraGroups) {
+    for (const t of g.tickets) {
+      rows.push({
+        key: t.key,
+        title: t.summary,
+        stream: g.status,
+        done: Boolean(t.closedAt),
+      });
+    }
+  }
+  return rows;
+}
 
-function DetailRow({ label, children }: { label: string; children: React.ReactNode }) {
+function buildPhaseContext(project: PortfolioProject): string {
+  const extra = [project.qa.notes?.trim(), project.uat.handoffSummary?.trim()]
+    .filter(Boolean)
+    .join(" ");
+  if (extra) return extra;
+  return project.description;
+}
+
+function BuildCommitsPanel({
+  commits,
+  repoUrl,
+}: {
+  commits: PortfolioProject["build"]["githubActivity"];
+  repoUrl: string | null;
+}) {
+  const sorted = React.useMemo(
+    () => [...commits].sort((a, b) => (b.date || "").localeCompare(a.date || "")),
+    [commits],
+  );
+  const { page, setPage, pageItems, total } = usePagedItems(sorted, BUILD_COMMIT_PAGE, [commits]);
   return (
-    <div className="flex items-start justify-between gap-6 border-b border-dotted border-border py-3.5 text-sm last:border-b-0">
-      <span className="shrink-0 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
-        {label}
-      </span>
-      <div className="min-w-0 text-right text-sm font-medium text-foreground">{children}</div>
+    <div>
+      <div className="mb-4 flex items-center justify-between gap-2 border-b border-border pb-2">
+        <h5 className="flex items-center gap-2 text-[10px] font-mono font-medium uppercase tracking-widest text-muted-foreground">
+          <Github className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />
+          Recent commits
+        </h5>
+        {repoUrl ? (
+          <a
+            href={repoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 text-[9px] font-mono uppercase tracking-wide text-primary hover:underline"
+          >
+            Open repo →
+          </a>
+        ) : null}
+      </div>
+      {pageItems.length === 0 ? (
+        <p className="py-8 text-center text-sm text-muted-foreground">No synced commits yet.</p>
+      ) : (
+        <div className="divide-y divide-border font-mono">
+          {pageItems.map((c) => (
+            <div
+              key={c.sha}
+              className="group relative flex gap-3 border-l-4 border-transparent py-3 pl-3 transition-colors duration-200 ease-out hover:border-primary-foreground hover:bg-primary"
+            >
+              {c.url ? (
+                <a
+                  href={c.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex shrink-0 items-center self-start rounded-sm bg-primary px-1.5 py-px text-[10px] font-medium leading-tight text-primary-foreground transition-colors group-hover:bg-primary-foreground group-hover:text-primary group-hover:ring-1 group-hover:ring-white/40"
+                >
+                  {c.sha.slice(0, 7)}
+                </a>
+              ) : (
+                <span className="inline-flex shrink-0 items-center self-start rounded-sm bg-primary px-1.5 py-px text-[10px] font-medium leading-tight text-primary-foreground transition-colors group-hover:bg-primary-foreground group-hover:text-primary">
+                  {c.sha.slice(0, 7)}
+                </span>
+              )}
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-medium leading-snug text-foreground transition-colors group-hover:text-white">
+                  {c.message}
+                </p>
+                <p className="mt-0.5 text-[10px] text-muted-foreground transition-colors group-hover:text-white/85">
+                  {c.date?.slice(0, 10) ?? "—"}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {total > BUILD_COMMIT_PAGE ? (
+        <TablePaginationBar
+          page={page}
+          pageSize={BUILD_COMMIT_PAGE}
+          total={total}
+          onPageChange={setPage}
+        />
+      ) : null}
+    </div>
+  );
+}
+
+function BuildJiraPanel({ project }: { project: PortfolioProject }) {
+  const rows = React.useMemo(() => flattenJiraRows(project), [project]);
+  const { page, setPage, pageItems, total } = usePagedItems(rows, BUILD_JIRA_PAGE, [project]);
+  return (
+    <div>
+      <div className="mb-4 border-b border-border pb-2">
+        <h5 className="flex items-center gap-2 text-[10px] font-mono font-medium uppercase tracking-widest text-muted-foreground">
+          <Layout className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />
+          Jira activity
+        </h5>
+      </div>
+      {pageItems.length === 0 ? (
+        <p className="py-8 text-center text-sm text-muted-foreground">No tickets in snapshot.</p>
+      ) : (
+        <div className="divide-y divide-border">
+          {pageItems.map((t) => (
+            <div
+              key={t.key}
+              className="group relative flex flex-col gap-1 border-l-4 border-transparent py-3 pl-3 transition-colors duration-200 ease-out hover:border-primary-foreground hover:bg-primary sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+            >
+              <div className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-1">
+                <span className="font-mono text-xs font-semibold text-muted-foreground transition-colors group-hover:text-white/90">
+                  {t.key}
+                </span>
+                <span className="min-w-0 text-sm font-medium text-foreground transition-colors group-hover:text-white">
+                  {t.title}
+                </span>
+              </div>
+              <div className="flex shrink-0 items-center gap-3">
+                <span className="max-w-[10rem] truncate text-[10px] font-mono uppercase tracking-tight text-muted-foreground transition-colors group-hover:text-white/80 sm:max-w-xs">
+                  {t.stream}
+                </span>
+                <span
+                  className={cn(
+                    "rounded-sm px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider transition-colors",
+                    t.done
+                      ? "bg-primary text-primary-foreground group-hover:bg-primary-foreground group-hover:text-primary"
+                      : "border border-primary/45 bg-card text-primary group-hover:border-white/40 group-hover:bg-primary-foreground group-hover:text-primary",
+                  )}
+                >
+                  {t.done ? "Done" : "Open"}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {total > BUILD_JIRA_PAGE ? (
+        <TablePaginationBar page={page} pageSize={BUILD_JIRA_PAGE} total={total} onPageChange={setPage} />
+      ) : null}
+    </div>
+  );
+}
+
+function healthBadgeClass(health: UiHealth): string {
+  switch (health) {
+    case "Healthy":
+      return "border-emerald-500/30 bg-emerald-500/10 text-emerald-900 dark:text-emerald-100";
+    case "At Risk":
+      return "border-amber-500/40 bg-amber-500/15 text-amber-950 dark:text-amber-50";
+    case "Critical":
+      return "border-destructive/40 bg-destructive/10 text-destructive";
+    case "Maintenance":
+      return "border-border bg-muted text-foreground";
+    default:
+      return "border-border bg-muted text-muted-foreground";
+  }
+}
+
+function SnapshotMeta({
+  label,
+  children,
+  mono,
+}: {
+  label: string;
+  children: React.ReactNode;
+  mono?: boolean;
+}) {
+  return (
+    <div className="min-w-0 rounded-xl border border-border/80 bg-muted/25 px-3 py-2.5">
+      <p className="text-[10px] font-mono font-medium uppercase tracking-widest text-muted-foreground">{label}</p>
+      <div
+        className={cn(
+          "mt-1 truncate text-sm font-semibold text-foreground",
+          mono && "font-mono text-xs font-medium",
+        )}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function phaseTabStatusIcon(phase: UiPhase, currentPhase: UiPhase) {
+  const phases = UI_PHASES;
+  const currentIndex = phases.indexOf(currentPhase);
+  const targetIndex = phases.indexOf(phase);
+  if (targetIndex < currentIndex) {
+    return <CheckCircle2 className="h-3 w-3 shrink-0 text-primary" aria-hidden />;
+  }
+  if (targetIndex === currentIndex) {
+    return <Activity className="h-3 w-3 shrink-0 text-primary" aria-hidden />;
+  }
+  return <span className="h-2 w-2 shrink-0 rounded-full bg-muted-foreground/25" aria-hidden />;
+}
+
+function phaseContextBody(project: PortfolioProject, phase: UiPhase): string {
+  switch (phase) {
+    case "Sales":
+    case "Discovery":
+      return project.description;
+    case "Build":
+      return buildPhaseContext(project);
+    case "QA":
+      return project.qa.notes?.trim() || project.description;
+    case "UAT": {
+      const parts = [project.uat.handoffSummary?.trim()];
+      if (project.uat.testEnvUrl) parts.push(`Staging: ${project.uat.testEnvUrl}`);
+      return parts.filter(Boolean).join(" ") || project.description;
+    }
+    case "Maintenance": {
+      const bits: string[] = [];
+      if (project.maintenance.owner && project.maintenance.owner !== "—") {
+        bits.push(`Owner: ${project.maintenance.owner}`);
+      }
+      if (project.maintenance.channel && project.maintenance.channel !== "—") {
+        bits.push(`Channel: ${project.maintenance.channel}`);
+      }
+      if (project.maintenance.notes?.trim()) bits.push(project.maintenance.notes.trim());
+      return bits.length ? bits.join(" · ") : project.description;
+    }
+    default:
+      return project.description;
+  }
+}
+
+function SalesMeetingsPanel({ meetings }: { meetings: PortfolioProject["sales"]["meetings"] }) {
+  const { page, setPage, pageItems, total } = usePagedItems(meetings, LIST_PAGE, [meetings]);
+  if (!meetings.length) {
+    return <p className="py-8 text-center text-sm text-muted-foreground">No meetings in config.</p>;
+  }
+  return (
+    <div>
+      <div className="mb-4 flex items-center gap-2 border-b border-border pb-2">
+        <Calendar className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />
+        <h5 className="text-[10px] font-mono font-medium uppercase tracking-widest text-muted-foreground">
+          Phase meetings
+        </h5>
+      </div>
+      <div className="divide-y divide-border">
+        {pageItems.map((m) => (
+          <div
+            key={m.id}
+            className="group relative border-l-4 border-transparent py-4 pl-4 transition-colors duration-200 ease-out hover:border-primary-foreground hover:bg-primary"
+          >
+            <p className="font-mono text-[10px] text-muted-foreground transition-colors group-hover:text-white/85">{m.date}</p>
+            <p className="mt-1 font-display text-lg font-semibold uppercase tracking-tight text-foreground transition-colors group-hover:text-white">
+              {m.title}
+            </p>
+            {m.tool ? (
+              <p className="mt-1 text-[10px] font-mono uppercase tracking-widest text-muted-foreground transition-colors group-hover:text-white/75">
+                {m.tool}
+              </p>
+            ) : null}
+          </div>
+        ))}
+      </div>
+      {total > LIST_PAGE ? (
+        <TablePaginationBar page={page} pageSize={LIST_PAGE} total={total} onPageChange={setPage} />
+      ) : null}
+    </div>
+  );
+}
+
+function DiscoveryDocsPanel({ docs }: { docs: PortfolioProject["discovery"]["docs"] }) {
+  const { page, setPage, pageItems, total } = usePagedItems(docs, LIST_PAGE, [docs]);
+  if (!docs.length) {
+    return <p className="py-8 text-center text-sm text-muted-foreground">No discovery docs.</p>;
+  }
+  return (
+    <div>
+      <div className="mb-4 border-b border-border pb-2">
+        <h5 className="text-[10px] font-mono font-medium uppercase tracking-widest text-muted-foreground">
+          Workspace artifacts
+        </h5>
+      </div>
+      <div className="divide-y divide-border">
+        {pageItems.map((d) => (
+          <div
+            key={d.id}
+            className="group relative border-l-4 border-transparent py-3 pl-3 transition-colors duration-200 ease-out hover:border-primary-foreground hover:bg-primary"
+          >
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="rounded-sm bg-muted px-1.5 py-0.5 text-[9px] font-mono uppercase text-muted-foreground transition-colors group-hover:bg-primary-foreground/15 group-hover:text-white">
+                {d.kind}
+              </span>
+              <span className="text-sm font-medium text-foreground transition-colors group-hover:text-white">{d.name}</span>
+            </div>
+            <p className="mt-1 font-mono text-[10px] text-muted-foreground transition-colors group-hover:text-white/80">{d.path}</p>
+          </div>
+        ))}
+      </div>
+      {total > LIST_PAGE ? (
+        <TablePaginationBar page={page} pageSize={LIST_PAGE} total={total} onPageChange={setPage} />
+      ) : null}
+    </div>
+  );
+}
+
+function QAPanel({ project }: { project: PortfolioProject }) {
+  return (
+    <div className="space-y-6">
+      <div className="border-b border-border pb-2">
+        <h5 className="text-[10px] font-mono font-medium uppercase tracking-widest text-muted-foreground">QA surface</h5>
+      </div>
+      {project.qa.notionSummaryUrl ? (
+        <a
+          href={project.qa.notionSummaryUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block rounded-lg border border-border bg-card px-4 py-3 text-sm font-medium text-primary transition-colors hover:bg-muted/50"
+        >
+          Open Notion workspace →
+        </a>
+      ) : null}
+      {project.qa.loomEmbedUrl ? (
+        <a
+          href={project.qa.loomEmbedUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block text-sm font-medium text-primary hover:underline"
+        >
+          Loom / recording
+        </a>
+      ) : null}
+      {project.qa.notes.trim() ? (
+        <p className="text-sm leading-relaxed text-muted-foreground">{project.qa.notes}</p>
+      ) : (
+        <p className="text-sm text-muted-foreground">No QA notes in YAML.</p>
+      )}
+    </div>
+  );
+}
+
+function UATPanel({ project }: { project: PortfolioProject }) {
+  return (
+    <div className="space-y-6">
+      <div className="border-b border-border pb-2">
+        <h5 className="text-[10px] font-mono font-medium uppercase tracking-widest text-muted-foreground">UAT pack</h5>
+      </div>
+      {project.uat.testEnvUrl ? (
+        <a
+          href={project.uat.testEnvUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex text-sm font-medium text-primary hover:underline"
+        >
+          Staging environment →
+        </a>
+      ) : null}
+      {project.uat.handoffSummary.trim() ? (
+        <p className="text-sm leading-relaxed text-muted-foreground">{project.uat.handoffSummary}</p>
+      ) : (
+        <p className="text-sm text-muted-foreground">No handoff summary.</p>
+      )}
+      {project.uat.credentialHints.length > 0 ? (
+        <ul className="list-inside list-disc space-y-1 text-sm text-muted-foreground">
+          {project.uat.credentialHints.map((h) => (
+            <li key={h}>{h}</li>
+          ))}
+        </ul>
+      ) : null}
+    </div>
+  );
+}
+
+function MaintenancePanel({ project }: { project: PortfolioProject }) {
+  return (
+    <div className="divide-y divide-border">
+      <div className="group relative border-l-4 border-transparent py-3 pl-3 transition-colors duration-200 ease-out hover:border-primary-foreground hover:bg-primary">
+        <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground transition-colors group-hover:text-white/85">
+          Owner
+        </p>
+        <p className="mt-1 text-sm font-medium text-foreground transition-colors group-hover:text-white">{project.maintenance.owner}</p>
+      </div>
+      <div className="group relative border-l-4 border-transparent py-3 pl-3 transition-colors duration-200 ease-out hover:border-primary-foreground hover:bg-primary">
+        <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground transition-colors group-hover:text-white/85">
+          Channel
+        </p>
+        <p className="mt-1 text-sm font-medium text-foreground transition-colors group-hover:text-white">{project.maintenance.channel}</p>
+      </div>
+      <div className="group relative border-l-4 border-transparent py-3 pl-3 transition-colors duration-200 ease-out hover:border-primary-foreground hover:bg-primary">
+        <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground transition-colors group-hover:text-white/85">
+          Notes
+        </p>
+        <p className="mt-1 text-sm text-muted-foreground transition-colors group-hover:text-white/90">{project.maintenance.notes || "—"}</p>
+      </div>
     </div>
   );
 }
@@ -84,37 +457,12 @@ export function ProjectDetailView({ project }: { project: PortfolioProject }) {
   const ui = mapPortfolioToUiProject(project);
   const progress = portfolioProgress(project);
   const [activeTab, setActiveTab] = React.useState<UiPhase>(ui.currentPhase);
-  const [selectedArtifactId, setSelectedArtifactId] = React.useState<string | null>(null);
-  const [searchTerm, setSearchTerm] = React.useState("");
 
-  const baseArtifacts = React.useMemo(
-    () => artifactsForPhase(project, activeTab),
-    [project, activeTab],
+  const phaseDateLookup = React.useMemo(
+    () => phaseDatesFromMilestones(project.milestones),
+    [project.milestones],
   );
-
-  React.useEffect(() => {
-    const list = artifactsForPhase(project, activeTab);
-    setSelectedArtifactId(list[0]?.id ?? null);
-    setSearchTerm("");
-  }, [activeTab, project]);
-
-  const activeArtifacts = React.useMemo(
-    () =>
-      baseArtifacts.filter((a) =>
-        a.title.toLowerCase().includes(searchTerm.toLowerCase()),
-      ),
-    [baseArtifacts, searchTerm],
-  );
-
-  const selectedArtifact =
-    activeArtifacts.find((a) => a.id === selectedArtifactId) ?? activeArtifacts[0];
-
-  const {
-    page: artifactListPage,
-    setPage: setArtifactListPage,
-    pageItems: pagedArtifacts,
-    total: artifactListTotal,
-  } = usePagedItems(activeArtifacts, ARTIFACT_PAGE_SIZE, [activeTab, searchTerm]);
+  const hasPhaseDates = Object.keys(phaseDateLookup).length > 0;
 
   const team = deliveryTeam(project, ui.owner.name);
   const gh = githubWebUrl(project.githubRepo);
@@ -124,59 +472,17 @@ export function ProjectDetailView({ project }: { project: PortfolioProject }) {
     0,
   );
   const jiraTotal = project.build.jiraGroups.reduce((n, g) => n + g.tickets.length, 0);
-  const firstDoc = project.discovery.docs[0];
-
-  const engineeringRows: {
-    title: string;
-    sub: string;
-    date: string;
-    icon: typeof Github;
-    status: "Active" | "Jira" | "Doc";
-    href: string | null;
-  }[] = [];
-  if (gh) {
-    engineeringRows.push({
-      title: project.githubRepo ?? "Repository",
-      sub: `${project.build.githubActivity.length} synced commits`,
-      date: "GitHub",
-      icon: Github,
-      status: "Active",
-      href: gh,
-    });
-  }
-  engineeringRows.push({
-    title: project.jiraProjectKey ? `${project.jiraProjectKey} board` : "Jira backlog",
-    sub: `${jiraOpen} open · ${jiraTotal} total`,
-    date: "Jira",
-    icon: Target,
-    status: "Jira",
-    href: null,
-  });
-  if (firstDoc) {
-    engineeringRows.push({
-      title: firstDoc.name,
-      sub: firstDoc.path,
-      date: firstDoc.kind,
-      icon: FileText,
-      status: "Doc",
-      href: null,
-    });
-  }
 
   const operationalLinks: {
     label: string;
     href: string;
     icon: typeof Layers;
-    wrap: string;
-    iconWrap: string;
   }[] = [];
   if (project.qa.notionSummaryUrl) {
     operationalLinks.push({
       label: "Notion workspace",
       href: project.qa.notionSummaryUrl,
       icon: Layers,
-      wrap: "text-indigo-600",
-      iconWrap: "bg-indigo-50",
     });
   }
   if (gh) {
@@ -184,8 +490,6 @@ export function ProjectDetailView({ project }: { project: PortfolioProject }) {
       label: "GitHub repository",
       href: gh,
       icon: Github,
-      wrap: "text-brand-dark",
-      iconWrap: "bg-muted",
     });
   }
   if (project.jiraProjectKey) {
@@ -193,16 +497,12 @@ export function ProjectDetailView({ project }: { project: PortfolioProject }) {
       label: `Jira · ${project.jiraProjectKey}`,
       href: "#",
       icon: Target,
-      wrap: "text-blue-600",
-      iconWrap: "bg-blue-50",
     });
   }
   operationalLinks.push({
     label: `Slack · ${project.slackContactChannel}`,
     href: "#",
     icon: MessageSquare,
-    wrap: "text-violet-600",
-    iconWrap: "bg-violet-50",
   });
 
   return (
@@ -220,8 +520,7 @@ export function ProjectDetailView({ project }: { project: PortfolioProject }) {
           <span className="text-brand-dark">{project.clientName}</span>
         </div>
 
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-          <div className="flex min-w-0 items-start gap-4">
+        <div className="flex min-w-0 items-start gap-4">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-border bg-card text-brand-green shadow-sm">
               <Box size={24} />
             </div>
@@ -230,162 +529,179 @@ export function ProjectDetailView({ project }: { project: PortfolioProject }) {
                 <h1 className="font-display text-3xl font-bold tracking-tight text-brand-dark sm:text-4xl">
                   {project.projectName}
                 </h1>
-                <div className="rounded bg-brand-green/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-tighter text-brand-green">
-                  {ui.currentPhase === "Maintenance" ? "In maintenance" : "In production"}
+                <div className="rounded-full border border-primary/25 bg-primary/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-primary">
+                  {ui.currentPhase}
                 </div>
+                {ui.currentPhase === "Maintenance" ? (
+                  <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+                    Maintenance mode
+                  </span>
+                ) : (
+                  <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+                    Delivery active
+                  </span>
+                )}
               </div>
-              <p className="max-w-2xl text-sm leading-relaxed text-brand-gray">{project.description}</p>
+              <p className="max-w-2xl text-sm leading-relaxed text-brand-gray line-clamp-2">{project.description}</p>
+              <p className="mt-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                {project.slug}
+                <span className="text-muted-foreground/50"> · </span>
+                {ui.id}
+              </p>
             </div>
           </div>
-          <button
-            type="button"
-            className="shrink-0 self-start rounded-lg border border-border p-2 text-brand-gray transition-colors hover:bg-muted hover:text-brand-green"
-            aria-label="Edit (placeholder)"
-          >
-            <Edit3 size={18} />
-          </button>
-        </div>
       </div>
 
-      <section className="rounded-2xl border border-border bg-card px-5 py-4 shadow-sm sm:px-6">
-        <div className="mb-1 flex items-center justify-between">
-          <h2 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Overview</h2>
-          <Activity className="h-4 w-4 text-muted-foreground" aria-hidden />
+      <section className="rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-5">
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <h2 className="flex items-center gap-2 text-xs font-mono font-medium uppercase tracking-widest text-muted-foreground">
+            <Activity className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />
+            Project snapshot
+          </h2>
         </div>
-        <DetailRow label="Client">{project.clientName}</DetailRow>
-        <DetailRow label="Slug">
-          <span className="font-mono text-xs">{project.slug}</span>
-        </DetailRow>
-        <DetailRow label="Engagement">{project.engagementType}</DetailRow>
-        <DetailRow label="Current phase">{ui.currentPhase}</DetailRow>
-        <DetailRow label="Health">{ui.health}</DetailRow>
-        <div className="flex items-end justify-between gap-4 border-b border-dotted border-border py-3.5 last:border-b-0">
-          <span className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">Progress</span>
-          <div className="flex flex-col items-end gap-2">
-            <span className="font-display text-3xl font-bold tabular-nums text-foreground">
-              {progress}
-              <span className="text-lg text-muted-foreground">%</span>
-            </span>
-            <div className="h-1.5 w-40 max-w-full overflow-hidden rounded-full bg-muted sm:w-56">
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: `${progress}%` }}
-                className="h-full bg-primary"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <section className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8">
-        <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-[10px] font-bold uppercase tracking-widest text-brand-gray">Global status & intent</h2>
-          <button
-            type="button"
-            className="p-2 text-brand-gray transition-all hover:text-brand-green"
-            aria-label="Edit summary"
-          >
-            <Edit3 size={12} />
-          </button>
-        </div>
-        <div className="prose prose-sm max-w-none leading-relaxed text-brand-dark">
-          <p className="mb-6 text-base font-medium leading-relaxed text-brand-gray sm:text-lg">
-            This initiative delivers <span className="text-brand-dark">{project.projectName}</span> for{" "}
-            <span className="text-brand-dark">{project.clientName}</span>. Engagement type: {project.engagementType}.
-            Current stream: <span className="font-semibold text-brand-dark">{ui.currentPhase}</span>.
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <span className="flex items-center gap-2 rounded-lg border border-border bg-muted px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-brand-gray">
-              <Target size={12} className="text-brand-green" /> {project.engagementType}
-            </span>
-            <span className="flex items-center gap-2 rounded-lg border border-border bg-muted px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-brand-gray">
-              <Layers size={12} className="text-brand-green" /> Config-driven portfolio
-            </span>
-            <span className="flex items-center gap-2 rounded-lg border border-border bg-muted px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-brand-gray">
-              <Box size={12} className="text-brand-green" /> Phase: {ui.currentPhase}
-            </span>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="rounded-xl border border-border bg-muted/20 p-3 sm:min-h-[5.5rem]">
+            <p className="text-[10px] font-mono font-medium uppercase tracking-widest text-muted-foreground">Phase</p>
+            <p className="mt-2 font-display text-xl font-bold tabular-nums tracking-tight text-foreground">{ui.currentPhase}</p>
+            <p className="mt-1 text-[11px] text-muted-foreground">Portfolio stream</p>
           </div>
+          <div className="rounded-xl border border-border bg-muted/20 p-3 sm:min-h-[5.5rem]">
+            <p className="text-[10px] font-mono font-medium uppercase tracking-widest text-muted-foreground">Health</p>
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+              <span
+                className={cn(
+                  "inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide",
+                  healthBadgeClass(ui.health),
+                )}
+              >
+                {ui.health}
+              </span>
+            </div>
+            <p className="mt-2 text-[11px] text-muted-foreground">From Jira snapshot + phase rules</p>
+          </div>
+          <div className="rounded-xl border border-border bg-muted/20 p-3 sm:col-span-2 lg:col-span-1 sm:min-h-[5.5rem]">
+            <p className="text-[10px] font-mono font-medium uppercase tracking-widest text-muted-foreground">Progress</p>
+            <div className="mt-1 flex items-baseline gap-1">
+              <span className="font-display text-3xl font-bold tabular-nums text-foreground">{progress}</span>
+              <span className="text-lg font-semibold text-muted-foreground">%</span>
+            </div>
+            <p className="mt-2 text-[11px] leading-snug text-muted-foreground">Jira roll-up</p>
+            {!hasPhaseDates ? <PortfolioDeliveryProgressFallback pct={progress} compact /> : null}
+          </div>
+          <div className="rounded-xl border border-border bg-muted/20 p-3 sm:col-span-2 sm:min-h-[5.5rem] lg:col-span-1">
+            <p className="text-[10px] font-mono font-medium uppercase tracking-widest text-muted-foreground">Jira (synced)</p>
+            <p className="mt-2 font-display text-xl font-bold tabular-nums text-foreground">{jiraOpen}</p>
+            <p className="mt-1 text-[11px] text-muted-foreground">
+              Open · {jiraTotal} total in snapshot
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+          <SnapshotMeta label="Client">{project.clientName}</SnapshotMeta>
+          <SnapshotMeta label="Slug" mono>
+            {project.slug}
+          </SnapshotMeta>
+          <SnapshotMeta label="Engagement">{project.engagementType}</SnapshotMeta>
+          <SnapshotMeta label="Portfolio ID" mono>
+            {ui.id}
+          </SnapshotMeta>
+        </div>
+
+        <div className="mt-3 flex flex-wrap gap-2">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/50 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+            <Layers size={12} className="text-primary" aria-hidden />
+            Config-driven
+          </span>
+        </div>
+
+        <div className="mt-10 border-t border-border pt-8">
+          <PhaseDotStrip recordedPhase={ui.currentPhase} phaseDates={phaseDateLookup} />
         </div>
       </section>
 
       <section className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-        <div className="border-b border-border bg-muted/30 px-4 py-3">
-          <h2 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">People & links</h2>
+        <div className="border-b border-border bg-muted/20 px-4 py-3">
+          <h2 className="text-xs font-mono font-medium uppercase tracking-widest text-muted-foreground">
+            People & links
+          </h2>
         </div>
-        <div className="divide-y divide-border">
-          <div className="px-5 py-5 sm:px-6">
-            <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-[10px] font-bold uppercase tracking-widest text-brand-gray">Delivery team</h3>
+        <div className="grid md:grid-cols-2 md:divide-x md:divide-border">
+          <div className="p-4 sm:p-5">
+            <div className="mb-4 flex items-center justify-between gap-2">
+              <h3 className="flex items-center gap-2 text-xs font-mono font-medium uppercase tracking-widest text-muted-foreground">
+                <Users className="h-3 w-3 shrink-0" aria-hidden />
+                Strategic stakeholders
+              </h3>
               <button
                 type="button"
-                className="p-2 text-brand-gray transition-all hover:rotate-90 hover:text-brand-green"
+                className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-primary"
                 aria-label="Add member"
               >
-                <Plus size={16} />
+                <Plus size={14} />
               </button>
             </div>
-            <div className="space-y-4">
+            <div>
               {team.map((member) => (
-                <div key={member.id} className="group flex items-center gap-4">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-border bg-muted text-[11px] font-bold uppercase tracking-tighter text-brand-dark transition-all group-hover:bg-primary group-hover:text-primary-foreground">
-                    {member.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </div>
+                <div
+                  key={member.id}
+                  className="flex items-center justify-between gap-3 border-b border-border py-3 transition-colors last:border-b-0 hover:border-primary/35"
+                >
                   <div className="min-w-0">
-                    <p className="text-[13px] font-bold leading-none text-brand-dark">{member.name}</p>
-                    <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.1em] text-brand-gray">{member.role}</p>
+                    <p className="text-sm font-semibold uppercase tracking-tight text-foreground">{member.name}</p>
+                    <p className="mt-0.5 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+                      {member.role}
+                    </p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          <div className="bg-muted/15 px-5 py-5 sm:px-6">
-            <h3 className="mb-3 text-[10px] font-bold uppercase tracking-widest text-brand-gray">Operational links</h3>
-            <div className="space-y-2">
+          <div className="bg-muted/5 p-4 sm:p-5">
+            <h3 className="mb-1 flex items-center gap-2 text-xs font-mono font-medium uppercase tracking-widest text-muted-foreground">
+              <ExternalLink className="h-3 w-3 shrink-0" aria-hidden />
+              Asset directory
+            </h3>
+            <div className="flex flex-col divide-y divide-border">
               {operationalLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   target={link.href.startsWith("http") ? "_blank" : undefined}
                   rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="group flex items-center rounded-xl border border-border bg-card px-3 py-3 transition-all hover:border-brand-green/20 hover:bg-muted"
+                  className="group flex items-center justify-between gap-3 py-3 transition-all hover:pl-1.5"
                 >
-                  <div
-                    className={cn(
-                      "mr-3 shrink-0 rounded-lg p-2 transition-transform group-hover:scale-105",
-                      link.iconWrap,
-                      link.wrap,
-                    )}
-                  >
-                    <link.icon size={14} />
+                  <div className="flex min-w-0 items-center gap-3">
+                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border bg-card text-primary transition-colors group-hover:border-primary group-hover:bg-primary/10">
+                      <link.icon size={14} strokeWidth={2} />
+                    </div>
+                    <span className="truncate text-xs font-semibold uppercase tracking-wider text-foreground">
+                      {link.label}
+                    </span>
                   </div>
-                  <span className="min-w-0 flex-1 truncate text-xs font-bold text-brand-gray transition-colors group-hover:text-brand-dark">
-                    {link.label}
+                  <span className="shrink-0 text-[9px] font-mono uppercase tracking-tight text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100">
+                    Open →
                   </span>
-                  <ExternalLink
-                    size={14}
-                    className="shrink-0 text-brand-gray/30 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-brand-green"
-                  />
                 </a>
               ))}
               <a
                 href={project.clientDashboardPath}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center rounded-xl border border-border bg-card px-3 py-3 transition-all hover:border-brand-green/20 hover:bg-muted"
+                className="group flex items-center justify-between gap-3 py-3 transition-all hover:pl-1.5"
               >
-                <div className="mr-3 shrink-0 rounded-lg bg-brand-green/10 p-2 text-brand-green transition-transform group-hover:scale-105">
-                  <ExternalLink size={14} />
+                <div className="flex min-w-0 items-center gap-3">
+                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary transition-colors group-hover:border-primary group-hover:bg-primary/15">
+                    <ArrowUpRight size={14} strokeWidth={2} />
+                  </div>
+                  <span className="truncate text-xs font-semibold uppercase tracking-wider text-primary">
+                    Client dashboard
+                  </span>
                 </div>
-                <span className="min-w-0 flex-1 truncate text-xs font-bold text-brand-gray group-hover:text-brand-dark">
-                  Client dashboard
+                <span className="shrink-0 text-[9px] font-mono uppercase tracking-tight text-primary/80 opacity-0 transition-opacity group-hover:opacity-100">
+                  Open →
                 </span>
-                <ArrowUpRight
-                  size={14}
-                  className="shrink-0 text-brand-gray/30 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-brand-green"
-                />
               </a>
             </div>
           </div>
@@ -393,9 +709,8 @@ export function ProjectDetailView({ project }: { project: PortfolioProject }) {
       </section>
 
       <section className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-        <div className="flex min-w-0 gap-1 overflow-x-auto border-b border-border bg-muted/30 p-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex min-w-0 flex-wrap border-b border-border bg-card [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {UI_PHASES.map((phase) => {
-            const Icon = phaseIcons[phase];
             const isCurrent = ui.currentPhase === phase;
             const isActive = activeTab === phase;
             return (
@@ -404,197 +719,83 @@ export function ProjectDetailView({ project }: { project: PortfolioProject }) {
                 type="button"
                 onClick={() => setActiveTab(phase)}
                 className={cn(
-                  "relative flex min-w-[5.5rem] shrink-0 items-center justify-center gap-1.5 rounded-xl px-2 py-3 text-[9px] font-bold uppercase tracking-widest transition-all sm:min-w-0 sm:flex-1 sm:px-3 sm:text-[10px]",
-                  isActive
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "text-brand-gray hover:bg-muted",
+                  "relative flex min-w-0 shrink-0 items-center gap-2 px-3 py-3.5 text-[10px] font-mono font-medium uppercase tracking-widest transition-colors sm:flex-1 sm:justify-center sm:px-4",
+                  isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground",
                 )}
               >
-                <Icon size={14} className="shrink-0" />
+                {phaseTabStatusIcon(phase, ui.currentPhase)}
                 <span className="truncate">{phase}</span>
                 {isCurrent && !isActive ? (
-                  <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 animate-pulse rounded-full bg-primary sm:right-2 sm:top-2" />
+                  <span
+                    className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-primary/80 sm:right-3"
+                    title="Portfolio recorded phase"
+                  />
+                ) : null}
+                {isActive ? (
+                  <motion.div
+                    layoutId="projectPhaseTabIndicator"
+                    className="absolute bottom-0 left-1 right-1 h-0.5 rounded-full bg-primary sm:left-2 sm:right-2"
+                    transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                  />
                 ) : null}
               </button>
             );
           })}
         </div>
 
-        <div className="border-b border-border p-4">
-          <div className="relative">
-            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-brand-gray" />
-            <Input
-              variant="default"
-              type="search"
-              placeholder="Filter context…"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="py-2.5 pl-9 pr-4 text-[11px]"
-            />
-          </div>
-        </div>
-
-        {activeTab === "Build" ? (
-          <div className="space-y-6 border-b border-border p-5 sm:p-6">
-            <div className="space-y-3">
-              <div className="flex items-center justify-between gap-2">
-                <h4 className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-brand-gray">
-                  <Github size={14} className="text-brand-green" /> Engineering stream
-                </h4>
-                {gh ? (
-                  <a
-                    href={gh}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="shrink-0 text-[9px] font-bold uppercase tracking-widest text-brand-green hover:underline"
-                  >
-                    Open repo →
-                  </a>
-                ) : null}
-              </div>
-              <div className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-card">
-                {engineeringRows.map((log, i) => {
-                  const row = (
-                    <div className="flex flex-col gap-3 p-4 transition-colors group hover:bg-muted/30 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:p-5">
-                      <div className="flex min-w-0 items-start gap-3 sm:items-center sm:gap-4">
-                        <div className="rounded-xl bg-muted p-2.5 transition-transform group-hover:scale-105 sm:p-3">
-                          <log.icon size={18} className="text-brand-dark sm:h-5 sm:w-5" />
-                        </div>
-                        <div className="min-w-0">
-                          <p className="text-sm font-bold text-brand-dark">{log.title}</p>
-                          <p className="text-[11px] font-medium tracking-tight text-brand-gray">{log.sub}</p>
-                          <p className="text-[10px] italic text-brand-gray/50">{log.date}</p>
-                        </div>
-                      </div>
-                      <span
-                        className={cn(
-                          "self-start rounded-md px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest sm:self-center",
-                          log.status === "Active" && "bg-brand-green/10 text-brand-green",
-                          log.status === "Jira" && "bg-blue-500/15 text-blue-700 dark:text-blue-300",
-                          log.status === "Doc" && "bg-orange-500/15 text-orange-800 dark:text-orange-300",
-                        )}
-                      >
-                        {log.status}
-                      </span>
-                    </div>
-                  );
-                  return log.href ? (
-                    <a key={i} href={log.href} target="_blank" rel="noopener noreferrer" className="block">
-                      {row}
-                    </a>
-                  ) : (
-                    <div key={i}>{row}</div>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div className="space-y-3">
-              <div className="flex items-center justify-between gap-2">
-                <h4 className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-brand-gray">
-                  <AlertCircle size={14} className="text-red-500" /> Delivery attention
-                </h4>
-                <Link
-                  href={RouteNames.projectDetail(project.slug)}
-                  className="shrink-0 text-[9px] font-bold uppercase tracking-widest text-red-500 hover:underline"
-                >
-                  Refresh data →
-                </Link>
-              </div>
-              {openTicket ? (
-                <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
-                  <div className="flex min-w-0 items-start gap-3">
-                    <div className="mt-1 h-2 w-2 shrink-0 animate-pulse rounded-full bg-red-500 shadow-sm shadow-red-500/20" />
-                    <div className="min-w-0">
-                      <p className="text-xs font-bold text-brand-dark">
-                        {openTicket.key} — {openTicket.summary}
-                      </p>
-                      <p className="mt-0.5 text-[10px] text-brand-gray">
-                        Status group: <span className="font-bold">{openTicket.status}</span>
-                      </p>
-                    </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="border-b border-border"
+          >
+            <div className="p-5 sm:p-8">
+              <div className="grid gap-10 md:grid-cols-5 md:gap-12">
+                <div className="space-y-6 md:col-span-2">
+                  <div>
+                    <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-muted-foreground">
+                      Phase context — {activeTab}
+                    </p>
+                    <h3 className="mt-2 font-display text-2xl font-bold uppercase tracking-tight text-foreground sm:text-3xl">
+                      Details & intelligence
+                    </h3>
+                    <p className="mt-4 text-sm font-light leading-relaxed text-muted-foreground">
+                      {phaseContextBody(project, activeTab)}
+                    </p>
                   </div>
-                  <span className="self-start rounded-full bg-primary/15 px-3 py-1 text-[9px] font-bold uppercase tracking-widest text-primary sm:self-center">
-                    Open
-                  </span>
-                </div>
-              ) : (
-                <div className="rounded-xl border border-border bg-card p-4 text-sm text-brand-gray">
-                  No open Jira tickets in the synced snapshot.
-                </div>
-              )}
-            </div>
-          </div>
-        ) : null}
-
-        <div className="p-3 sm:p-4">
-          {activeArtifacts.length > 0 ? (
-            <>
-              <p className="mb-2 px-1 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-                Stream items
-              </p>
-              <div className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-card">
-                {pagedArtifacts.map((artifact) => (
-                  <button
-                    key={artifact.id}
-                    type="button"
-                    onClick={() => setSelectedArtifactId(artifact.id)}
-                    className={cn(
-                      "flex w-full flex-col gap-1 px-4 py-3.5 text-left transition-colors sm:flex-row sm:items-center sm:justify-between sm:gap-4",
-                      selectedArtifactId === artifact.id ||
-                        (!selectedArtifactId && selectedArtifact?.id === artifact.id)
-                        ? "bg-brand-green/5"
-                        : "hover:bg-muted/50",
-                    )}
-                  >
-                    <span
-                      className={cn(
-                        "min-w-0 truncate text-[12px] font-bold",
-                        selectedArtifactId === artifact.id ? "text-brand-green" : "text-brand-dark",
-                      )}
-                    >
-                      {artifact.title}
-                    </span>
-                    <div className="flex shrink-0 items-center justify-between gap-3 sm:justify-end">
-                      <span className="text-[9px] font-bold uppercase tracking-widest text-brand-gray">
-                        {artifact.type}
-                      </span>
-                      <span className="text-[9px] text-brand-gray/50">{artifact.date}</span>
+                  {activeTab === "Build" && openTicket ? (
+                    <div className="border-l-4 border-primary-foreground bg-primary px-4 py-4 text-primary-foreground shadow-sm">
+                      <p className="mb-1.5 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-primary-foreground/90">
+                        <Activity className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                        Attention required
+                      </p>
+                      <p className="text-xs leading-relaxed opacity-95">
+                        <span className="font-semibold">{openTicket.key}</span> — {openTicket.summary}. Stream:{" "}
+                        <span className="font-medium">{openTicket.status}</span>
+                      </p>
                     </div>
-                  </button>
-                ))}
+                  ) : null}
+                </div>
+                <div className="space-y-10 md:col-span-3">
+                  {activeTab === "Build" ? (
+                    <>
+                      <BuildCommitsPanel commits={project.build.githubActivity} repoUrl={gh} />
+                      <BuildJiraPanel project={project} />
+                    </>
+                  ) : null}
+                  {activeTab === "Sales" ? <SalesMeetingsPanel meetings={project.sales.meetings} /> : null}
+                  {activeTab === "Discovery" ? <DiscoveryDocsPanel docs={project.discovery.docs} /> : null}
+                  {activeTab === "QA" ? <QAPanel project={project} /> : null}
+                  {activeTab === "UAT" ? <UATPanel project={project} /> : null}
+                  {activeTab === "Maintenance" ? <MaintenancePanel project={project} /> : null}
+                </div>
               </div>
-              <TablePaginationBar
-                page={artifactListPage}
-                pageSize={ARTIFACT_PAGE_SIZE}
-                total={artifactListTotal}
-                onPageChange={setArtifactListPage}
-              />
-              <button
-                type="button"
-                className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-border py-3 text-[10px] font-bold uppercase tracking-widest text-brand-gray transition-all hover:border-brand-green/30 hover:text-brand-green"
-              >
-                <Plus size={12} /> Add artifact
-              </button>
-            </>
-          ) : (
-            <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border py-12 text-center text-brand-gray">
-              <Box size={32} strokeWidth={1} className="mb-2 opacity-20" />
-              <p className="text-[10px] font-bold uppercase tracking-widest">No stream data</p>
             </div>
-          )}
-        </div>
-
-        {activeTab !== "Build" && selectedArtifact ? (
-          <div className="border-t border-border bg-muted/10 p-3 sm:p-4">
-            <ArtifactDetailCard project={project} artifact={selectedArtifact} uiId={ui.id} />
-          </div>
-        ) : activeTab !== "Build" && !selectedArtifact ? (
-          <div className="flex flex-col items-center justify-center border-t border-dashed border-border py-16 text-brand-gray opacity-40">
-            <Box size={40} strokeWidth={1} className="mb-3" />
-            <p className="text-xs font-bold uppercase tracking-[0.2em]">Select stream context</p>
-          </div>
-        ) : null}
+          </motion.div>
+        </AnimatePresence>
       </section>
       {project.comments.length > 0 ? (
         <div className="rounded-3xl border border-border bg-card p-8 shadow-sm">
@@ -618,112 +819,5 @@ export function ProjectDetailView({ project }: { project: PortfolioProject }) {
         </div>
       ) : null}
     </motion.div>
-  );
-}
-
-function ArtifactDetailCard({
-  project,
-  artifact,
-  uiId,
-}: {
-  project: PortfolioProject;
-  artifact: DetailArtifact;
-  uiId: string;
-}) {
-  return (
-    <div className="flex min-h-[500px] flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-xl">
-      <div className="flex items-center justify-between border-b border-border bg-muted/20 p-8">
-        <div className="flex items-center gap-5">
-          <div className="rounded-2xl border border-border bg-card p-4 text-brand-green shadow-sm">
-            <FileText size={24} />
-          </div>
-          <div>
-            <div className="flex items-center gap-3">
-              <h2 className="text-xl font-bold text-brand-dark">{artifact.title}</h2>
-              <span className="rounded-md bg-primary px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-primary-foreground">
-                Portfolio
-              </span>
-            </div>
-            <p className="mt-1 text-[10px] font-bold uppercase tracking-widest text-brand-gray">
-              Source: {artifact.source} · {artifact.date}
-            </p>
-          </div>
-        </div>
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            className="rounded-xl p-3 text-brand-gray transition-all hover:bg-muted hover:text-brand-green"
-            aria-label="Edit"
-          >
-            <Edit3 size={18} />
-          </button>
-          <button
-            type="button"
-            className="rounded-xl p-3 text-brand-gray transition-all hover:bg-muted hover:text-brand-green"
-            aria-label="Preview"
-          >
-            <Eye size={18} />
-          </button>
-          <button
-            type="button"
-            className="rounded-xl p-3 text-brand-gray transition-all hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-950/40"
-            aria-label="Delete"
-          >
-            <Trash2 size={18} />
-          </button>
-        </div>
-      </div>
-
-      <div className="flex-1 space-y-10 p-12">
-        <div className="space-y-6">
-          <div className="space-y-3">
-            <h4 className="text-[11px] font-bold uppercase leading-none tracking-widest text-brand-gray">
-              Context
-            </h4>
-            <p className="text-justify text-base leading-relaxed text-brand-dark">
-              {project.description}
-            </p>
-          </div>
-
-          <div className="space-y-1 border-y border-border py-8">
-            <h4 className="mb-3 text-[11px] font-bold uppercase tracking-widest text-brand-gray">Workspace</h4>
-            <DetailRow label="Slug">
-              <span className="font-mono text-xs">{project.slug}</span>
-            </DetailRow>
-            <DetailRow label="API">
-              <span className="break-all font-mono text-[11px] font-normal">{project.apiBaseUrl}</span>
-            </DetailRow>
-            {project.prototypeUrl ? <DetailRow label="Prototype">Linked</DetailRow> : null}
-            <div className="pt-4">
-              <h4 className="mb-3 text-[11px] font-bold uppercase tracking-widest text-brand-gray">Client channel</h4>
-              <div className="flex items-center justify-between rounded-xl border border-brand-green/10 bg-brand-green/5 px-4 py-4">
-                <div className="flex items-center gap-3 text-xs font-bold text-brand-green">
-                  <ShieldCheck size={20} /> Dashboard configured
-                </div>
-                <span className="text-[9px] font-bold uppercase text-brand-green/60">Live</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between rounded-3xl border border-border bg-muted/50 p-8">
-            <div>
-              <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-brand-gray">
-                Operational trace
-              </p>
-              <p className="font-mono text-xs font-bold text-brand-dark">
-                {uiId}-ARTI-{artifact.id.slice(0, 6).toUpperCase()}
-              </p>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="text-right">
-                <p className="text-[9px] font-bold uppercase leading-none text-brand-gray">Artifact</p>
-                <p className="text-[10px] font-bold text-brand-dark">{artifact.type}</p>
-              </div>
-              <div className="h-2.5 w-2.5 animate-pulse rounded-full bg-green-500 ring-4 ring-green-500/25 dark:ring-green-400/20" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }

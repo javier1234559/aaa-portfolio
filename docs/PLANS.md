@@ -298,3 +298,24 @@ _Added from implementation feedback (May 2026). Vietnamese product notes are sum
 
 - **Server-driven pagination** when data moves from static JSON to API/DB.
 - **Gantt** and phase automation remain per **§12** / **§4**.
+
+---
+
+## 17. Near-term backlog (UI polish + skills)
+
+Ordered checklist for the **current build track** (UI-first; backend/Gantt deferred per **§11**). Check items in Git / update this list when shipped.
+
+**Design brief (prompt for redesign / handoff):** `docs/DESIGN.md`
+
+### 17.1 UI / UX
+
+- [x] **Project detail density** (`/app/projects/[slug]`) — reduce redundant cards; single **snapshot** band for metadata + intent; emphasize **health** + **progress**; tighter “People & links” (see `docs/DESIGN.md`).
+- [ ] **Publish / client preview parity** — `ClientPortalView` + `/app/publish/[slug]` aligned with the same snapshot + density patterns as internal detail.
+- [ ] **Portfolio dashboard table** — optional second pass for row density / status scannability after detail page stabilizes.
+- [ ] **Lightweight pipeline readout** — read-only **phase stepper** or slim timeline derived from `currentPhase` + config (no drag-edit; precursor to Gantt in **§12**).
+
+### 17.2 Agent skills (Cursor + Claude; mirror `aaa-portfolio-config`)
+
+- [ ] **Skill: init project** — scaffold `config/projects/<slug>/`, manifest + `ci-sync-manifest.json` row; validate shapes against `types` / loader; optional PR checklist.
+- [ ] **Skill: ask project** — answer questions from YAML + synced JSON only (read-only “portfolio Q&A” over checked-in data).
+- [ ] **Skill: sync hygiene** — compare manifest slugs to folders; flag missing `data_*` files or stale keys (local / CI helper).

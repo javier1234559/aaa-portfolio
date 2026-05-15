@@ -1,0 +1,29 @@
+# Optional per-project milestones. `phase` ties a row to the lifecycle strip (see README).
+# startedAt: YYYY-MM-DD shown under that phase dot. completed: reserved for future automation.
+
+version: 1
+milestones:
+  - title: Sales & proposal
+    phase: sales
+    startedAt: "2024-01-10"
+    completed: true
+  - title: Discovery handoff
+    phase: discovery
+    startedAt: "2024-02-15"
+    completed: true
+  - title: Build core
+    phase: build
+    startedAt: "2024-03-01"
+    completed: true
+  - title: QA entry
+    phase: qa
+    startedAt: "2024-04-10"
+    completed: true
+  - title: UAT window
+    phase: uat
+    startedAt: "2024-05-20"
+    completed: false
+  - title: Maintenance plan
+    phase: maintenance
+    startedAt: "2024-06-01"
+    completed: false

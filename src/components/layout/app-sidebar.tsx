@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { LayoutGrid, LogOut, FolderKanban } from "lucide-react";
+import { LogOut, FolderKanban } from "lucide-react";
 
+import { BrandWordmark } from "@/components/layout/brand-wordmark";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ThemeToggleButton } from "@/components/layout/theme-toggle-button";
-import { brandConfig } from "@/config";
 import { RouteNames } from "@/constants";
 import { cn } from "@/lib/utils";
 
@@ -25,11 +25,8 @@ export function AppSidebar({ currentPath }: { currentPath: string }) {
 
   return (
     <aside className="flex w-60 shrink-0 flex-col border-r border-border/80 bg-sidebar text-sidebar-foreground">
-      <div className="flex h-14 items-center gap-2 border-b border-border/80 px-4">
-        <LayoutGrid className="h-5 w-5 text-muted-foreground" aria-hidden />
-        <span className="font-display text-base font-semibold tracking-tight text-foreground">
-          {brandConfig.NAME}
-        </span>
+      <div className="flex h-14 items-center border-b border-border/80 px-4">
+        <BrandWordmark textClassName="text-base font-semibold tracking-tight" />
       </div>
       <nav className="flex flex-1 flex-col gap-1 p-2">
         {nav.map(({ href, label, icon: Icon }) => {

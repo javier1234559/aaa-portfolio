@@ -14,9 +14,10 @@ Internal **project portfolio** UI for Automation Architecture: one table of clie
 ## Quick start
 
 ```bash
-npm install
+corepack enable   # once per machine; pins pnpm via package.json "packageManager"
+pnpm install
 cp .env.example .env   # adjust mock login if needed
-npm run dev
+pnpm run dev
 ```
 
 Open `http://localhost:3000`, sign in with the mock credentials from `.env`, then open **Projects** (`/app`).
@@ -31,6 +32,7 @@ All portfolio rows and synced snapshots live under **`config/`** at the **root o
   - **`data_sprint_progress.json`** — Jira/sprint-style card snapshot (same shape as `aaa-client-dashboard` `sprint-progress.json`).
   - **`data_github_activity.json`** — recent commits (same shape as the dashboard `github_activity.json`).
   - **`data_comments.json`** — optional internal comment threads (read today; **writes** planned via API + persistence — see `docs/PLANS.md` §7.6).
+  - **`milestones.yaml`** *(optional)* — delivery gates; use optional **`phase`** (`sales` … `maintenance`) to set the **start date** shown on the snapshot phase dot strip. Without `phase` rows, a compact Jira % bar appears in the Progress tile only.
 
 The Next.js loader resolves `config/` relative to the app root (this repo), or **`PORTFOLIO_CONFIG_ROOT`** if you override the path.
 
@@ -81,13 +83,13 @@ python scripts/sync_github_portfolio.py --slug kidneyhood --repo Automation-Arch
 
 Cursor **rules:** [`.cursor/rules/portfolio-config.mdc`](.cursor/rules/portfolio-config.mdc).
 
-## npm scripts
+## pnpm scripts
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Next.js dev server |
-| `npm run build` | Production build |
-| `npm run lint` | ESLint |
+| `pnpm run dev` | Next.js dev server |
+| `pnpm run build` | Production build |
+| `pnpm run lint` | ESLint |
 
 ## Comments API (stub)
 

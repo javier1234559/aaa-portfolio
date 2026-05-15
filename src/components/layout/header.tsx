@@ -5,6 +5,7 @@ import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { BrandWordmark } from "@/components/layout/brand-wordmark";
 import { Button } from "@/components/ui/button";
 import { RouteNames } from "@/constants";
 
@@ -22,13 +23,13 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center justify-between px-4">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+      <div className="container flex h-14 items-center justify-between px-4 mx-auto">
         <Link
           href={RouteNames.Home}
-          className="flex items-center gap-2 font-semibold text-foreground"
+          className="flex items-center text-foreground transition-opacity hover:opacity-90"
         >
-          <span className="font-display text-lg font-semibold">AAA Portfolio</span>
+          <BrandWordmark textClassName="text-lg font-semibold" />
         </Link>
 
         <nav className="flex items-center gap-2">

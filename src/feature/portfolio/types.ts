@@ -45,6 +45,17 @@ export interface PortfolioComment {
   at: string;
 }
 
+/** Optional delivery milestones (`milestones.yaml` per project). */
+export interface PortfolioMilestone {
+  title: string;
+  /** Start date for this gate (YYYY-MM-DD). */
+  startedAt: string;
+  /** When true, used by future automation; optional for UI. */
+  completed: boolean;
+  /** If set, `startedAt` shows on the phase dot strip for this lifecycle phase. */
+  phase?: PortfolioPhase;
+}
+
 export interface PortfolioProject {
   slug: string;
   projectName: string;
@@ -87,4 +98,6 @@ export interface PortfolioProject {
   };
   /** Loaded from data_comments.json when present. */
   comments: PortfolioComment[];
+  /** Loaded from milestones.yaml when present; otherwise empty. */
+  milestones: PortfolioMilestone[];
 }

@@ -11,5 +11,6 @@ alwaysApply: false
 - **JSON mirrors:** `data_sprint_progress.json` / `data_github_activity.json` — same shapes as the dashboard files. Refresh via **monorepo root** `.github/workflows/portfolio-sync-*.yml` and `idea/config/ci-sync-manifest.json`, or copy from `aaa-client-dashboard` after its Actions run.
 - **Loader:** `src/server/portfolio/load-config.ts` and `sprint-github.ts` — keep types aligned with `src/feature/portfolio/types.ts`.
 - **Comments:** `data_comments.json` is read-only in MVP; writes go through a planned Next.js Route Handler (see `docs/PLANS.md` §7.6). Do not call Slack webhooks from the browser.
+- **Milestones (optional):** `milestones.yaml` in each `projects/<slug>/` drives the delivery milestone rail on the project detail page (`title`, `startedAt`, `completed`). Omit the file to use the Jira-derived fallback bar only.
 
 When adding a client, mirror the steps in `.cursor/skills/aaa-portfolio-config/SKILL.md` (and the Claude copy under `.claude/skills/`).

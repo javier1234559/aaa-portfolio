@@ -75,6 +75,7 @@ function normalizeProject(
   commentsFile: DataCommentsFile | null,
   syncJiraGroups: PortfolioProject["build"]["jiraGroups"],
   syncGithubActivity: PortfolioProject["build"]["githubActivity"],
+  milestones: PortfolioProject["milestones"],
 ): PortfolioProject {
   const y = (yamlRaw && typeof yamlRaw === "object"
     ? yamlRaw
@@ -172,7 +173,42 @@ function normalizeProject(
       notes: String(maintenance.notes ?? ""),
     },
     comments,
+    milestones,
   };
+}
+
+function parseMilestonesYaml(path: string): PortfolioProject["milestones"] {
+  if (!existsSync(path)) return [];
+  try {
+    const raw = parseYaml(readFileSync(path, "utf8"));
+    const root = (raw && typeof raw === "object" ? raw : {}) as {
+      milestones?: unknown;
+    };
+    const list = Array.isArray(root.milestones) ? root.milestones : [];
+    const out: PortfolioProject["milestones"] = [];
+    for (const row of list) {
+      if (!row || typeof row !== "object") continue;
+      const r = row as Record<string, unknown>;
+      const title = typeof r.title === "string" ? r.title.trim() : "";
+      const startedAt = typeof r.startedAt === "string" ? r.startedAt.trim() : "";
+      if (!title || !startedAt) continue;
+      const phaseRaw = r.phase;
+      const phase =
+        typeof phaseRaw === "string" && isPortfolioPhase(phaseRaw.trim().toLowerCase())
+          ? (phaseRaw.trim().toLowerCase() as PortfolioPhase)
+          : undefined;
+
+      out.push({
+        title,
+        startedAt,
+        completed: Boolean(r.completed),
+        phase,
+      });
+    }
+    return out;
+  } catch {
+    return [];
+  }
 }
 
 function loadOneProject(configRoot: string, slug: string): PortfolioProject {
@@ -214,6 +250,9 @@ function loadOneProject(configRoot: string, slug: string): PortfolioProject {
     githubRepo,
   );
 
+  const milestonesPath = join(dir, "milestones.yaml");
+  const milestones = parseMilestonesYaml(milestonesPath);
+
   return normalizeProject(
     slug,
     yamlRaw,
@@ -221,6 +260,7 @@ function loadOneProject(configRoot: string, slug: string): PortfolioProject {
     commentsFile,
     syncJiraGroups,
     syncGithubActivity,
+    milestones,
   );
 }
 
