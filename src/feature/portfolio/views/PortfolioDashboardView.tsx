@@ -17,13 +17,17 @@ import { formatMoney } from "@/feature/portfolio/lib/portfolio-commercial";
 import type { PortfolioCommercialRollup } from "@/feature/portfolio/lib/portfolio-commercial";
 import type { UiProject } from "@/feature/portfolio/types-display";
 import { PortfolioProjectTable } from "@/feature/portfolio/components/portfolio-project-table";
+import { PortfolioRevenueChart } from "@/feature/portfolio/components/portfolio-revenue-chart";
+import type { PortfolioProject } from "@/feature/portfolio/types";
 import { RouteNames } from "@/constants";
 
 export function PortfolioDashboardView({
   projects,
+  portfolioRows,
   stats,
 }: {
   projects: UiProject[];
+  portfolioRows: PortfolioProject[];
   stats: {
     total: number;
     clientCount: number;
@@ -144,6 +148,8 @@ export function PortfolioDashboardView({
           </div>
         ))}
       </motion.div>
+
+      {hasRevenue ? <PortfolioRevenueChart projects={portfolioRows} /> : null}
 
       <motion.div className="min-w-0 overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
         <div className="flex items-center justify-between border-b border-border bg-muted/30 px-8 py-5">

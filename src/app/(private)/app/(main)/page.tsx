@@ -19,5 +19,7 @@ export default function AppHomePage() {
     maintenance: rows.filter((p) => p.currentPhase === "maintenance").length,
     revenue,
   };
-  return <PortfolioDashboardView projects={projects} stats={stats} />;
+  return (
+    <PortfolioDashboardView projects={projects} portfolioRows={rows} stats={stats} />
+  );
 }

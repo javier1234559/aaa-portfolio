@@ -67,6 +67,15 @@ export interface PortfolioComment {
   at: string;
 }
 
+/** Cash event for revenue timeline (`commercial.entries` in YAML). */
+export interface PortfolioCommercialEntry {
+  /** YYYY-MM-DD */
+  date: string;
+  amount: number;
+  /** `collected` = realized; `forecast` = expected (default forecast). */
+  kind: "collected" | "forecast";
+}
+
 /** Internal-only commercial fields (`commercial:` in project YAML). */
 export interface PortfolioCommercial {
   currency: string;
@@ -78,6 +87,8 @@ export interface PortfolioCommercial {
   winProbability: number;
   expectedCloseDate?: string;
   notes?: string;
+  /** Optional dated cash events; inferred from totals when omitted. */
+  entries?: PortfolioCommercialEntry[];
 }
 
 /** Strategic stakeholders for the project detail “People” panel. */

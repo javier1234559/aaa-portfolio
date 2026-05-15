@@ -1,4 +1,8 @@
-import type { PortfolioCommercial, PortfolioProject } from "@/feature/portfolio/types";
+import type {
+  PortfolioCommercial,
+  PortfolioCommercialEntry,
+  PortfolioProject,
+} from "@/feature/portfolio/types";
 
 export type CommercialStatus =
   | "pipeline"
@@ -38,11 +42,14 @@ export function parseCommercialYaml(raw: unknown): PortfolioCommercial | undefin
   const contractedAmount = num(y.contractedAmount);
   const collectedAmount = num(y.collectedAmount) ?? 0;
 
+  const entries = parseCommercialEntriesYaml(y.entries);
+
   if (
     proposalAmount === null &&
     contractedAmount === null &&
     collectedAmount === 0 &&
-    !y.notes
+    !y.notes &&
+    entries.length === 0
   ) {
     return undefined;
   }
@@ -57,7 +64,31 @@ export function parseCommercialYaml(raw: unknown): PortfolioCommercial | undefin
     expectedCloseDate:
       typeof y.expectedCloseDate === "string" ? y.expectedCloseDate.trim() : undefined,
     notes: typeof y.notes === "string" ? y.notes.trim() : undefined,
+    entries: entries.length > 0 ? entries : undefined,
   };
+}
+
+function parseCommercialEntriesYaml(raw: unknown): PortfolioCommercialEntry[] {
+  if (!Array.isArray(raw)) return [];
+  const out: PortfolioCommercialEntry[] = [];
+  for (const row of raw) {
+    if (!row || typeof row !== "object") continue;
+    const r = row as Record<string, unknown>;
+    const date = typeof r.date === "string" ? r.date.trim() : "";
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) continue;
+    const amountRaw = r.amount;
+    const amount =
+      typeof amountRaw === "number"
+        ? amountRaw
+        : amountRaw !== undefined && amountRaw !== ""
+          ? Number(amountRaw)
+          : NaN;
+    if (!Number.isFinite(amount) || amount <= 0) continue;
+    const kindRaw = typeof r.kind === "string" ? r.kind.trim().toLowerCase() : "forecast";
+    const kind = kindRaw === "collected" ? "collected" : "forecast";
+    out.push({ date, amount, kind });
+  }
+  return out.sort((a, b) => a.date.localeCompare(b.date));
 }
 
 export function formatMoney(amount: number, currency = "USD"): string {

@@ -21,6 +21,19 @@ commercial:
   winProbability: 1
   expectedCloseDate: "2025-03-01"
   notes: "SOW signed; internal-only — not shown on client publish."
+  entries:
+    - date: "2024-11-15"
+      amount: 22000
+      kind: collected
+    - date: "2025-02-01"
+      amount: 22000
+      kind: collected
+    - date: "2025-06-01"
+      amount: 22000
+      kind: forecast
+    - date: "2025-09-01"
+      amount: 22000
+      kind: forecast
 
 team:
   sales: Brad Wilcox

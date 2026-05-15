@@ -9,7 +9,7 @@ alwaysApply: false
 - **Manifest:** `config/projects.manifest.yaml` lists slugs; each slug has a folder `config/projects/<slug>/`.
 - **YAML:** `<slug>.yml` holds identity, URLs, `currentPhase`, `jiraProjectKey`, `githubRepo`, and tab copy. Prefer editing YAML over hardcoding in TS.
 - **JSON mirrors:** `data_sprint_progress.json` / `data_github_activity.json` — same shapes as the dashboard files. Refresh via `.github/workflows/portfolio-sync-*.yml` and `config/ci-sync-manifest.json`, or copy from `aaa-client-dashboard` after its Actions run.
-- **Commercial (internal):** YAML `commercial:` — `status`, `proposalAmount`, `contractedAmount`, `collectedAmount`, `winProbability`. Drives dashboard revenue rollup and project detail Revenue tile. Not shown on client publish.
+- **Commercial (internal):** YAML `commercial:` — `status`, `proposalAmount`, `contractedAmount`, `collectedAmount`, `winProbability`, optional `entries` (`date`, `amount`, `kind: collected|forecast`) for dashboard revenue timeline. Drives dashboard rollup/chart and project detail Revenue tile. Not shown on client publish.
 - **Loader:** `src/server/portfolio/load-config.ts` and `sprint-github.ts` — keep types aligned with `src/feature/portfolio/types.ts`.
 - **Comments:** `data_comments.json` is read-only in MVP; writes go through a planned Next.js Route Handler (see `docs/PLANS.md` §7.6). Do not call Slack webhooks from the browser.
 - **Milestones (optional):** `milestones.yaml` in each `projects/<slug>/` drives the delivery milestone rail on the project detail page (`title`, `startedAt`, `completed`). Omit the file to use the Jira-derived fallback bar only.
