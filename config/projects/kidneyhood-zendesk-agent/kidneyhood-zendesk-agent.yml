@@ -10,6 +10,16 @@ clientDashboardPath: "https://dashboard.automationarchitecture.ai/client/kidneyh
 description: >-
   Zendesk-integrated AI support agent for Kidneyhood patients. Reads incoming tickets, queries a private RAG knowledge base built from 6 published books and curated Q&A history, and replies with citations and an educational disclaimer. Runs in supervised burn-in mode at launch and graduates to autonomous on operator approval.
 
+commercial:
+  currency: USD
+  status: pipeline
+  proposalAmount: 28000
+  contractedAmount:
+  collectedAmount: 0
+  winProbability: 0.45
+  expectedCloseDate: "2026-08-01"
+  notes: "Add-on to KidneyHood — sample data for portfolio demo."
+
 sales:
   meetings: []
 discovery:

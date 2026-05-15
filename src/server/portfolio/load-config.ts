@@ -2,12 +2,20 @@ import { existsSync, readFileSync } from "fs";
 import { join, resolve } from "path";
 import { parse as parseYaml } from "yaml";
 
+import { parseCommercialYaml } from "@/feature/portfolio/lib/portfolio-commercial";
+import { parseTeamYaml } from "@/feature/portfolio/lib/portfolio-stakeholders";
 import type {
+  MeetingRow,
   PortfolioComment,
   PortfolioPhase,
   PortfolioProject,
 } from "@/feature/portfolio/types";
 
+import {
+  legacyYamlMeetingsToSales,
+  loadPhaseMarkdownDir,
+  loadSalesMeetingsJson,
+} from "@/server/portfolio/load-phase-content";
 import {
   dashboardGithubToActivity,
   sprintProgressToJiraGroups,
@@ -76,6 +84,11 @@ function normalizeProject(
   syncJiraGroups: PortfolioProject["build"]["jiraGroups"],
   syncGithubActivity: PortfolioProject["build"]["githubActivity"],
   milestones: PortfolioProject["milestones"],
+  salesMeetings: PortfolioProject["sales"]["meetings"],
+  discoveryDocuments: PortfolioProject["discovery"]["documents"],
+  qaDocuments: PortfolioProject["qa"]["documents"],
+  uatDocuments: PortfolioProject["uat"]["documents"],
+  maintenanceDocuments: PortfolioProject["maintenance"]["documents"],
 ): PortfolioProject {
   const y = (yamlRaw && typeof yamlRaw === "object"
     ? yamlRaw
@@ -85,12 +98,12 @@ function normalizeProject(
     ? y.currentPhase
     : "discovery";
 
-  const sales = (y.sales && typeof y.sales === "object"
-    ? y.sales
-    : {}) as PortfolioProject["sales"];
+  const salesYaml = (y.sales && typeof y.sales === "object" ? y.sales : {}) as {
+    meetings?: MeetingRow[];
+  };
   const discovery = (y.discovery && typeof y.discovery === "object"
     ? y.discovery
-    : {}) as PortfolioProject["discovery"];
+    : {}) as Pick<PortfolioProject["discovery"], "docs">;
   const buildYaml = (y.build && typeof y.build === "object"
     ? y.build
     : {}) as Partial<PortfolioProject["build"]>;
@@ -123,10 +136,17 @@ function normalizeProject(
     ? commentsFile!.comments!
     : [];
 
+  const clientName = String(y.clientName ?? "—");
+  const teamYaml = (y.team && typeof y.team === "object" ? y.team : undefined) as
+    | Record<string, unknown>
+    | undefined;
+  const team = parseTeamYaml(teamYaml, clientName);
+  const commercial = parseCommercialYaml(y.commercial);
+
   return {
     slug: typeof y.slug === "string" ? y.slug : slug,
     projectName: String(y.projectName ?? slug),
-    clientName: String(y.clientName ?? "—"),
+    clientName,
     clientContact:
       typeof y.clientContact === "string" ? y.clientContact : undefined,
     engagementType: String(y.engagementType ?? "—"),
@@ -140,10 +160,17 @@ function normalizeProject(
       typeof y.jiraProjectKey === "string" ? y.jiraProjectKey : undefined,
     githubRepo: typeof y.githubRepo === "string" ? y.githubRepo : undefined,
     clientDashboardPath: String(y.clientDashboardPath ?? "#"),
+    team,
     sales: {
-      meetings: Array.isArray(sales.meetings) ? sales.meetings : [],
+      meetings:
+        salesMeetings.length > 0
+          ? salesMeetings
+          : legacyYamlMeetingsToSales(
+              Array.isArray(salesYaml.meetings) ? salesYaml.meetings : [],
+            ),
     },
     discovery: {
+      documents: discoveryDocuments,
       docs: Array.isArray(discovery.docs) ? discovery.docs : [],
     },
     build: {
@@ -151,6 +178,7 @@ function normalizeProject(
       githubActivity,
     },
     qa: {
+      documents: qaDocuments,
       notionSummaryUrl:
         typeof qa.notionSummaryUrl === "string"
           ? qa.notionSummaryUrl
@@ -160,6 +188,7 @@ function normalizeProject(
       notes: String(qa.notes ?? ""),
     },
     uat: {
+      documents: uatDocuments,
       handoffSummary: String(uat.handoffSummary ?? ""),
       testEnvUrl:
         typeof uat.testEnvUrl === "string" ? uat.testEnvUrl : undefined,
@@ -168,12 +197,14 @@ function normalizeProject(
         : [],
     },
     maintenance: {
+      documents: maintenanceDocuments,
       owner: String(maintenance.owner ?? "—"),
       channel: String(maintenance.channel ?? "—"),
       notes: String(maintenance.notes ?? ""),
     },
     comments,
     milestones,
+    commercial,
   };
 }
 
@@ -253,6 +284,12 @@ function loadOneProject(configRoot: string, slug: string): PortfolioProject {
   const milestonesPath = join(dir, "milestones.yaml");
   const milestones = parseMilestonesYaml(milestonesPath);
 
+  const salesMeetings = loadSalesMeetingsJson(join(dir, "data_sales_meetings.json"));
+  const discoveryDocuments = loadPhaseMarkdownDir(join(dir, "discovery"));
+  const qaDocuments = loadPhaseMarkdownDir(join(dir, "qa"));
+  const uatDocuments = loadPhaseMarkdownDir(join(dir, "uat"));
+  const maintenanceDocuments = loadPhaseMarkdownDir(join(dir, "maintenance"));
+
   return normalizeProject(
     slug,
     yamlRaw,
@@ -261,6 +298,11 @@ function loadOneProject(configRoot: string, slug: string): PortfolioProject {
     syncJiraGroups,
     syncGithubActivity,
     milestones,
+    salesMeetings,
+    discoveryDocuments,
+    qaDocuments,
+    uatDocuments,
+    maintenanceDocuments,
   );
 }
 

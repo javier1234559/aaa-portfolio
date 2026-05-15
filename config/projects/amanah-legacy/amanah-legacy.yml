@@ -12,6 +12,16 @@ clientDashboardPath: "https://dashboard.automationarchitecture.ai/client/amanah-
 description: >-
   AI-powered Islamic estate planning platform with automated will generation
 
+commercial:
+  currency: USD
+  status: closed
+  proposalAmount: 65000
+  contractedAmount: 62000
+  collectedAmount: 62000
+  winProbability: 1
+  expectedCloseDate: "2024-11-01"
+  notes: "Delivered; maintenance phase. Sample data — internal only."
+
 sales:
   meetings: []
 discovery:

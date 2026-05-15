@@ -13,6 +13,8 @@ import {
   TrendingUp,
 } from "lucide-react";
 
+import { formatMoney } from "@/feature/portfolio/lib/portfolio-commercial";
+import type { PortfolioCommercialRollup } from "@/feature/portfolio/lib/portfolio-commercial";
 import type { UiProject } from "@/feature/portfolio/types-display";
 import { PortfolioProjectTable } from "@/feature/portfolio/components/portfolio-project-table";
 import { RouteNames } from "@/constants";
@@ -27,8 +29,11 @@ export function PortfolioDashboardView({
     clientCount: number;
     inBuild: number;
     maintenance: number;
+    revenue: PortfolioCommercialRollup;
   };
 }) {
+  const { revenue } = stats;
+  const hasRevenue = revenue.projectsWithCommercial > 0;
   const [showNewProject, setShowNewProject] = React.useState(false);
   const [newProjectStep, setNewProjectStep] = React.useState(1);
   const [newProjectName, setNewProjectName] = React.useState("");
@@ -51,10 +56,22 @@ export function PortfolioDashboardView({
     {
       label: "Completed (MTN)",
       value: stats.maintenance,
-      sub: "Recurring revenue",
+      sub: "In maintenance phase",
       icon: CheckCircle2,
       color: "text-blue-600",
     },
+    ...(hasRevenue
+      ? [
+          {
+            label: "Revenue forecast",
+            value: formatMoney(revenue.totalForecast, revenue.currency),
+            sub: `${formatMoney(revenue.totalContracted, revenue.currency)} contracted · ${revenue.projectsWithCommercial} with $ data`,
+            icon: TrendingUp,
+            color: "text-emerald-600",
+            isText: true as const,
+          },
+        ]
+      : []),
   ];
 
   return (
@@ -88,7 +105,13 @@ export function PortfolioDashboardView({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <motion.div
+        className={
+          hasRevenue
+            ? "grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4"
+            : "grid grid-cols-1 gap-6 md:grid-cols-3"
+        }
+      >
         {statCards.map((stat, idx) => (
           <div
             key={idx}
@@ -107,14 +130,22 @@ export function PortfolioDashboardView({
               <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-brand-gray">
                 {stat.label}
               </p>
-              <h3 className="font-display text-3xl font-bold text-brand-dark">{stat.value}</h3>
+              <h3
+                className={
+                  "isText" in stat && stat.isText
+                    ? "font-display text-2xl font-bold text-brand-dark"
+                    : "font-display text-3xl font-bold text-brand-dark"
+                }
+              >
+                {stat.value}
+              </h3>
               <p className="mt-1 text-[10px] text-brand-gray">{stat.sub}</p>
             </div>
           </div>
         ))}
-      </div>
+      </motion.div>
 
-      <div className="min-w-0 overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
+      <motion.div className="min-w-0 overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
         <div className="flex items-center justify-between border-b border-border bg-muted/30 px-8 py-5">
           <div className="flex items-center gap-3">
             <div className="rounded-lg border border-border bg-card p-2 text-brand-green">
@@ -139,7 +170,7 @@ export function PortfolioDashboardView({
           </div>
         </div>
 
-        <div className="overflow-x-auto p-8">
+        <div className="thin-scrollbar overflow-x-auto p-8">
           <div className="min-w-[900px]">
             <div className="mb-6 grid grid-cols-[200px_1fr]">
               <div className="text-[10px] font-bold uppercase tracking-widest text-brand-gray">
@@ -195,7 +226,7 @@ export function PortfolioDashboardView({
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       <div className="space-y-4">
         <div className="flex items-center justify-between">

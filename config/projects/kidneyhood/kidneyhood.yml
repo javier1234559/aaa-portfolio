@@ -3,7 +3,7 @@ projectName: KidneyHood
 clientName: Lee
 engagementType: "Project · Web Application"
 currentPhase: build
-slackContactChannel: "#client-comms"
+slackContactChannel: "#kidneyhood"
 apiBaseUrl: "https://lkid-backend.railway.app"
 prototypeUrl: "https://kidneyhood.vercel.app"
 jiraProjectKey: LKID
@@ -11,6 +11,22 @@ githubRepo: Automation-Architecture/LKID
 clientDashboardPath: "https://dashboard.automationarchitecture.ai/client/kidneyhood"
 description: >-
   A patient-facing eGFR projection tool with predictive modelling, reportable PDFs, and a tokenized clinician share-flow. Built by AAA over 6 sprints. This page updates each Monday with the week's ship list, tickets, deploys, and the live prototype.
+
+commercial:
+  currency: USD
+  status: signed
+  proposalAmount: 95000
+  contractedAmount: 88000
+  collectedAmount: 44000
+  winProbability: 1
+  expectedCloseDate: "2025-03-01"
+  notes: "SOW signed; internal-only — not shown on client publish."
+
+team:
+  sales: Brad Wilcox
+  qa: Javier
+  clients:
+    - Lee
 
 sales:
   meetings: []
@@ -28,5 +44,5 @@ uat:
   credentialHints: []
 maintenance:
   owner: AAA Engineering
-  channel: "#client-comms"
+  channel: "#kidneyhood"
   notes: ""

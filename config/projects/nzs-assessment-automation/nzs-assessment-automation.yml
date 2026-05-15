@@ -10,6 +10,16 @@ clientDashboardPath: "https://dashboard.automationarchitecture.ai/client/nzs-ass
 description: >-
   Stage 1 Eligibility Assessment report automation — supervised-then-autonomous pipeline with C1/C2 checkpoints, standalone Next.js EA web app on client AWS, Brevo email delivery, Talent Seeker CV ingest, two-step NZ Job Portal opt-in. Foundation for Stage 2+ CRM migration to a Google-Workspace-integrated system.
 
+commercial:
+  currency: USD
+  status: proposed
+  proposalAmount: 42000
+  contractedAmount:
+  collectedAmount: 0
+  winProbability: 0.6
+  expectedCloseDate: "2026-09-30"
+  notes: "Proposal stage — sample data for portfolio demo."
+
 sales:
   meetings: []
 discovery:

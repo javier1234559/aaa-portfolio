@@ -12,6 +12,16 @@ clientDashboardPath: "https://dashboard.automationarchitecture.ai/client/broa-fr
 description: >-
   Freight invoice auditor — compares carrier invoices against Salesforce estimates, flags variances >5%
 
+commercial:
+  currency: USD
+  status: signed
+  proposalAmount: 120000
+  contractedAmount: 105000
+  collectedAmount: 52500
+  winProbability: 1
+  expectedCloseDate: "2025-02-15"
+  notes: "Sample data for portfolio demo — internal only."
+
 sales:
   meetings: []
 discovery:

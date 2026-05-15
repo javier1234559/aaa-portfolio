@@ -17,8 +17,8 @@ export function PortfolioProjectTable({ projects }: { projects: UiProject[] }) {
 
   return (
     <div className="min-w-0 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-      <div className="min-w-0 overflow-x-auto">
-        <table className="w-full min-w-[760px] border-collapse text-left text-sm">
+      <div className="thin-scrollbar min-w-0 overflow-x-auto">
+        <table className="w-full min-w-[880px] border-collapse text-left text-sm">
           <thead>
             <tr className="border-b border-border bg-muted/40">
               <th className="whitespace-nowrap px-4 py-3 text-left text-[11px] font-medium uppercase tracking-wide text-muted-foreground md:px-6">
@@ -26,6 +26,9 @@ export function PortfolioProjectTable({ projects }: { projects: UiProject[] }) {
               </th>
               <th className="whitespace-nowrap px-4 py-3 text-left text-[11px] font-medium uppercase tracking-wide text-muted-foreground md:px-6">
                 Current phase
+              </th>
+              <th className="whitespace-nowrap px-4 py-3 text-left text-[11px] font-medium uppercase tracking-wide text-muted-foreground md:px-6">
+                Revenue
               </th>
               <th className="whitespace-nowrap px-4 py-3 text-left text-[11px] font-medium uppercase tracking-wide text-muted-foreground md:px-6">
                 Lead
@@ -57,6 +60,16 @@ export function PortfolioProjectTable({ projects }: { projects: UiProject[] }) {
                 </td>
                 <td className="px-4 py-4 align-middle md:px-6">
                   <PhaseBadge phase={project.currentPhase} />
+                </td>
+                <td className="max-w-[140px] px-4 py-4 align-middle md:px-6">
+                  <span className="block truncate text-xs font-semibold tabular-nums text-foreground">
+                    {project.revenueLabel}
+                  </span>
+                  {project.commercialStatus ? (
+                    <span className="mt-0.5 block truncate text-[10px] text-muted-foreground">
+                      {project.commercialStatus}
+                    </span>
+                  ) : null}
                 </td>
                 <td className="px-4 py-4 align-middle md:px-6">
                   <div className="flex min-w-0 items-center gap-3">

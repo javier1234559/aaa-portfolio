@@ -163,7 +163,7 @@ Likely needs **small backend** (same pattern as dashboard: don’t expose Slack 
 - **YAML** often best for **human-edited** `project.config.yaml` (comments, multiline); scripts can emit **JSON** for the Next app.
 - **JSON** fine if team prefers JS-only editing.
 - **Skill** should target **both Cursor Agent Skills and Claude Code skills** where possible—same `SKILL.md` content, different install paths (`~/.cursor/skills/…` vs `~/.claude/skills/…`).
-- **In-repo helpers:** `idea/.cursor/skills/aaa-portfolio-config/`, `idea/.claude/skills/aaa-portfolio-config/` (mirrored workflow), and `idea/.cursor/rules/portfolio-config.mdc` for editor agents.
+- **In-repo helpers:** `.cursor/skills/` (`about`, `ceo-init`, `ceo-update`, `ceo-ask`, `ceo-stats`, `dev-ask`, `dev-new-feature`), mirrored under `.claude/skills/`, and `.cursor/rules/portfolio-config.mdc`.
 
 ### 7.5 Jira & GitHub snapshots — automated cadence (dashboard is the model)
 
@@ -314,8 +314,14 @@ Ordered checklist for the **current build track** (UI-first; backend/Gantt defer
 - [ ] **Portfolio dashboard table** — optional second pass for row density / status scannability after detail page stabilizes.
 - [ ] **Lightweight pipeline readout** — read-only **phase stepper** or slim timeline derived from `currentPhase` + config (no drag-edit; precursor to Gantt in **§12**).
 
-### 17.2 Agent skills (Cursor + Claude; mirror `aaa-portfolio-config`)
+### 17.2 Agent skills (Cursor + Claude; `.cursor/skills/` + `.claude/skills/`)
 
-- [ ] **Skill: init project** — scaffold `config/projects/<slug>/`, manifest + `ci-sync-manifest.json` row; validate shapes against `types` / loader; optional PR checklist.
-- [ ] **Skill: ask project** — answer questions from YAML + synced JSON only (read-only “portfolio Q&A” over checked-in data).
+- [x] **`@about`** — hub menu; routes Brad to the right tag.
+- [x] **`@ceo-init`** — scaffold project from proposal + transcript; includes `commercial:` block.
+- [x] **`@ceo-update`** — edit existing project config (phase, commercial, team, milestones); redirects UI work to `@dev-new-feature`.
+- [x] **`@ceo-ask`** — per-project Q&A from `config/projects/<slug>/`.
+- [x] **`@ceo-stats`** — portfolio rollup including revenue forecast.
+- [x] **`@dev-ask`** — engineering Q&A (read-only).
+- [x] **`@dev-new-feature`** — all engineering work (UI, config schema, manifest, CI, loader); updates this PLANS file.
+- [x] **Commercial in config + UI** — YAML `commercial:`; dashboard forecast card + table Revenue column + detail Revenue tile.
 - [ ] **Skill: sync hygiene** — compare manifest slugs to folders; flag missing `data_*` files or stale keys (local / CI helper).

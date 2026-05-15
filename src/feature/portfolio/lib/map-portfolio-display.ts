@@ -1,3 +1,8 @@
+import {
+  commercialDisplayPrimary,
+  commercialForecastValue,
+  commercialStatusLabel,
+} from "@/feature/portfolio/lib/portfolio-commercial";
 import type { PortfolioPhase, PortfolioProject } from "@/feature/portfolio/types";
 import type { UiHealth, UiPhase, UiProject } from "@/feature/portfolio/types-display";
 
@@ -68,7 +73,7 @@ function nextMilestoneFrom(p: PortfolioProject): UiProject["nextMilestone"] {
   if (!title) title = p.qa.notes?.trim();
   if (!title) {
     const nextMeet = p.sales.meetings[0];
-    title = nextMeet ? nextMeet.title : "Delivery sync";
+    title = nextMeet ? nextMeet.meeting : "Delivery sync";
   }
   title = title.slice(0, 72);
   return {
@@ -102,8 +107,15 @@ export function mapPortfolioToUiProject(p: PortfolioProject): UiProject {
     nextMilestone: nextMilestoneFrom(p),
     isPublished: /^https?:\/\//i.test(p.clientDashboardPath.trim()),
     clientDashboardPath: p.clientDashboardPath,
+    revenueLabel: p.commercial ? commercialDisplayPrimary(p.commercial) : "—",
+    revenueForecast: p.commercial ? commercialForecastValue(p.commercial) : 0,
+    commercialStatus: p.commercial
+      ? commercialStatusLabel(p.commercial.status)
+      : undefined,
   };
 }
+
+export { rollupPortfolioCommercial } from "@/feature/portfolio/lib/portfolio-commercial";
 
 export function mapPortfolioProjectsToUi(
   projects: PortfolioProject[],

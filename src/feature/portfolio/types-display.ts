@@ -32,6 +32,10 @@ export interface UiProject {
   };
   isPublished: boolean;
   clientDashboardPath: string;
+  /** Formatted primary revenue line; empty when no `commercial` in YAML. */
+  revenueLabel: string;
+  revenueForecast: number;
+  commercialStatus?: string;
 }
 
 export const UI_PHASES: UiPhase[] = [

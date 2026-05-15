@@ -17,18 +17,18 @@ export function artifactsForPhase(
     case "Sales":
       return project.sales.meetings.map((m) => ({
         id: m.id,
-        title: m.title,
+        title: m.meeting,
         type: "Meeting",
-        source: m.tool ?? "Calendar",
+        source: m.source || "Calendar",
         date: m.date,
       }));
     case "Discovery":
-      return project.discovery.docs.map((d) => ({
+      return project.discovery.documents.map((d) => ({
         id: d.id,
-        title: d.name,
-        type: d.kind,
-        source: "Workspace",
-        date: d.path,
+        title: d.title,
+        type: "Doc",
+        source: d.filename,
+        date: "—",
       }));
     case "Build": {
       const rows: DetailArtifact[] = [];
@@ -54,52 +54,30 @@ export function artifactsForPhase(
       }
       return rows;
     }
-    case "QA": {
-      const rows: DetailArtifact[] = [];
-      if (project.qa.notionSummaryUrl) {
-        rows.push({
-          id: "qa-notion",
-          title: "QA / checklist (Notion)",
-          type: "Link",
-          source: "Notion",
-          date: "—",
-        });
-      }
-      if (project.qa.notes.trim()) {
-        rows.push({
-          id: "qa-notes",
-          title: project.qa.notes.slice(0, 120),
-          type: "Note",
-          source: "Internal",
-          date: "—",
-        });
-      }
-      return rows;
-    }
+    case "QA":
+      return project.qa.documents.map((d) => ({
+        id: d.id,
+        title: d.title,
+        type: "Doc",
+        source: d.filename,
+        date: "—",
+      }));
     case "UAT":
-      return project.uat.handoffSummary.trim()
-        ? [
-            {
-              id: "uat-handoff",
-              title: "UAT handoff summary",
-              type: "Doc",
-              source: "Portfolio",
-              date: project.uat.testEnvUrl ? "Staging linked" : "—",
-            },
-          ]
-        : [];
+      return project.uat.documents.map((d) => ({
+        id: d.id,
+        title: d.title,
+        type: "Doc",
+        source: d.filename,
+        date: project.uat.testEnvUrl ? "Staging linked" : "—",
+      }));
     case "Maintenance":
-      return project.maintenance.notes.trim()
-        ? [
-            {
-              id: "mtn-notes",
-              title: project.maintenance.notes.slice(0, 120),
-              type: "Report",
-              source: "Operations",
-              date: "—",
-            },
-          ]
-        : [];
+      return project.maintenance.documents.map((d) => ({
+        id: d.id,
+        title: d.title,
+        type: "Doc",
+        source: d.filename,
+        date: "—",
+      }));
     default:
       return [];
   }

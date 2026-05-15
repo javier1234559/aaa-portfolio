@@ -125,7 +125,7 @@ export function PublishPortfolioView({ projects }: { projects: UiProject[] }) {
           </div>
         </div>
 
-        <div className="min-w-0 overflow-x-auto">
+      <div className="thin-scrollbar min-w-0 overflow-x-auto">
           <table className="w-full border-collapse text-left text-sm">
             <thead>
               <tr className="border-b border-border">

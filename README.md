@@ -28,11 +28,13 @@ All portfolio rows and synced snapshots live under **`config/`** at the **root o
 
 - `config/projects.manifest.yaml` — ordered list of project `slug`s.
 - `config/projects/<slug>/` — per project:
-  - **`<slug>.yml`** — human-edited metadata (names, URLs, phase, Jira project key, GitHub `org/repo`, dashboard link, optional tab copy).
+  - **`<slug>.yml`** — human-edited metadata (names, URLs, phase, Jira project key, GitHub `org/repo`, dashboard link, optional tab copy, optional **`commercial:`** for internal revenue rollup).
   - **`data_sprint_progress.json`** — Jira/sprint-style card snapshot (same shape as `aaa-client-dashboard` `sprint-progress.json`).
   - **`data_github_activity.json`** — recent commits (same shape as the dashboard `github_activity.json`).
   - **`data_comments.json`** — optional internal comment threads (read today; **writes** planned via API + persistence — see `docs/PLANS.md` §7.6).
   - **`milestones.yaml`** *(optional)* — delivery gates; use optional **`phase`** (`sales` … `maintenance`) to set the **start date** shown on the snapshot phase dot strip. Without `phase` rows, a compact Jira % bar appears in the Progress tile only.
+  - **`data_sales_meetings.json`** *(optional)* — Sales tab meeting list + inline transcript (`source`, `meeting`, `date`, `attendees`, `transcript`).
+  - **`discovery/`**, **`qa/`**, **`uat/`**, **`maintenance/`** *(optional)* — phase markdown (`*.md` with YAML frontmatter + body); rendered in the project detail tabs.
 
 The Next.js loader resolves `config/` relative to the app root (this repo), or **`PORTFOLIO_CONFIG_ROOT`** if you override the path.
 
@@ -76,12 +78,33 @@ python scripts/sync_github_portfolio.py --slug kidneyhood --repo Automation-Arch
 
 ## Agent skills (Cursor + Claude Code)
 
-| Location | Audience |
-|----------|----------|
-| [`.cursor/skills/aaa-portfolio-config/`](.cursor/skills/aaa-portfolio-config/) | Cursor Agent Skills (project-scoped) |
-| [`.claude/skills/aaa-portfolio-config/`](.claude/skills/aaa-portfolio-config/) | Claude Code skills in-repo |
+Tag with **`@skill-name`** in chat. Mirrored under `.cursor/skills/` and `.claude/skills/`.
 
-Cursor **rules:** [`.cursor/rules/portfolio-config.mdc`](.cursor/rules/portfolio-config.mdc).
+| Tag | Audience |
+|-----|----------|
+| `@about` | Menu — which skill to use |
+| `@ceo-init` | Brad — new project from proposal + transcript |
+| `@ceo-update` | Brad — edit existing project config (phase, revenue, team, …) |
+| `@ceo-ask` | Brad — Q&A one project |
+| `@ceo-stats` | Brad — portfolio report + revenue rollup |
+| `@dev-ask` | Engineering — Q&A (architecture, config, code) |
+| `@dev-new-feature` | Engineering — any code/config/CI change + `docs/PLANS.md` |
+
+Entry point: [`AGENTS.md`](AGENTS.md). Cursor **rules:** [`.cursor/rules/portfolio-config.mdc`](.cursor/rules/portfolio-config.mdc).
+
+### `commercial:` block (internal)
+
+```yaml
+commercial:
+  currency: USD
+  status: signed          # pipeline | proposed | signed | invoicing | closed
+  proposalAmount: 95000
+  contractedAmount: 88000
+  collectedAmount: 44000
+  winProbability: 0.5     # for pipeline deals (0–1)
+  expectedCloseDate: "2026-06-01"
+  notes: ""
+```
 
 ## pnpm scripts
 

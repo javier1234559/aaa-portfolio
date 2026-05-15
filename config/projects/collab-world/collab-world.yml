@@ -11,6 +11,16 @@ clientDashboardPath: "https://dashboard.automationarchitecture.ai/client/collab-
 description: >-
   Automated influencer recruitment and outreach engine for The Viral Movie Trailer Contest
 
+commercial:
+  currency: USD
+  status: pipeline
+  proposalAmount: 55000
+  contractedAmount:
+  collectedAmount: 0
+  winProbability: 0.35
+  expectedCloseDate: "2026-10-15"
+  notes: "Early pipeline — sample data for portfolio demo."
+
 sales:
   meetings: []
 discovery:

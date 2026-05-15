@@ -12,6 +12,16 @@ clientDashboardPath: "https://dashboard.automationarchitecture.ai/client/ptg-con
 description: >-
   Hotel content automation platform — CSV import, URL verification, AI scraping pipeline, AI content generation, multi-language translation, and Hygraph CMS integration
 
+commercial:
+  currency: USD
+  status: invoicing
+  proposalAmount: 98000
+  contractedAmount: 92000
+  collectedAmount: 75000
+  winProbability: 1
+  expectedCloseDate: "2025-01-20"
+  notes: "UAT / invoicing — sample data for portfolio demo."
+
 sales:
   meetings: []
 discovery:

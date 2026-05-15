@@ -12,6 +12,16 @@ clientDashboardPath: "https://dashboard.automationarchitecture.ai/client/funston
 description: >-
   InGov Intelligence and Insights Platform — trustee + admin portals delivering just-in-time governance intelligence to public pension fund trustees, tied to each board's decision calendar
 
+commercial:
+  currency: USD
+  status: signed
+  proposalAmount: 145000
+  contractedAmount: 132000
+  collectedAmount: 66000
+  winProbability: 1
+  expectedCloseDate: "2025-05-01"
+  notes: "Sample data for portfolio demo — internal only."
+
 sales:
   meetings: []
 discovery:

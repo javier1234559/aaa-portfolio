@@ -11,6 +11,16 @@ clientDashboardPath: "https://dashboard.automationarchitecture.ai/client/broa-op
 description: >-
   AI-powered Outlook add-in that converts inbound sales emails into Salesforce opportunities
 
+commercial:
+  currency: USD
+  status: signed
+  proposalAmount: 78000
+  contractedAmount: 72000
+  collectedAmount: 36000
+  winProbability: 1
+  expectedCloseDate: "2025-04-01"
+  notes: "Sample data for portfolio demo — internal only."
+
 sales:
   meetings: []
 discovery:
