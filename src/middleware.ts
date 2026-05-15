@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const SESSION_COOKIE = "portfolio_session";
-const SESSION_VALUE = "ok";
+import {
+  isSessionCookieValid,
+  SESSION_COOKIE,
+} from "@/lib/auth/session";
 
 function isPublicClientPortalPath(pathname: string): boolean {
   // `/app/publish/<slug>` — shareable read-only view (not `/app/publish` list).
@@ -16,7 +18,7 @@ export function middleware(request: NextRequest) {
   }
 
   const session = request.cookies.get(SESSION_COOKIE);
-  if (session?.value !== SESSION_VALUE) {
+  if (!isSessionCookieValid(session?.value)) {
     const login = new URL("/login", request.url);
     login.searchParams.set("from", request.nextUrl.pathname);
     return NextResponse.redirect(login);

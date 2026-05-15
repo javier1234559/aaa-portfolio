@@ -1,5 +1,7 @@
 "use client";
 
+import { Suspense } from "react";
+
 import SignInForm from "@/feature/auth/component/sign-in-form";
 
 export function LoginView() {
@@ -14,7 +16,9 @@ export function LoginView() {
             Use your email and password to sign in.
           </p>
         </div>
-        <SignInForm />
+        <Suspense fallback={null}>
+          <SignInForm />
+        </Suspense>
       </div>
     </div>
   );

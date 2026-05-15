@@ -1,7 +1,4 @@
-import { handleApiError } from "@/lib/handleApiError";
-import axiosInstance from "@/service/baseApi";
 import type { User } from "@/feature/auth/types";
-import { AxiosResponse } from "axios";
 
 interface LoginDto {
   email: string;
@@ -13,23 +10,43 @@ interface RegisterDto {
   password: string;
 }
 
+async function parseJsonResponse<T>(res: Response): Promise<T> {
+  const data = (await res.json().catch(() => ({}))) as T & {
+    message?: string;
+  };
+  if (!res.ok) {
+    throw new Error(data.message ?? "Request failed");
+  }
+  return data;
+}
+
+/** Same-origin fetch so session cookies attach to this app (not NEXT_PUBLIC_APP_API). */
+async function authFetch<T>(path: string, init?: RequestInit): Promise<T> {
+  const res = await fetch(path, {
+    ...init,
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+      ...init?.headers,
+    },
+  });
+  return parseJsonResponse<T>(res);
+}
+
 export const authApi = {
   login(form: LoginDto) {
-    return axiosInstance
-      .post<{ user: User }>("/api/auth/login", form)
-      .then((res) => res.data)
-      .catch(handleApiError);
+    return authFetch<{ user: User }>("/api/auth/login", {
+      method: "POST",
+      body: JSON.stringify(form),
+    });
   },
   register(form: RegisterDto) {
-    return axiosInstance
-      .post("/api/auth/register", form)
-      .then((res) => res.data)
-      .catch(handleApiError);
+    return authFetch("/api/auth/register", {
+      method: "POST",
+      body: JSON.stringify(form),
+    });
   },
   getMe() {
-    return axiosInstance
-      .get<User>("/api/auth/me")
-      .then((res: AxiosResponse<User>) => res.data)
-      .catch(handleApiError);
+    return authFetch<User>("/api/auth/me");
   },
 };

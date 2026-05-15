@@ -3,6 +3,7 @@
 import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useSearchParams } from "next/navigation";
 import * as yup from "yup";
 
 import { Button } from "@/components/ui/button";
@@ -19,11 +20,17 @@ import { Input } from "@/components/ui/input";
 import { useAuth } from "@/feature/auth/hooks/useAuth";
 import { DEFAULT_LOGIN_FORM, loginSchema } from "./schema";
 import { RouteNames } from "@/constants";
-import { useRouter } from "next/navigation";
+
+function loginRedirectPath(from: string | null): string {
+  if (from && from.startsWith("/app") && !from.startsWith("//")) {
+    return from;
+  }
+  return RouteNames.App;
+}
 
 function SignInForm() {
   const loginMutation = useAuth();
-  const router = useRouter();
+  const searchParams = useSearchParams();
   const form = useForm<yup.InferType<typeof loginSchema>>({
     resolver: yupResolver(loginSchema),
     defaultValues: DEFAULT_LOGIN_FORM,
@@ -32,7 +39,8 @@ function SignInForm() {
   const onSubmit = (values: yup.InferType<typeof loginSchema>) => {
     loginMutation.mutate(values, {
       onSuccess: () => {
-        router.push(RouteNames.App);
+        const target = loginRedirectPath(searchParams.get("from"));
+        window.location.assign(target);
       },
     });
   };

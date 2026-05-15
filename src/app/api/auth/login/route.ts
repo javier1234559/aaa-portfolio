@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
-import { globalConfig } from "@/config";
 
-const MOCK_EMAIL = globalConfig.MOCK_EMAIL;
-const MOCK_PASSWORD = globalConfig.MOCK_PASSWORD;
+import { getMockCredentials } from "@/lib/auth/credentials";
+import { SESSION_COOKIE, SESSION_VALUE } from "@/lib/auth/session";
 
 export async function POST(request: Request) {
   try {
@@ -16,7 +15,9 @@ export async function POST(request: Request) {
       );
     }
 
-    if (email !== MOCK_EMAIL || password !== MOCK_PASSWORD) {
+    const { email: mockEmail, password: mockPassword } = getMockCredentials();
+
+    if (email !== mockEmail || password !== mockPassword) {
       return NextResponse.json(
         { message: "Invalid email or password" },
         { status: 401 },
@@ -26,18 +27,21 @@ export async function POST(request: Request) {
     const res = NextResponse.json({
       user: {
         id: "mock-user-1",
-        email: MOCK_EMAIL,
+        email: mockEmail,
         name: "Example User",
       },
     });
+    const secure =
+      process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
+
     res.cookies.set({
-      name: "portfolio_session",
-      value: "ok",
+      name: SESSION_COOKIE,
+      value: SESSION_VALUE,
       httpOnly: true,
       path: "/",
       sameSite: "lax",
       maxAge: 60 * 60 * 24 * 7,
-      secure: process.env.NODE_ENV === "production",
+      secure,
     });
     return res;
   } catch {

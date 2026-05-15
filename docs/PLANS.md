@@ -312,6 +312,7 @@ Ordered checklist for the **current build track** (UI-first; backend/Gantt defer
 - [x] **Project detail density** (`/app/projects/[slug]`) — reduce redundant cards; single **snapshot** band for metadata + intent; emphasize **health** + **progress**; tighter “People & links” (see `docs/DESIGN.md`).
 - [ ] **Publish / client preview parity** — `ClientPortalView` + `/app/publish/[slug]` aligned with the same snapshot + density patterns as internal detail.
 - [x] **Dashboard revenue timeline chart** — full-width stacked bar on `/app`; Week / Bi-week / Month; YAML `commercial.entries` or inferred from totals.
+- [x] **Login redirect on Vercel** — same-origin `fetch` for `/api/auth/login`; full-page redirect after cookie set; honors `?from=`; server `MOCK_*` env fallback.
 - [ ] **Portfolio dashboard table** — optional second pass for row density / status scannability after detail page stabilizes.
 - [ ] **Lightweight pipeline readout** — read-only **phase stepper** or slim timeline derived from `currentPhase` + config (no drag-edit; precursor to Gantt in **§12**).
 
